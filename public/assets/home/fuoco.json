@@ -1,0 +1,9 @@
+{
+ "file": "fuoco_sheet.png",
+ "fotogrammi": 24,
+ "larghezza": 256,
+ "altezza": 256,
+ "colonne": 8,
+ "fps": 24,
+ "loop": true
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Home · anteprima</title>
+<style>
+  :root { --bg:#111418; --card:#1a1f25; --testo:#f5f2eb; --muto:#aab0b8; --verde:#2e7d4f; --verde-ch:#3ddc84; --giallo:#f5c542; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--testo); font-family: -apple-system, "SF Pro Rounded", "SF Pro Text", Helvetica, Arial, sans-serif; }
+  .home { max-width: 480px; margin: 0 auto; min-height: 100dvh; display: flex; flex-direction: column; }
+  .hero { position: relative; width: 100%; aspect-ratio: 1100 / 1428; overflow: hidden; background: #0f1418; }
+  .hero > video, .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero::after { content: ""; position: absolute; inset: auto 0 0 0; height: 34%; background: linear-gradient(180deg, transparent, var(--bg)); z-index: 1; }
+  .sopra { position: absolute; inset: 0; padding: calc(env(safe-area-inset-top) + 14px) 18px 0; z-index: 2; }
+  .riga-alto { display: flex; justify-content: flex-end; gap: 10px; position: relative; z-index: 3; }
+  .chip { display: flex; align-items: center; gap: 8px; background: rgba(17,20,24,.75); border: 2px solid #2b323a; border-radius: 14px; padding: 8px 12px; font-size: 12px; color: var(--muto); }
+  .chip strong { color: var(--testo); font-size: 18px; line-height: 1; }
+  .chip .fuoco { width: 30px; height: 30px; object-fit: contain; }
+  .chip.ingranaggio { padding: 8px; width: 46px; height: 46px; justify-content: center; cursor: pointer; }
+  .chip.ingranaggio img { width: 26px; height: 26px; object-fit: contain; }
+  .titolo { position: absolute; left: 14px; top: calc(env(safe-area-inset-top) + 14px); width: 172px; }
+  .titolo img { display: block; position: static; width: 100%; height: auto; filter: drop-shadow(0 6px 0 rgba(0,0,0,.45)); }
+  .titolo p { margin: 4px 0 0 14px; font-weight: 700; font-size: 14px; transform: rotate(-6deg); transform-origin: left top; text-shadow: 0 2px 0 #000; }
+  .titolo p em { font-style: normal; box-shadow: inset 0 -7px 0 var(--giallo); }
+  .cta { position: absolute; left: 18px; right: 18px; bottom: 4%; display: flex; align-items: center; justify-content: center; gap: 14px; padding: 18px; border-radius: 18px; background: var(--verde); color: #fff; font-size: 24px; font-weight: 900; text-decoration: none; border: 3px solid #1e5a39; box-shadow: 0 6px 0 #1a4a30; }
+  .cta .play { width: 0; height: 0; border-left: 18px solid #f5f2eb; border-top: 11px solid transparent; border-bottom: 11px solid transparent; }
+  section { padding: 8px 18px 0; }
+  h2 { font-size: 20px; margin: 10px 0 12px; display: flex; justify-content: space-between; align-items: baseline; }
+  h2 a { font-size: 13px; color: var(--muto); text-decoration: none; font-weight: 500; }
+  .percorso { display: flex; justify-content: space-between; align-items: flex-start; position: relative; padding-bottom: 6px; }
+  .percorso::before { content: ""; position: absolute; left: 26px; right: 26px; top: 26px; border-top: 3px dashed #2b323a; }
+  .tappa { position: relative; width: 62px; text-align: center; font-size: 13px; color: var(--muto); }
+  .tappa i { display: grid; place-items: center; width: 52px; height: 52px; margin: 0 auto 8px; border-radius: 50%; background: var(--card); border: 3px solid #2b323a; font-style: normal; font-weight: 800; color: #5a636d; }
+  .tappa.attiva { color: var(--testo); font-weight: 700; } .tappa.attiva i { border-color: var(--verde-ch); color: var(--verde-ch); background: #163425; }
+  .tappa.attiva::after { content: ""; display: block; width: 44px; height: 4px; margin: 6px auto 0; background: var(--verde-ch); border-radius: 2px; }
+  .card { display: flex; gap: 14px; align-items: center; background: var(--card); border: 2px solid #2b323a; border-radius: 18px; padding: 12px; text-decoration: none; color: inherit; }
+  .card img { width: 150px; aspect-ratio: 1; object-fit: cover; object-position: 50% 62%; border-radius: 12px; background: #232930; }
+  .card h3 { margin: 0 0 4px; font-size: 18px; } .card p { margin: 0; color: var(--muto); font-size: 13px; }
+  .barra { height: 10px; border-radius: 5px; background: #2b323a; margin-top: 10px; overflow: hidden; } .barra b { display: block; width: 37%; height: 100%; background: var(--verde-ch); }
+  .tab { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); padding: 10px 8px calc(env(safe-area-inset-bottom) + 10px); border-top: 2px solid #1e242b; background: #0f1317; font-size: 12px; color: var(--muto); text-align: center; }
+  .tab span { display: block; font-size: 22px; margin-bottom: 2px; } .tab .attiva { color: var(--giallo); font-weight: 700; }
+</style>
+</head>
+<body>
+<main class="home">
+  <div class="hero">
+    <video src="assets/home/home_loop.mp4" poster="assets/home/home_base.png" autoplay muted loop playsinline></video>
+    <div class="sopra">
+      <div class="riga-alto"><div class="chip"><img class="fuoco" src="assets/home/fuoco_loop.gif" alt=""><div><strong>7</strong><br>giorni di fila</div></div><button class="chip ingranaggio" aria-label="Impostazioni"><img src="assets/home/ingranaggio.png" alt=""></button></div>
+      <div class="titolo"><img src="assets/home/logo.png" alt="Code Play"><p>Impara JavaScript <em>giocando.</em></p></div>
+      <a class="cta" href="lezione.html"><span class="play"></span> Inizia a giocare</a>
+    </div>
+  </div>
+  <section>
+    <h2>Il tuo percorso <a href="#">Vedi tutto ›</a></h2>
+    <div class="percorso">
+      <div class="tappa attiva"><i>&lt;/&gt;</i>Le basi</div><div class="tappa"><i>🔒</i>Logica</div><div class="tappa"><i>🔒</i>Cicli</div><div class="tappa"><i>🔒</i>Funzioni</div><div class="tappa"><i>🔒</i>Progetti</div>
+    </div>
+  </section>
+  <section>
+    <h2>Livello consigliato</h2>
+    <a class="card" href="lezione.html"><img src="assets/home/home_saluto.png" alt=""><div><h3>Le basi</h3><p>Muovi i primi passi con JavaScript.</p><div class="barra"><b></b></div></div></a>
+  </section>
+  <nav class="tab"><div class="attiva"><span>🏠</span>Home</div><div><span>🗺️</span>Percorso</div><div><span>🏆</span>Sfide</div><div><span>👤</span>Profilo</div></nav>
+</main>
+</body>
+</html>

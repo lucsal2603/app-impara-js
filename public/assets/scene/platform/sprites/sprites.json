@@ -1,0 +1,46 @@
+{
+ "attesa": {
+  "file": "attesa.png",
+  "fotogrammi": 24,
+  "larghezza": 256,
+  "altezza": 384,
+  "colonne": 8,
+  "fps": 24,
+  "loop": true,
+  "piedi_dal_basso": 38,
+  "tassello_px": 128
+ },
+ "corsa": {
+  "file": "corsa.png",
+  "fotogrammi": 16,
+  "larghezza": 256,
+  "altezza": 384,
+  "colonne": 8,
+  "fps": 24,
+  "loop": true,
+  "piedi_dal_basso": 38,
+  "tassello_px": 128
+ },
+ "morte": {
+  "file": "morte.png",
+  "fotogrammi": 48,
+  "larghezza": 256,
+  "altezza": 384,
+  "colonne": 8,
+  "fps": 24,
+  "loop": false,
+  "piedi_dal_basso": 38,
+  "tassello_px": 128
+ },
+ "salto": {
+  "file": "salto.png",
+  "fotogrammi": 32,
+  "larghezza": 256,
+  "altezza": 384,
+  "colonne": 8,
+  "fps": 24,
+  "loop": false,
+  "piedi_dal_basso": 38,
+  "tassello_px": 128
+ }
+}

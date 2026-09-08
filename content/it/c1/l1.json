@@ -1,0 +1,106 @@
+{
+  "id": "c1-l1",
+  "capitolo": "Le basi",
+  "titolo": "Il primo passo",
+  "durata": "4 min",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Ciao! Sono il tuo compagno di codice",
+      "immagine": "/assets/mascotte/saluto.png",
+      "testo": [
+        "In questo gioco non mi muovi con il dito. Mi dici cosa fare scrivendo dei comandi.",
+        "Ogni comando è una riga di codice JavaScript, lo stesso linguaggio con cui sono fatti i siti e le app. Impari giocando, una riga alla volta."
+      ]
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Questo è un comando",
+      "codice": "moveRight()",
+      "testo": [
+        "Ha un nome, moveRight, e due parentesi tonde.",
+        "Le parentesi vogliono dire: eseguilo adesso. Senza parentesi il comando non parte."
+      ]
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quale di questi mi fa fare un passo a destra?",
+      "opzioni": ["moveRight", "moveRight()", "move Right()"],
+      "risposta": 1,
+      "spiegazione": "Nome tutto attaccato e parentesi subito dopo: così JavaScript capisce che è un comando da eseguire."
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Una riga, un comando",
+      "codice": "moveRight()\nmoveRight()\njump()",
+      "testo": [
+        "Il codice si legge dall'alto in basso. Eseguo una riga alla volta, nell'ordine in cui le hai scritte.",
+        "Qui faccio due passi a destra e poi salto."
+      ]
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Cosa faccio con questo programma?",
+      "codice": "jump()\nmoveRight()",
+      "opzioni": ["Prima salto, poi un passo a destra", "Prima un passo a destra, poi salto", "Salto due volte"],
+      "risposta": 0,
+      "spiegazione": "Prima la riga 1, poi la riga 2. L'ordine delle righe è l'ordine delle azioni."
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Saltare e aspettare",
+      "codice": "jump()\nwait(1)",
+      "testo": [
+        "jump() mi fa saltare in avanti: supero un blocco alto uno o una buca.",
+        "wait(1) mi fa aspettare un secondo. Il numero dentro le parentesi dice quanto, e si chiama argomento. wait(2) aspetta due secondi."
+      ]
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Davanti a me c'è un blocco. Completa il programma per superarlo.",
+      "codice": "moveRight()\n___()\nmoveRight()",
+      "scelte": ["jump", "wait", "moveLeft"],
+      "risposta": ["jump"],
+      "spiegazione": "Con jump() salgo sul blocco, poi continuo a destra."
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Ora tocca a te",
+      "immagine": "/assets/mascotte/riposo.png",
+      "testo": [
+        "Sotto la scena c'è l'editor: scrivi i comandi, oppure toccali nella barra per inserirli.",
+        "ESEGUI fa partire il programma. PASSO esegue una riga alla volta. RICOMINCIA riporta tutto all'inizio. Se sbaglio non succede niente: si ricomincia e si riprova."
+      ]
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 1",
+      "sottotitolo": "Il primo passo",
+      "scena": "platform",
+      "config": {
+        "mappa": ["..L.....", "........", "........", "........", "....KD..", "S.#P.D.X", "========"],
+        "legenda": {
+          "=": "pavimento", "#": "blocco", "L": "lampada", "S": "spawn",
+          "K": { "tipo": "chiave", "id": "k1" },
+          "P": { "tipo": "piastra", "id": "p1" },
+          "D": { "tipo": "porta", "id": "d1", "apre_con": ["p1"] },
+          "X": "uscita"
+        }
+      },
+      "obiettivo": { "tipo": "uscita", "testo": "Raggiungi l'uscita" },
+      "starter": "moveRight()\n",
+      "api": ["moveRight", "moveLeft", "jump", "wait"],
+      "sintassi": ["call"],
+      "stelle": [
+        { "tipo": "completa", "testo": "Livello completato" },
+        { "tipo": "maxRighe", "valore": 8, "testo": "Massimo 8 righe" },
+        { "tipo": "chiave", "testo": "Chiave raccolta" }
+      ],
+      "aiuti": [
+        "Il blocco davanti a te si supera con jump().",
+        "Quando stai sulla piastra rossa, la porta si apre.",
+        "moveRight()\njump()\nmoveRight()\njump()\nmoveRight()\nmoveRight()\nmoveRight()"
+      ]
+    }
+  ]
+}

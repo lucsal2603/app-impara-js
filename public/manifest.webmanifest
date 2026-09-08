@@ -1,0 +1,12 @@
+{
+  "name": "Code Play",
+  "short_name": "Code Play",
+  "start_url": "home.html",
+  "display": "standalone",
+  "background_color": "#111418",
+  "theme_color": "#111418",
+  "icons": [
+    { "src": "icona-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icona-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
