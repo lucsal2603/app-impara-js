@@ -1,0 +1,127 @@
+{
+  "id": "c1-l4",
+  "capitolo": "Le basi",
+  "titolo": "Corri!",
+  "durata": "5 min",
+  "prossima": "5",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Missione 4: la porta a tempo",
+      "immagine": "/assets/mascotte/riposo.png",
+      "testo": [
+        "Il pulsante rosso apre la porta, ma solo per due secondi e mezzo. Poi si richiude.",
+        "Ogni comando dura un tempo: un passo mezzo secondo, un salto poco di più. Dal pulsante alla porta devo arrivare senza perdere tempo."
+      ]
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Niente pause",
+      "codice": "moveRight()\nmoveRight()\njump()",
+      "testo": [
+        "Qui wait() sarebbe un errore: mentre aspetto, la porta si chiude.",
+        "Scrivo solo i comandi che servono, nell'ordine giusto, e li lascio correre uno dietro l'altro."
+      ]
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "La porta resta aperta tre secondi. Quale programma arriva in tempo?",
+      "opzioni": [
+        "moveRight() poi wait(2) poi moveRight() poi moveRight()",
+        "moveRight() poi moveRight() poi moveRight()",
+        "wait(3) poi moveRight() poi moveRight()"
+      ],
+      "risposta": 1,
+      "spiegazione": "Tre passi durano un secondo e mezzo. Le pause, qui, mi fanno arrivare a porta chiusa."
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Salto per prendere la moneta e atterro proprio sul pulsante. Completa il programma.",
+      "codice": "___()\nmoveRight()",
+      "scelte": [
+        "jump",
+        "wait",
+        "moveLeft"
+      ],
+      "risposta": [
+        "jump"
+      ],
+      "spiegazione": "Il salto passa sotto la moneta e mi fa atterrare sul pulsante: due cose con una riga sola."
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 4",
+      "sottotitolo": "Corri!",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.....",
+          "........",
+          "........",
+          "........",
+          ".M....D.",
+          "S.P.^.DX",
+          "========"
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "M": {
+            "tipo": "moneta",
+            "id": "m1"
+          },
+          "P": {
+            "tipo": "piastra",
+            "id": "p1",
+            "durata": 150
+          },
+          "D": {
+            "tipo": "porta",
+            "id": "d1",
+            "apre_con": [
+              "p1"
+            ]
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Premi il pulsante e passa la porta prima che si chiuda"
+      },
+      "starter": "jump()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "maxRighe",
+          "valore": 6,
+          "testo": "Massimo 6 righe"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "Un salto dall'inizio prende la moneta e atterra sul pulsante.",
+        "Dal pulsante: un passo, un salto sopra gli spuntoni, due passi. Niente wait.",
+        "jump()\nmoveRight()\njump()\nmoveRight()\nmoveRight()"
+      ]
+    }
+  ]
+}

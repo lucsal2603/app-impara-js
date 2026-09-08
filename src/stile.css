@@ -84,3 +84,4 @@ textarea:read-only { color: #cfd3d8; }
 
 /* l'attributo hidden deve vincere anche sugli elementi con display flex/grid */
 [hidden] { display: none !important; }
+.fine .epilogo { margin: 14px 0 6px; padding: 12px 14px; border-radius: 12px; background: #163425; color: #d7f5e4; font-size: 15px; text-align: left; }

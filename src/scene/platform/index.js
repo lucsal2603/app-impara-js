@@ -93,14 +93,17 @@ export class ScenaPlatform extends Scena {
     const p = this.player, c = this.cella();
     if (logica && p.vivo) {
       for (const k of this.chiavi) if (!k.presa && k.x === c.x && k.y === c.y) { k.presa = true; this.effetti.push({ nome: 'chiave_presa', x: k.x, y: k.y, t: 0, durata: 32 }); }
-      for (const pl of this.piastre) if (!pl.premuta && pl.x === c.x && pl.y === c.y && !this.azione) pl.premuta = true;   // a scatto: resta premuta
+      for (const pl of this.piastre) if (pl.x === c.x && pl.y === c.y && !this.azione) { pl.premuta = true; pl.ultimo = this.tempo; }   // a scatto: resta premuta (o per `durata` tick se a tempo)
       for (const m of this.monete) if (!m.presa && m.x === c.x && m.y === c.y) { m.presa = true; this.effetti.push({ nome: 'moneta_presa', x: m.x, y: m.y, t: 0, durata: 20 }); }
       for (const pe of this.L.pericoli) if (pe.x === c.x && pe.y === c.y) { this.muori(); return; }
       for (const l of this.L.laser) if (this.laserAcceso(l) && this.celleLaser(l).some(cl => cl.x === c.x && cl.y === c.y)) { this.muori(); return; }
       if (!this.azione && !this.uscita && this.L.uscita && p.gx === this.L.uscita.x && p.gy === this.L.uscita.y) { this.uscita = { t: 0, durata: 120 }; p.anim = 'uscita'; p.animTick = 0; }
     }
     const nPremi = (this.anim.pulsante_premi || []).length || 3;
-    for (const pl of this.piastre) pl.frame = Math.min(nPremi - 1, pl.frame + (pl.premuta ? (this.tickN % 2 === 0 ? 1 : 0) : 0));
+    for (const pl of this.piastre) {
+      if (pl.durata && pl.premuta && this.tempo - pl.ultimo > pl.durata) pl.premuta = false;
+      if (this.tickN % 2 === 0) pl.frame = Math.max(0, Math.min(nPremi - 1, pl.frame + (pl.premuta ? 1 : -1)));
+    }
     for (const d of this.porte) {
       const viaPiastra = d.apre_con.some(id => this.piastre.find(pl => pl.id === id)?.premuta);
       const viaChiave = d.chiave ? this.chiavi.find(k => k.id === d.chiave)?.presa : false;

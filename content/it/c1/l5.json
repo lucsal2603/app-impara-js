@@ -1,0 +1,118 @@
+{
+  "id": "c1-l5",
+  "capitolo": "Le basi",
+  "titolo": "Il laboratorio",
+  "durata": "6 min",
+  "prossima": null,
+  "epilogo": "Hai scritto moveRight() e jump() tante volte, una riga per ogni passo. Nel prossimo capitolo impari a dire una cosa una volta sola e farla ripetere: si chiama ciclo.",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Missione 5: il laboratorio",
+      "immagine": "/assets/mascotte/saluto.png",
+      "testo": [
+        "Ultima stanza del capitolo, con tutto insieme: la chiave su un blocco, gli spuntoni, il laser che va e viene, la porta chiusa.",
+        "Un programma più lungo si scrive un pezzo alla volta: qualche riga, PASSO per vederla eseguire, poi le righe dopo."
+      ]
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Ripasso",
+      "codice": "moveRight()\nmoveLeft()\njump()\nwait(2)",
+      "testo": [
+        "Un passo a destra, un passo a sinistra, un salto che sale un gradino o supera una casella, un'attesa di due secondi.",
+        "Sono i quattro comandi del capitolo. Con questi si risolve tutto il laboratorio."
+      ]
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Sono davanti al laser acceso. Cosa scrivo?",
+      "opzioni": [
+        "moveRight() subito",
+        "wait(2) e poi moveRight()",
+        "jump() per passarci sopra"
+      ],
+      "risposta": 1,
+      "spiegazione": "Il raggio è alto due caselle: non si salta. Si aspetta che si spenga e poi si passa."
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 5",
+      "sottotitolo": "Il laboratorio",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.....",
+          "........",
+          "....#...",
+          "....R...",
+          ".K...MD.",
+          "S#.^..DX",
+          "========"
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "K": {
+            "tipo": "chiave",
+            "id": "k1"
+          },
+          "M": {
+            "tipo": "moneta",
+            "id": "m1"
+          },
+          "R": {
+            "tipo": "laser",
+            "id": "l1",
+            "lunghezza": 2,
+            "acceso": 180,
+            "spento": 180
+          },
+          "D": {
+            "tipo": "porta",
+            "id": "d1",
+            "chiave": "k1"
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Chiave, laser, porta: raggiungi l'uscita"
+      },
+      "starter": "jump()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "maxRighe",
+          "valore": 8,
+          "testo": "Massimo 8 righe"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "Un salto ti porta sul blocco con la chiave. Poi un passo e cadi.",
+        "Prima del salto sugli spuntoni aspetta due secondi: atterrerai sotto il laser spento. La moneta si prende con un salto davanti alla porta.",
+        "jump()\nmoveRight()\nwait(2)\njump()\njump()\nmoveRight()"
+      ]
+    }
+  ]
+}

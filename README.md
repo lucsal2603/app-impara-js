@@ -14,7 +14,7 @@ Cosa c'è nel prototipo:
 - Il livello ha il pulsante `?` che mostra gli aiuti uno alla volta.
 - `src/ui/editor.js`: editor provvisorio (textarea con numeri di riga, riga in esecuzione evidenziata, palette dei comandi). CodeMirror arriva con M3.
 - `content/it/c1/l1.json`: il livello di esempio nel formato del concept.
-- `lezione.html`: la prima lezione, cioè il tutorial (`content/it/c1/l1.json`): schede di spiegazione, scelta multipla e completa il codice, poi il livello da giocare e la schermata finale con le stelle. `?scheda=N` salta alla scheda N. Il player è `src/ui/lezione.js`, le schede in `src/ui/schede/` (`codice.js` monta la scena in qualsiasi contenitore ed espone `onVittoria` con le stelle).
+- `lezione.html?l=N`: le cinque lezioni del capitolo Le basi in `content/it/c1/`: l1 tutorial, l2 il laser (moveLeft, wait, laser a tempo), l3 la chiave (porta con chiave, gradini), l4 corri (piastra a tempo con `durata`, la porta si richiude), l5 il laboratorio (tutto insieme, con `epilogo` che anticipa i cicli). Ogni lezione ha `prossima`.: schede di spiegazione, scelta multipla e completa il codice, poi il livello da giocare e la schermata finale con le stelle. `?scheda=N` salta alla scheda N. Il player è `src/ui/lezione.js`, le schede in `src/ui/schede/` (`codice.js` monta la scena in qualsiasi contenitore ed espone `onVittoria` con le stelle).
 - `home.html`: anteprima statica della schermata iniziale con il video in loop della mascotte (`public/assets/home/`), titolo, percorso, livello consigliato e barra delle schede. Il pulsante porta al livello.
 
 Per provare dal browser: `window.__app` espone scena, sessione, editor e loop.

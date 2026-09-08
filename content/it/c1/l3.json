@@ -1,0 +1,124 @@
+{
+  "id": "c1-l3",
+  "capitolo": "Le basi",
+  "titolo": "La chiave",
+  "durata": "5 min",
+  "prossima": "4",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Missione 3: la porta chiusa",
+      "immagine": "/assets/mascotte/riposo.png",
+      "testo": [
+        "Questa porta non ha un pulsante: si apre solo con la chiave. E la chiave sta in alto, sopra due gradini.",
+        "Prima la chiave, poi la porta. Se arrivo alla porta senza chiave, sbatto e resto fermo: l'ordine delle righe conta."
+      ]
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Salire a gradini",
+      "codice": "jump()\njump()",
+      "testo": [
+        "jump() davanti a un blocco alto uno mi fa salire sopra. Per un gradino di due blocchi salto due volte, una riga dopo l'altra.",
+        "Quando scendo non serve niente: cado da solo e atterro."
+      ]
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "La porta è chiusa e la chiave è in alto alle mie spalle. Cosa faccio prima?",
+      "opzioni": [
+        "Vado alla porta e provo a passare",
+        "Prendo la chiave, poi vado alla porta",
+        "Salto sopra la porta"
+      ],
+      "risposta": 1,
+      "spiegazione": "Prima le cose che servono dopo: la chiave apre la porta, quindi va presa prima."
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Davanti a me c'è un gradino di due blocchi. Completa il programma per salirci.",
+      "codice": "jump()\n___()",
+      "scelte": [
+        "jump",
+        "wait",
+        "moveLeft"
+      ],
+      "risposta": [
+        "jump"
+      ],
+      "spiegazione": "Due salti in fila: il primo mi porta sul primo blocco, il secondo sul secondo."
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 3",
+      "sottotitolo": "La chiave",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.....",
+          "........",
+          "........",
+          "........",
+          "..#KM.D.",
+          "S##.^.DX",
+          "========"
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "K": {
+            "tipo": "chiave",
+            "id": "k1"
+          },
+          "M": {
+            "tipo": "moneta",
+            "id": "m1"
+          },
+          "D": {
+            "tipo": "porta",
+            "id": "d1",
+            "chiave": "k1"
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Prendi la chiave e raggiungi l'uscita"
+      },
+      "starter": "jump()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "maxRighe",
+          "valore": 8,
+          "testo": "Massimo 8 righe"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "Due salti per salire sui blocchi: la chiave è lì sopra.",
+        "Dal blocco alto un passo a destra e cadi sulla chiave. Poi salta gli spuntoni: passando prendi anche la moneta.",
+        "jump()\njump()\nmoveRight()\njump()\nmoveRight()\nmoveRight()"
+      ]
+    }
+  ]
+}

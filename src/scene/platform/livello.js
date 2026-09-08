@@ -18,7 +18,7 @@ export function analizzaLivello(config) {
       case 'spawn': spawn = { x, y }; break;
       case 'uscita': uscita = { x, y }; break;
       case 'chiave': chiavi.push({ x, y, id: voce.id || `k${chiavi.length + 1}` }); break;
-      case 'piastra': piastre.push({ x, y, id: voce.id || `p${piastre.length + 1}` }); break;
+      case 'piastra': piastre.push({ x, y, id: voce.id || `p${piastre.length + 1}`, durata: voce.durata || 0 }); break;
       case 'spuntoni': pericoli.push({ x, y, tipo }); break;
       case 'moneta': monete.push({ x, y, id: voce.id || `m${monete.length + 1}` }); break;
       case 'laser': laser.push({ x, y, id: voce.id || `l${laser.length + 1}`, lunghezza: voce.lunghezza || 1, acceso: voce.acceso ?? 180, spento: voce.spento ?? 180, fase: voce.fase || 0 }); break;
