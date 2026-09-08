@@ -3,7 +3,7 @@
   "capitolo": "Le basi",
   "titolo": "Il laboratorio",
   "durata": "6 min",
-  "prossima": null,
+  "prossima": "6",
   "epilogo": "Hai scritto moveRight() e jump() tante volte, una riga per ogni passo. Nel prossimo capitolo impari a dire una cosa una volta sola e farla ripetere: si chiama ciclo.",
   "schede": [
     {

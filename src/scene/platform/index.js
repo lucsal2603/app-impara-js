@@ -1,6 +1,6 @@
 // Scena platform vista di lato: griglia di tasselli, personaggio con sprite, piastre, porte, chiavi, uscita.
 import { Scena } from '../base.js';
-import { DURATE } from '../../config.js';
+import { DURATE, COLONNE } from '../../config.js';
 import { azioni } from '../../motore/azioni.js';
 import { analizzaLivello, variantePavimento } from './livello.js';
 
@@ -18,6 +18,9 @@ export class ScenaPlatform extends Scena {
     this.porte = L.porte.map(d => ({ ...d, aperta: false, frame: 0 }));
     this.chiavi = L.chiavi.map(k => ({ ...k, presa: false }));
     this.monete = L.monete.map(m => ({ ...m, presa: false }));
+    this.casse = L.casse.map(c => ({ ...c }));
+    this.player.cassa = null;
+    this.cam = { x: 0, manuale: false };
     this.tempo = 0;                                      // tick di logica dall'avvio del programma (i laser vanno a tempo)
   }
 
@@ -27,6 +30,7 @@ export class ScenaPlatform extends Scena {
     if (x < 0 || x >= this.colonne) return false;
     if (y < 0 || y >= this.righe) return true;          // cielo sopra, vuoto sotto (si cade)
     if (this.L.solido[y][x]) return false;
+    if (this.casse.some(c => c.x === x && c.y === y)) return false;
     for (const d of this.porte) if (!d.aperta && d.x === x && y <= d.y && y > d.y - d.alta) return false;
     return true;
   }
@@ -34,6 +38,21 @@ export class ScenaPlatform extends Scena {
   avvia(az) {
     const p = this.player;
     if (!p.vivo || this.esito) return;
+    this.cam.manuale = false;
+    if (az.tipo === 'pickUp') {
+      const tx = p.gx + p.dir, i = this.casse.findIndex(c => c.x === tx && c.y === p.gy);
+      if (i >= 0 && !p.cassa) p.cassa = this.casse.splice(i, 1)[0];
+      this.azione = { tipo: 'pickUp', t: 0, durata: DURATE.pickUp, x1: p.gx, y1: p.gy }; p.anim = 'attesa'; return;
+    }
+    if (az.tipo === 'putDown') {
+      const tx = p.gx + p.dir;
+      if (p.cassa && tx >= 0 && tx < this.colonne && this.libera(tx, p.gy)) {
+        const c = p.cassa; p.cassa = null; c.x = tx; c.y = p.gy;
+        while (c.y + 1 < this.righe && this.libera(c.x, c.y + 1)) c.y++;     // la scatola cade fino a terra
+        this.casse.push(c);                                                 // torna un ostacolo sul campo
+      }
+      this.azione = { tipo: 'putDown', t: 0, durata: DURATE.putDown, x1: p.gx, y1: p.gy }; p.anim = 'attesa'; return;
+    }
     if (az.tipo === 'move') {
       p.dir = az.dir; const tx = p.gx + az.dir;
       if (this.libera(tx, p.gy)) this.azione = { tipo: 'move', t: 0, durata: DURATE.move, x0: p.gx, y0: p.gy, x1: tx, y1: p.gy };
@@ -53,7 +72,13 @@ export class ScenaPlatform extends Scena {
 
   cella() { return { x: Math.round(this.player.px), y: Math.round(this.player.py) }; }
 
-  animaSolo() { this.tickN++; this.player.animTick++; this.aggiornaMondo(false); }
+  animaSolo() { this.tickN++; this.player.animTick++; this.aggiornaMondo(false); this.aggiornaCamera(); }
+
+  aggiornaCamera() {
+    const max = Math.max(0, this.colonne - COLONNE);
+    if (!this.cam.manuale) { const target = Math.max(0, Math.min(max, this.player.px + 0.5 - COLONNE / 2)); this.cam.x += (target - this.cam.x) * 0.12; }
+    this.cam.x = Math.max(0, Math.min(max, this.cam.x));
+  }
 
   laserAcceso(l) { const per = l.acceso + l.spento; return ((this.tempo + l.fase) % per) < l.acceso; }
   celleLaser(l) { const c = []; for (let k = 1; k <= l.lunghezza; k++) c.push({ x: l.x, y: l.y + k }); return c; }
@@ -85,7 +110,7 @@ export class ScenaPlatform extends Scena {
         else { fine = true; p.anim = 'attesa'; p.animTick = 0; }
       }
     } else fine = true;
-    this.aggiornaMondo(true);
+    this.aggiornaMondo(true); this.aggiornaCamera();
     return fine;
   }
 
@@ -93,7 +118,6 @@ export class ScenaPlatform extends Scena {
     const p = this.player, c = this.cella();
     if (logica && p.vivo) {
       for (const k of this.chiavi) if (!k.presa && k.x === c.x && k.y === c.y) { k.presa = true; this.effetti.push({ nome: 'chiave_presa', x: k.x, y: k.y, t: 0, durata: 32 }); }
-      for (const pl of this.piastre) if (pl.x === c.x && pl.y === c.y && !this.azione) { pl.premuta = true; pl.ultimo = this.tempo; }   // a scatto: resta premuta (o per `durata` tick se a tempo)
       for (const m of this.monete) if (!m.presa && m.x === c.x && m.y === c.y) { m.presa = true; this.effetti.push({ nome: 'moneta_presa', x: m.x, y: m.y, t: 0, durata: 20 }); }
       for (const pe of this.L.pericoli) if (pe.x === c.x && pe.y === c.y) { this.muori(); return; }
       for (const l of this.L.laser) if (this.laserAcceso(l) && this.celleLaser(l).some(cl => cl.x === c.x && cl.y === c.y)) { this.muori(); return; }
@@ -101,6 +125,9 @@ export class ScenaPlatform extends Scena {
     }
     const nPremi = (this.anim.pulsante_premi || []).length || 3;
     for (const pl of this.piastre) {
+      const occupata = (p.vivo && !this.azione && p.gx === pl.x && p.gy === pl.y) || this.casse.some(cs => cs.x === pl.x && cs.y === pl.y);
+      if (pl.tenuta) pl.premuta = occupata;                                   // tenuto: premuto solo finché c'è qualcosa sopra
+      else if (occupata && logica) { pl.premuta = true; pl.ultimo = this.tempo; }   // a scatto, o a tempo se ha `durata`
       if (pl.durata && pl.premuta && this.tempo - pl.ultimo > pl.durata) pl.premuta = false;
       if (this.tickN % 2 === 0) pl.frame = Math.max(0, Math.min(nPremi - 1, pl.frame + (pl.premuta ? 1 : -1)));
     }
@@ -126,8 +153,14 @@ export class ScenaPlatform extends Scena {
     const s = T / this.risorse.tilesMeta.tassello_px, w = img.width * s, h = img.height * s;
     ctx.drawImage(img, cx * T, (cy + 1) * T - h, w, h);
   }
+  tasselloScala(ctx, T, nome, cx, cy, k) {
+    const img = this.risorse.tiles[nome]; if (!img) return;
+    const s = T / this.risorse.tilesMeta.tassello_px * k, w = img.width * s, h = img.height * s;
+    ctx.drawImage(img, cx * T, (cy + 1) * T - h, w, h);
+  }
   disegna(ctx, T) {
     const L = this.L, R = this.risorse;
+    ctx.save(); ctx.translate(-Math.round(this.cam.x * T), 0);
     for (let y = 0; y < L.righe; y++) for (let x = 0; x < L.colonne; x++) this.tassello(ctx, T, 'pannello_sfondo', x, y);
     for (const d of L.decor) this.tassello(ctx, T, d.tipo, d.x, d.y);
     for (let y = 0; y < L.righe; y++) for (let x = 0; x < L.colonne; x++) {
@@ -142,6 +175,7 @@ export class ScenaPlatform extends Scena {
       if (this.laserAcceso(l)) { ctx.save(); ctx.globalAlpha = 0.82 + 0.18 * Math.sin(this.tickN * 0.6); for (const cl of this.celleLaser(l)) this.tassello(ctx, T, 'laser_verticale', cl.x, cl.y); ctx.restore(); }
     }
     for (const m of this.monete) if (!m.presa) this.tassello(ctx, T, 'moneta', m.x, m.y);
+    for (const cs of this.casse) this.tassello(ctx, T, 'cassa', cs.x, cs.y);
     for (const pl of this.piastre) this.tassello(ctx, T, `pulsante_premi_0${pl.frame + 1}`, pl.x, pl.y);
     for (const k of this.chiavi) if (!k.presa) this.tassello(ctx, T, 'chiave', k.x, k.y);
     for (const e of this.effetti) {
@@ -156,6 +190,13 @@ export class ScenaPlatform extends Scena {
       const g = ctx.createRadialGradient(cx, cy, T * 0.1, cx, cy, T * 1.3);
       g.addColorStop(0, `rgba(253,242,219,${a})`); g.addColorStop(1, 'rgba(253,242,219,0)');
       ctx.fillStyle = g; ctx.fillRect(cx - T * 1.4, cy - T * 1.4, T * 2.8, T * 2.8);
+    }
+    if (this.player.cassa) this.tasselloScala(ctx, T, 'cassa', this.player.px + 0.24, this.player.py - 1.72, 0.55);   // scatola sopra la testa
+    ctx.restore();
+    if (L.colonne > COLONNE) {                             // indicatore: quale parte del livello si sta guardando
+      const W = ctx.canvas.width, larg = W * COLONNE / L.colonne, x0 = W * this.cam.x / L.colonne, y0 = ctx.canvas.height - 6;
+      ctx.fillStyle = 'rgba(255,255,255,0.15)'; ctx.fillRect(0, y0, W, 4);
+      ctx.fillStyle = 'rgba(61,220,132,0.8)'; ctx.fillRect(x0, y0, larg, 4);
     }
   }
   fotogramma() {

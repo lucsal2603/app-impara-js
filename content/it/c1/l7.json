@@ -1,0 +1,151 @@
+{
+  "id": "c1-l7",
+  "capitolo": "Le basi",
+  "titolo": "Due porte",
+  "durata": "7 min",
+  "prossima": "8",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Missione 7: due porte",
+      "testo": [
+        "Due porte, due pulsanti da tenere premuti, due scatole. E in mezzo un laser.",
+        "La prima scatola resta dietro di me sul primo pulsante: per la seconda porta serve la seconda scatola, che trovo oltre il laser."
+      ],
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "I numeri con la virgola",
+      "testo": [
+        "wait(1) aspetta un secondo, wait(2) due. Posso aspettare anche mezzo secondo: si scrive wait(0.5), con il punto e non con la virgola.",
+        "In JavaScript i numeri decimali usano sempre il punto. wait(0,5) non funziona."
+      ],
+      "codice": "wait(0.5)\nwait(1.5)"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Come si scrive un'attesa di mezzo secondo?",
+      "opzioni": [
+        "wait(0,5)",
+        "wait(0.5)",
+        "wait(1/2)"
+      ],
+      "risposta": 1,
+      "spiegazione": "Il punto separa i decimali. La virgola, in JavaScript, serve ad altro."
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Sono davanti al pulsante con la scatola in mano. Completa il programma per posarla.",
+      "codice": "___()\njump()",
+      "scelte": [
+        "putDown",
+        "pickUp",
+        "wait"
+      ],
+      "risposta": [
+        "putDown"
+      ],
+      "spiegazione": "putDown la posa davanti a me, sul pulsante. Poi ci salto sopra per passare."
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 7",
+      "sottotitolo": "Due porte",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L...........",
+          "..............",
+          ".......#......",
+          ".......R......",
+          "...M.A.....B..",
+          "S.C.PA..C.QBX.",
+          "=============="
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "C": {
+            "tipo": "cassa"
+          },
+          "P": {
+            "tipo": "piastra",
+            "id": "p1",
+            "tenuta": true
+          },
+          "Q": {
+            "tipo": "piastra",
+            "id": "p2",
+            "tenuta": true
+          },
+          "A": {
+            "tipo": "porta",
+            "id": "d1",
+            "apre_con": [
+              "p1"
+            ]
+          },
+          "B": {
+            "tipo": "porta",
+            "id": "d2",
+            "apre_con": [
+              "p2"
+            ]
+          },
+          "R": {
+            "tipo": "laser",
+            "id": "l1",
+            "lunghezza": 2,
+            "acceso": 180,
+            "spento": 180,
+            "fase": 180
+          },
+          "M": {
+            "tipo": "moneta",
+            "id": "m1"
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Due scatole, due pulsanti, un laser"
+      },
+      "starter": "moveRight()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait",
+        "pickUp",
+        "putDown"
+      ],
+      "sintassi": [
+        "call"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "maxRighe",
+          "valore": 22,
+          "testo": "Massimo 22 righe"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "Prima scatola sul primo pulsante, poi salta sulla scatola e scendi oltre la porta.",
+        "Il laser si accende dopo tre secondi: quando arrivi davanti aspetta che si spenga. La seconda scatola è subito dopo.",
+        "jump()\nmoveRight()\nmoveLeft()\npickUp()\nmoveLeft()\nmoveRight()\nputDown()\njump()\njump()\nwait(2)\njump()\njump()\nmoveLeft()\npickUp()\nmoveLeft()\nmoveRight()\nputDown()\njump()\njump()"
+      ]
+    }
+  ]
+}

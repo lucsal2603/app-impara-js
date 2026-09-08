@@ -1,0 +1,139 @@
+{
+  "id": "c1-l6",
+  "capitolo": "Le basi",
+  "titolo": "La scatola",
+  "durata": "6 min",
+  "prossima": "7",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Missione 6: la scatola",
+      "testo": [
+        "Da qui i livelli sono più larghi dello schermo. Trascina la scena con il dito per vederla tutta; quando premi ESEGUI la camera torna a seguirmi.",
+        "In questa stanza il pulsante non è a scatto: resta premuto solo finché c'è qualcosa sopra. Io devo passare la porta, quindi sopra il pulsante ci va una scatola."
+      ],
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Prendere e posare",
+      "testo": [
+        "pickUp() prende la scatola che ho davanti. putDown() la posa davanti a me, e se sotto non c'è niente cade fino a terra.",
+        "Con la scatola in mano cammino e salto normalmente. Una scatola posata è un ostacolo, ma anche un gradino: ci salto sopra."
+      ],
+      "codice": "pickUp()\nmoveRight()\nputDown()"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Sono davanti alla scatola. Cosa scrivo per prenderla?",
+      "opzioni": [
+        "pickUp()",
+        "putDown()",
+        "jump()"
+      ],
+      "risposta": 0,
+      "spiegazione": "pickUp vuol dire raccogli: prende la scatola che ho davanti, nella direzione in cui guardo."
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Maiuscole e minuscole",
+      "testo": [
+        "JavaScript distingue le maiuscole dalle minuscole. moveRight() esiste, moveright() e MoveRight() no: sono nomi diversi.",
+        "Se sbagli una lettera il gioco te lo dice e ti suggerisce il nome giusto. Leggere quel messaggio è parte del lavoro."
+      ],
+      "codice": "moveRight()   // giusto\nmoveright()   // non esiste"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quale di questi è scritto giusto?",
+      "opzioni": [
+        "moveright()",
+        "MoveRight()",
+        "moveRight()"
+      ],
+      "risposta": 2,
+      "spiegazione": "La R maiuscola nel mezzo e tutto il resto minuscolo: è così che si chiama il comando."
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 6",
+      "sottotitolo": "La scatola",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.........",
+          "............",
+          "............",
+          "............",
+          "......M.D...",
+          "S.C..P..D..X",
+          "============"
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "C": {
+            "tipo": "cassa",
+            "id": "c1"
+          },
+          "P": {
+            "tipo": "piastra",
+            "id": "p1",
+            "tenuta": true
+          },
+          "D": {
+            "tipo": "porta",
+            "id": "d1",
+            "apre_con": [
+              "p1"
+            ]
+          },
+          "M": {
+            "tipo": "moneta",
+            "id": "m1"
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Porta la scatola sul pulsante e passa la porta"
+      },
+      "starter": "moveRight()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait",
+        "pickUp",
+        "putDown"
+      ],
+      "sintassi": [
+        "call"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "maxRighe",
+          "valore": 16,
+          "testo": "Massimo 16 righe"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "Un passo, poi pickUp(): la scatola è davanti a te.",
+        "Posa la scatola sul pulsante con putDown() quando sei nella casella prima. Poi saltaci sopra: dall'alto prendi anche la moneta.",
+        "jump()\njump()\njump()\nmoveLeft()\njump()\npickUp()\nmoveRight()\njump()\nputDown()\njump()\njump()\njump()\njump()"
+      ]
+    }
+  ]
+}

@@ -5,4 +5,6 @@ export const azioni = {
   moveLeft:  () => ({ tipo: 'move', dir: -1 }),
   jump:      () => ({ tipo: 'jump' }),
   wait:      (secondi = 1) => ({ tipo: 'wait', ticks: Math.max(1, Math.round(Number(secondi) * DURATE.secondo)) }),
+  pickUp:    () => ({ tipo: 'pickUp' }),
+  putDown:   () => ({ tipo: 'putDown' }),
 };

@@ -1,0 +1,133 @@
+{
+  "id": "c1-l9",
+  "capitolo": "Le basi",
+  "titolo": "Il corridoio",
+  "durata": "8 min",
+  "prossima": "10",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Missione 9: il corridoio",
+      "testo": [
+        "Un corridoio lungo il doppio dello schermo, con due laser che vanno a tempi diversi, gli spuntoni, una scatola e un pulsante da tenere premuto.",
+        "Prima di scrivere, trascina la scena e guarda tutto il percorso. Poi scrivi un pezzo alla volta e usa PASSO."
+      ],
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Leggere gli errori",
+      "testo": [
+        "Se scrivo movRight() il programma non parte: in basso compare un messaggio con la riga sbagliata e il nome giusto.",
+        "Non è una punizione, è un aiuto. Si legge, si corregge la riga, si preme di nuovo ESEGUI."
+      ],
+      "codice": "movRight()\n// Riga 1: movRight non esiste.\n// Forse volevi moveRight()?"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Cosa succede se scrivo moveRigth() con le lettere invertite?",
+      "opzioni": [
+        "Faccio un passo a destra lo stesso",
+        "Il programma non parte e mi dice che quel nome non esiste",
+        "Salto"
+      ],
+      "risposta": 1,
+      "spiegazione": "Il gioco controlla i nomi prima di partire. Un nome sbagliato ferma tutto e ti suggerisce quello giusto."
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Due laser: uno acceso nei primi tre secondi, l'altro nei secondi tre. Davanti al primo laser, appena arrivo, cosa faccio?",
+      "opzioni": [
+        "Passo subito",
+        "Aspetto che si spenga",
+        "Torno indietro"
+      ],
+      "risposta": 1,
+      "spiegazione": "Il primo laser è acceso all'inizio: si aspetta. Quando poi arrivo al secondo, è lui a essere acceso: si aspetta ancora."
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 9",
+      "sottotitolo": "Il corridoio",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.............",
+          "................",
+          "....#......#....",
+          "....R......R....",
+          "...M........D...",
+          "S..^....C.P.D..X",
+          "================"
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "C": {
+            "tipo": "cassa"
+          },
+          "P": {
+            "tipo": "piastra",
+            "id": "p1",
+            "tenuta": true
+          },
+          "D": {
+            "tipo": "porta",
+            "apre_con": [
+              "p1"
+            ]
+          },
+          "M": {
+            "tipo": "moneta"
+          },
+          "R": {
+            "tipo": "laser",
+            "lunghezza": 2,
+            "acceso": 180,
+            "spento": 180
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Due laser, una scatola, una porta: arriva in fondo"
+      },
+      "starter": "moveRight()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait",
+        "pickUp",
+        "putDown"
+      ],
+      "sintassi": [
+        "call"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "maxRighe",
+          "valore": 20,
+          "testo": "Massimo 20 righe"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "Il salto sugli spuntoni atterra sotto il primo laser: aspetta due secondi prima di saltare.",
+        "La scatola va sul pulsante prima della porta. Dalla scatola, davanti al secondo laser, aspetta ancora prima di scendere.",
+        "jump()\nwait(2)\njump()\njump()\njump()\njump()\nmoveLeft()\npickUp()\nmoveRight()\nputDown()\nwait(2)\njump()\njump()\njump()\njump()"
+      ]
+    }
+  ]
+}

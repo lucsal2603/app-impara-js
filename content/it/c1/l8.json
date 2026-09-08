@@ -1,0 +1,130 @@
+{
+  "id": "c1-l8",
+  "capitolo": "Le basi",
+  "titolo": "La torre",
+  "durata": "7 min",
+  "prossima": "9",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Missione 8: la torre",
+      "testo": [
+        "Il pulsante è in cima a una torre di blocchi, e apre la porta per poco. Il primo gradino manca: lo faccio io con la scatola.",
+        "Dalla cima si scende in un salto solo: quando cammino nel vuoto cado, e cadere non fa male."
+      ],
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "I commenti",
+      "testo": [
+        "Una riga che inizia con due barre è un commento: io la salto. Serve a te, per scrivere cosa fa un pezzo di programma.",
+        "Nei programmi lunghi i commenti aiutano a ritrovarsi: un commento prima di ogni pezzo."
+      ],
+      "codice": "// salgo sulla torre\njump()\njump()\n// scendo alla porta\nmoveRight()"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quale di queste righe viene ignorata dal programma?",
+      "opzioni": [
+        "// salto sul blocco",
+        "jump()",
+        "wait(1)"
+      ],
+      "risposta": 0,
+      "spiegazione": "Le due barre trasformano la riga in un commento: si legge ma non si esegue."
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Completa il programma: il commento dice cosa fare.",
+      "codice": "// prendo la scatola davanti a me\n___()",
+      "scelte": [
+        "pickUp",
+        "putDown",
+        "moveLeft"
+      ],
+      "risposta": [
+        "pickUp"
+      ],
+      "spiegazione": "Il commento non fa niente da solo: il comando sotto fa il lavoro."
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 8",
+      "sottotitolo": "La torre",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.......",
+          "..........",
+          ".....P....",
+          ".....#....",
+          "....##M.D.",
+          "SC..##..DX",
+          "=========="
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "C": {
+            "tipo": "cassa"
+          },
+          "P": {
+            "tipo": "piastra",
+            "id": "p1",
+            "durata": 200
+          },
+          "D": {
+            "tipo": "porta",
+            "apre_con": [
+              "p1"
+            ]
+          },
+          "M": {
+            "tipo": "moneta"
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Costruisci il gradino, premi il pulsante in cima e scendi alla porta"
+      },
+      "starter": "pickUp()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait",
+        "pickUp",
+        "putDown"
+      ],
+      "sintassi": [
+        "call"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "maxRighe",
+          "valore": 16,
+          "testo": "Massimo 16 righe"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "La scatola va posata proprio davanti alla torre, come primo gradino.",
+        "Tre salti per arrivare in cima. Poi un passo nel vuoto: cadendo prendi la moneta e sei subito alla porta.",
+        "jump()\njump()\nmoveLeft()\npickUp()\nmoveLeft()\nmoveRight()\nputDown()\njump()\njump()\njump()\nmoveRight()\njump()\njump()"
+      ]
+    }
+  ]
+}

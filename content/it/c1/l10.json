@@ -1,0 +1,148 @@
+{
+  "id": "c1-l10",
+  "capitolo": "Le basi",
+  "titolo": "L'uscita segreta",
+  "durata": "9 min",
+  "prossima": null,
+  "epilogo": "Per fare dieci passi oggi scrivi dieci righe. Nel capitolo dei cicli scriverai for (let i = 0; i < 10; i++) { moveRight() } e saranno tre righe. Ci vediamo lì.",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Missione 10: l'uscita segreta",
+      "testo": [
+        "L'ultima stanza del capitolo è la più lunga: la chiave su un blocco, una scatola, una porta chiusa a chiave, un pulsante da tenere premuto, un laser, gli spuntoni.",
+        "Tutto quello che hai imparato, in un programma solo. Scrivilo a pezzi, con un commento per ogni pezzo."
+      ],
+      "immagine": "/assets/mascotte/saluto.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Un assaggio del prossimo capitolo",
+      "testo": [
+        "Quando scrivi moveRight() cinque volte di fila, stai ripetendo. JavaScript ha un modo per dire ripeti cinque volte: si chiama ciclo for.",
+        "Non serve ancora. Serve sapere che esiste, perché tra poco toglierà un sacco di righe ai tuoi programmi."
+      ],
+      "codice": "for (let i = 0; i < 5; i++) {\n  moveRight()\n}"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quante volte esegue moveRight() questo ciclo?",
+      "opzioni": [
+        "Una",
+        "Cinque",
+        "Dieci"
+      ],
+      "risposta": 1,
+      "spiegazione": "i parte da 0 e va avanti finché è minore di 5: 0, 1, 2, 3, 4. Cinque giri.",
+      "codice": "for (let i = 0; i < 5; i++) {\n  moveRight()\n}"
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Sono sul pulsante con la scatola posata dietro? No: la scatola la poso davanti, sul pulsante, e poi salto. Completa.",
+      "codice": "putDown()\n___()\nmoveRight()",
+      "scelte": [
+        "jump",
+        "wait",
+        "pickUp"
+      ],
+      "risposta": [
+        "jump"
+      ],
+      "spiegazione": "Posata la scatola, ci salto sopra e scendo dall'altra parte, dentro la porta aperta."
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 10",
+      "sottotitolo": "L'uscita segreta",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L...............",
+          "..................",
+          "............#.....",
+          "............R.....",
+          ".K....D...E...M...",
+          "S#..C.D.P.E..^..X.",
+          "=================="
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "K": {
+            "tipo": "chiave",
+            "id": "k1"
+          },
+          "C": {
+            "tipo": "cassa"
+          },
+          "P": {
+            "tipo": "piastra",
+            "id": "p1",
+            "tenuta": true
+          },
+          "M": {
+            "tipo": "moneta"
+          },
+          "R": {
+            "tipo": "laser",
+            "lunghezza": 2,
+            "acceso": 180,
+            "spento": 180,
+            "fase": 180
+          },
+          "D": {
+            "tipo": "porta",
+            "chiave": "k1"
+          },
+          "E": {
+            "tipo": "porta",
+            "id": "d2",
+            "apre_con": [
+              "p1"
+            ]
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Chiave, scatola, laser, spuntoni: trova l'uscita"
+      },
+      "starter": "jump()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait",
+        "pickUp",
+        "putDown"
+      ],
+      "sintassi": [
+        "call"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "maxRighe",
+          "valore": 22,
+          "testo": "Massimo 22 righe"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "La chiave è sul blocco davanti a te: un salto e ce l'hai. La prima porta si apre con quella.",
+        "La scatola va sul pulsante dopo la prima porta. Davanti al laser aspetta un secondo, poi salta gli spuntoni: la moneta è sull'atterraggio.",
+        "jump()\njump()\njump()\njump()\nmoveLeft()\npickUp()\nmoveRight()\njump()\nputDown()\njump()\njump()\njump()\nmoveRight()\njump()\njump()"
+      ]
+    }
+  ]
+}

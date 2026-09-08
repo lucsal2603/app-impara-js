@@ -10,5 +10,7 @@ export const DURATE = {            // in tick
   secondo: 60,                     // wait(1)
   morte: 120,                      // durata dell'animazione di morte
   porta: 4,                        // tick per fotogramma della porta che si apre
+  pickUp: 18,                      // prendere e posare una scatola
+  putDown: 18,
 };
 export const LIMITI = { righeMax: 60 };

@@ -10,7 +10,7 @@ button { font-family: inherit; cursor: pointer; }
 .icona, .contatore { width: 40px; text-align: center; font-weight: 700; font-size: 16px; }
 .icona { background: none; border: 0; color: var(--testo); }
 .scena-wrap { position: relative; width: 100%; aspect-ratio: 8 / 7; background: #232930; overflow: hidden; }
-canvas { display: block; width: 100%; height: 100%; }
+canvas { display: block; width: 100%; height: 100%; touch-action: none; }
 .messaggio { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(17,20,24,.6); font-size: 20px; font-weight: 800; text-align: center; padding: 24px; }
 .hud { display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; font-size: 13px; font-weight: 700; background: #181c21; }
 .hud span:last-child { color: var(--muto); font-weight: 500; }
