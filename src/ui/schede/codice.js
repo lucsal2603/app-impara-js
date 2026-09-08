@@ -51,6 +51,7 @@ export function valutaStelle(livello, scena, editor) {
     if (s.tipo === 'completa') return { ...s, ok: true };
     if (s.tipo === 'maxRighe') return { ...s, ok: editor.righeCodice() <= s.valore };
     if (s.tipo === 'chiave') return { ...s, ok: scena.chiavi.length > 0 && scena.chiavi.every(k => k.presa) };
+    if (s.tipo === 'monete') return { ...s, ok: scena.monete.length > 0 && scena.monete.every(m => m.presa) };
     return { ...s, ok: false };
   });
 }

@@ -46,7 +46,7 @@ export function avviaLezione(root, lezione, { homeUrl = 'home.html' } = {}) {
     el.innerHTML = `<img class="mascotte" src="${import.meta.env.BASE_URL}assets/mascotte/saluto.png" alt=""><h2>Livello completato!</h2>
       <div class="stelle">${stelle.map(st => `<div class="stella ${st.ok ? 'presa' : ''}"><span>★</span><small>${st.testo}</small></div>`).join('')}</div>
       <p>${stelle.filter(st => st.ok).length === stelle.length ? 'Tutte le stelle al primo colpo. Sei pronto per la prossima lezione.' : 'Puoi rigiocare il livello per prendere le stelle che mancano.'}</p>
-      <div class="azioni"><a class="bottone primario" href="${homeUrl}">Torna alla home</a><button class="bottone" type="button" data-r="rigioca">Rigioca il livello</button></div>`;
+      <div class="azioni">${lezione.prossima ? `<a class="bottone primario" href="lezione.html?l=${lezione.prossima}">Prossima lezione</a><a class="bottone" href="${homeUrl}">Torna alla home</a>` : `<a class="bottone primario" href="${homeUrl}">Torna alla home</a>`}<button class="bottone" type="button" data-r="rigioca">Rigioca il livello</button></div>`;
     el.querySelector('[data-r="rigioca"]').addEventListener('click', () => { i = schede.length - 1; mostra(); });
     corpo.appendChild(el); pie.hidden = true;
   }

@@ -1,0 +1,139 @@
+{
+  "id": "c1-l2",
+  "capitolo": "Le basi",
+  "titolo": "Il laser",
+  "durata": "5 min",
+  "prossima": null,
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Missione 2: il laser",
+      "immagine": "/assets/mascotte/riposo.png",
+      "testo": [
+        "Nuova stanza, nuovi guai: degli spuntoni sul pavimento e un laser che sbarra la strada verso l'uscita.",
+        "Sugli spuntoni non si cammina. Si saltano: jump() supera una casella e atterra oltre."
+      ]
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Anche a sinistra",
+      "codice": "moveLeft()\nmoveLeft()",
+      "testo": [
+        "moveLeft() è il gemello di moveRight(): un passo verso sinistra.",
+        "Serve quando la cosa che vuoi non è davanti a te. In questa stanza c'è una moneta alle mie spalle."
+      ]
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Il laser va e viene",
+      "codice": "wait(3)",
+      "testo": [
+        "Il laser resta acceso per tre secondi, poi si spegne per tre secondi, e ricomincia. Se lo tocco mentre è acceso, la missione riparte.",
+        "Il trucco è aspettare davanti al raggio: wait(3) mi ferma per tre secondi. Il numero tra parentesi è l'argomento, e può essere anche 2 o 1."
+      ]
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Cosa fa wait(3)?",
+      "opzioni": [
+        "Fa tre passi avanti",
+        "Aspetta tre secondi senza muoversi",
+        "Salta tre volte"
+      ],
+      "risposta": 1,
+      "spiegazione": "wait vuol dire aspetta, e l'argomento dice per quanto tempo."
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Sono davanti al laser acceso. Completa il programma per passare quando si spegne.",
+      "codice": "___(3)\nmoveRight()",
+      "scelte": [
+        "wait",
+        "jump",
+        "moveRight"
+      ],
+      "risposta": [
+        "wait"
+      ],
+      "spiegazione": "Prima aspetto che il raggio si spenga, poi faccio il passo."
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Il piano",
+      "testo": [
+        "Prima la moneta a sinistra, poi torno indietro, salto gli spuntoni, aspetto che il laser si spenga e vado all'uscita.",
+        "Il laser è acceso nei primi tre secondi: se arrivo prima, aspetto. Se sbaglio i tempi, riparto e provo un numero diverso."
+      ]
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 2",
+      "sottotitolo": "Il laser",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.....",
+          "........",
+          ".....#..",
+          ".....R..",
+          "........",
+          "M.S^...X",
+          "========"
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "M": {
+            "tipo": "moneta",
+            "id": "m1"
+          },
+          "^": "spuntoni",
+          "R": {
+            "tipo": "laser",
+            "id": "l1",
+            "lunghezza": 2,
+            "acceso": 180,
+            "spento": 180
+          },
+          "X": "uscita"
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Raggiungi l'uscita senza toccare il laser"
+      },
+      "starter": "moveRight()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "maxRighe",
+          "valore": 10,
+          "testo": "Massimo 10 righe"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "La moneta è a due passi a sinistra: moveLeft() due volte, poi torna con moveRight().",
+        "Gli spuntoni si saltano con jump(). Davanti al laser aspetta con wait(2) o wait(3).",
+        "moveLeft()\nmoveLeft()\nmoveRight()\nmoveRight()\njump()\nwait(2)\nmoveRight()\nmoveRight()\nmoveRight()"
+      ]
+    }
+  ]
+}

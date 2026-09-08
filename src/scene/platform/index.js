@@ -17,6 +17,8 @@ export class ScenaPlatform extends Scena {
     this.piastre = L.piastre.map(p => ({ ...p, premuta: false, frame: 0 }));
     this.porte = L.porte.map(d => ({ ...d, aperta: false, frame: 0 }));
     this.chiavi = L.chiavi.map(k => ({ ...k, presa: false }));
+    this.monete = L.monete.map(m => ({ ...m, presa: false }));
+    this.tempo = 0;                                      // tick di logica dall'avvio del programma (i laser vanno a tempo)
   }
 
   api() { return azioni; }
@@ -53,8 +55,11 @@ export class ScenaPlatform extends Scena {
 
   animaSolo() { this.tickN++; this.player.animTick++; this.aggiornaMondo(false); }
 
+  laserAcceso(l) { const per = l.acceso + l.spento; return ((this.tempo + l.fase) % per) < l.acceso; }
+  celleLaser(l) { const c = []; for (let k = 1; k <= l.lunghezza; k++) c.push({ x: l.x, y: l.y + k }); return c; }
+
   tick() {
-    this.tickN++;
+    this.tickN++; this.tempo++;
     const p = this.player; p.animTick++;
     if (!p.vivo) { this.morteTick++; this.aggiornaMondo(false); return false; }
     if (this.esito) return true;
@@ -89,7 +94,9 @@ export class ScenaPlatform extends Scena {
     if (logica && p.vivo) {
       for (const k of this.chiavi) if (!k.presa && k.x === c.x && k.y === c.y) { k.presa = true; this.effetti.push({ nome: 'chiave_presa', x: k.x, y: k.y, t: 0, durata: 32 }); }
       for (const pl of this.piastre) if (!pl.premuta && pl.x === c.x && pl.y === c.y && !this.azione) pl.premuta = true;   // a scatto: resta premuta
+      for (const m of this.monete) if (!m.presa && m.x === c.x && m.y === c.y) { m.presa = true; this.effetti.push({ nome: 'moneta_presa', x: m.x, y: m.y, t: 0, durata: 20 }); }
       for (const pe of this.L.pericoli) if (pe.x === c.x && pe.y === c.y) { this.muori(); return; }
+      for (const l of this.L.laser) if (this.laserAcceso(l) && this.celleLaser(l).some(cl => cl.x === c.x && cl.y === c.y)) { this.muori(); return; }
       if (!this.azione && !this.uscita && this.L.uscita && p.gx === this.L.uscita.x && p.gy === this.L.uscita.y) { this.uscita = { t: 0, durata: 120 }; p.anim = 'uscita'; p.animTick = 0; }
     }
     const nPremi = (this.anim.pulsante_premi || []).length || 3;
@@ -107,7 +114,7 @@ export class ScenaPlatform extends Scena {
   morteFinita() { return !this.player.vivo && this.morteTick >= DURATE.morte; }
 
   verifica() {
-    return { ok: this.esito === 'vinto', chiavi: this.chiavi.filter(k => k.presa).length, messaggio: this.esito === 'vinto' ? 'Livello completato!' : '' };
+    return { ok: this.esito === 'vinto', chiavi: this.chiavi.filter(k => k.presa).length, monete: this.monete.filter(m => m.presa).length, messaggio: this.esito === 'vinto' ? 'Livello completato!' : '' };
   }
 
   // ---------------------------------------------------------------- disegno
@@ -127,11 +134,17 @@ export class ScenaPlatform extends Scena {
     for (const d of this.porte) this.tassello(ctx, T, `porta_apre_0${d.frame + 1}`, d.x, d.y);
     if (L.uscita) this.tassello(ctx, T, 'uscita', L.uscita.x, L.uscita.y);
     for (const pe of L.pericoli) this.tassello(ctx, T, pe.tipo, pe.x, pe.y);
+    for (const l of L.laser) {
+      this.tassello(ctx, T, 'laser_emettitore_giu', l.x, l.y);
+      if (this.laserAcceso(l)) { ctx.save(); ctx.globalAlpha = 0.82 + 0.18 * Math.sin(this.tickN * 0.6); for (const cl of this.celleLaser(l)) this.tassello(ctx, T, 'laser_verticale', cl.x, cl.y); ctx.restore(); }
+    }
+    for (const m of this.monete) if (!m.presa) this.tassello(ctx, T, 'moneta', m.x, m.y);
     for (const pl of this.piastre) this.tassello(ctx, T, `pulsante_premi_0${pl.frame + 1}`, pl.x, pl.y);
     for (const k of this.chiavi) if (!k.presa) this.tassello(ctx, T, 'chiave', k.x, k.y);
     for (const e of this.effetti) {
-      const seq = this.anim[e.nome] || []; if (!seq.length) continue;
-      this.tassello(ctx, T, seq[Math.min(seq.length - 1, Math.floor((e.t / e.durata) * seq.length))], e.x, e.y);
+      const seq = this.anim[e.nome] || [];
+      if (seq.length) { this.tassello(ctx, T, seq[Math.min(seq.length - 1, Math.floor((e.t / e.durata) * seq.length))], e.x, e.y); continue; }
+      if (e.nome === 'moneta_presa') { const k = e.t / e.durata; ctx.save(); ctx.globalAlpha = 1 - k; ctx.translate(0, -k * T * 0.6); this.tassello(ctx, T, 'moneta', e.x, e.y); ctx.restore(); }
     }
     this.disegnaPlayer(ctx, T);
     if (this.uscita && L.uscita) {                       // entra nel bianco della porta

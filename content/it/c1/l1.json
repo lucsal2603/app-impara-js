@@ -25,7 +25,11 @@
     {
       "tipo": "scelta",
       "domanda": "Quale di questi mi fa fare un passo a destra?",
-      "opzioni": ["moveRight", "moveRight()", "move Right()"],
+      "opzioni": [
+        "moveRight",
+        "moveRight()",
+        "move Right()"
+      ],
       "risposta": 1,
       "spiegazione": "Nome tutto attaccato e parentesi subito dopo: così JavaScript capisce che è un comando da eseguire."
     },
@@ -42,7 +46,11 @@
       "tipo": "scelta",
       "domanda": "Cosa faccio con questo programma?",
       "codice": "jump()\nmoveRight()",
-      "opzioni": ["Prima salto, poi un passo a destra", "Prima un passo a destra, poi salto", "Salto due volte"],
+      "opzioni": [
+        "Prima salto, poi un passo a destra",
+        "Prima un passo a destra, poi salto",
+        "Salto due volte"
+      ],
       "risposta": 0,
       "spiegazione": "Prima la riga 1, poi la riga 2. L'ordine delle righe è l'ordine delle azioni."
     },
@@ -59,8 +67,14 @@
       "tipo": "completa",
       "domanda": "Davanti a me c'è un blocco. Completa il programma per superarlo.",
       "codice": "moveRight()\n___()\nmoveRight()",
-      "scelte": ["jump", "wait", "moveLeft"],
-      "risposta": ["jump"],
+      "scelte": [
+        "jump",
+        "wait",
+        "moveLeft"
+      ],
+      "risposta": [
+        "jump"
+      ],
       "spiegazione": "Con jump() salgo sul blocco, poi continuo a destra."
     },
     {
@@ -78,23 +92,66 @@
       "sottotitolo": "Il primo passo",
       "scena": "platform",
       "config": {
-        "mappa": ["..L.....", "........", "........", "........", "....KD..", "S.#P.D.X", "========"],
+        "mappa": [
+          "..L.....",
+          "........",
+          "........",
+          "........",
+          "....KD..",
+          "S.#P.D.X",
+          "========"
+        ],
         "legenda": {
-          "=": "pavimento", "#": "blocco", "L": "lampada", "S": "spawn",
-          "K": { "tipo": "chiave", "id": "k1" },
-          "P": { "tipo": "piastra", "id": "p1" },
-          "D": { "tipo": "porta", "id": "d1", "apre_con": ["p1"] },
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "K": {
+            "tipo": "chiave",
+            "id": "k1"
+          },
+          "P": {
+            "tipo": "piastra",
+            "id": "p1"
+          },
+          "D": {
+            "tipo": "porta",
+            "id": "d1",
+            "apre_con": [
+              "p1"
+            ]
+          },
           "X": "uscita"
         }
       },
-      "obiettivo": { "tipo": "uscita", "testo": "Raggiungi l'uscita" },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Raggiungi l'uscita"
+      },
       "starter": "moveRight()\n",
-      "api": ["moveRight", "moveLeft", "jump", "wait"],
-      "sintassi": ["call"],
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call"
+      ],
       "stelle": [
-        { "tipo": "completa", "testo": "Livello completato" },
-        { "tipo": "maxRighe", "valore": 8, "testo": "Massimo 8 righe" },
-        { "tipo": "chiave", "testo": "Chiave raccolta" }
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "maxRighe",
+          "valore": 8,
+          "testo": "Massimo 8 righe"
+        },
+        {
+          "tipo": "chiave",
+          "testo": "Chiave raccolta"
+        }
       ],
       "aiuti": [
         "Il blocco davanti a te si supera con jump().",
@@ -102,5 +159,6 @@
         "moveRight()\njump()\nmoveRight()\njump()\nmoveRight()\nmoveRight()\nmoveRight()"
       ]
     }
-  ]
+  ],
+  "prossima": "2"
 }

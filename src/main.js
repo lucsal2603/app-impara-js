@@ -1,5 +1,7 @@
 // Pagina del solo livello (prototipo e test): monta la scheda codice dell'ultima scheda della lezione 1.
-import lezione from '../content/it/c1/l1.json';
+import l1 from '../content/it/c1/l1.json';
+import l2 from '../content/it/c1/l2.json';
+const lezione = { '1': l1, '2': l2 }[new URLSearchParams(location.search).get('l') || '1'] || l1;
 import { montaCodice } from './ui/schede/codice.js';
 
 const livello = lezione.schede.find(s => s.tipo === 'codice');

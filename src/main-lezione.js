@@ -1,6 +1,10 @@
-import lezione from '../content/it/c1/l1.json';
+import l1 from '../content/it/c1/l1.json';
+import l2 from '../content/it/c1/l2.json';
 import { avviaLezione } from './ui/lezione.js';
+const LEZIONI = { '1': l1, '2': l2 };
+const q = new URLSearchParams(location.search);
+const lezione = LEZIONI[q.get('l') || '1'] || l1;
+document.title = `Lezione · ${lezione.titolo}`;
 const player = avviaLezione(document.getElementById('lezione'), lezione);
-const salta = new URLSearchParams(location.search).get('scheda');
-if (salta !== null) player.vai(Number(salta));
+if (q.get('scheda') !== null) player.vai(Number(q.get('scheda')));
 window.__lezione = player;
