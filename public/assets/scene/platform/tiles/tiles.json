@@ -313,6 +313,30 @@
     256
    ]
   },
+  "pulsante_premi_04": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "pulsante_premi_05": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "pulsante_premi_06": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
   "telecamera": {
    "w": 1,
    "h": 1,
@@ -528,6 +552,70 @@
     256,
     256
    ]
+  },
+  "chiave_presa_01": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_02": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_03": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_04": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_05": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_06": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_07": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_08": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
   }
  },
  "animazioni": {
@@ -542,7 +630,20 @@
   "pulsante_premi": [
    "pulsante_premi_01",
    "pulsante_premi_02",
-   "pulsante_premi_03"
+   "pulsante_premi_03",
+   "pulsante_premi_04",
+   "pulsante_premi_05",
+   "pulsante_premi_06"
+  ],
+  "chiave_presa": [
+   "chiave_presa_01",
+   "chiave_presa_02",
+   "chiave_presa_03",
+   "chiave_presa_04",
+   "chiave_presa_05",
+   "chiave_presa_06",
+   "chiave_presa_07",
+   "chiave_presa_08"
   ]
  }
 }

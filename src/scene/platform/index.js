@@ -12,6 +12,8 @@ export class ScenaPlatform extends Scena {
     this.colonne = L.colonne; this.righe = L.righe;
     this.player = { gx: L.spawn.x, gy: L.spawn.y, px: L.spawn.x, py: L.spawn.y, dir: 1, anim: 'attesa', animTick: 0, vivo: true };
     this.azione = null; this.esito = null; this.morteTick = 0; this.tickN = 0;
+    this.effetti = []; this.uscita = null;
+    this.anim = this.risorse.tilesMeta.animazioni || {};
     this.piastre = L.piastre.map(p => ({ ...p, premuta: false, frame: 0 }));
     this.porte = L.porte.map(d => ({ ...d, aperta: false, frame: 0 }));
     this.chiavi = L.chiavi.map(k => ({ ...k, presa: false }));
@@ -56,6 +58,13 @@ export class ScenaPlatform extends Scena {
     const p = this.player; p.animTick++;
     if (!p.vivo) { this.morteTick++; this.aggiornaMondo(false); return false; }
     if (this.esito) return true;
+    for (const e of this.effetti) e.t++;
+    this.effetti = this.effetti.filter(e => e.t < e.durata);
+    if (this.uscita) {                                  // sta entrando nella porta: il livello finisce alla fine dell'animazione
+      this.uscita.t++;
+      if (this.uscita.t >= this.uscita.durata) this.esito = 'vinto';
+      return false;
+    }
     let fine = false;
     const a = this.azione;
     if (a) {
@@ -78,12 +87,13 @@ export class ScenaPlatform extends Scena {
   aggiornaMondo(logica) {
     const p = this.player, c = this.cella();
     if (logica && p.vivo) {
-      for (const k of this.chiavi) if (!k.presa && k.x === c.x && k.y === c.y) k.presa = true;
+      for (const k of this.chiavi) if (!k.presa && k.x === c.x && k.y === c.y) { k.presa = true; this.effetti.push({ nome: 'chiave_presa', x: k.x, y: k.y, t: 0, durata: 32 }); }
       for (const pl of this.piastre) if (!pl.premuta && pl.x === c.x && pl.y === c.y && !this.azione) pl.premuta = true;   // a scatto: resta premuta
       for (const pe of this.L.pericoli) if (pe.x === c.x && pe.y === c.y) { this.muori(); return; }
-      if (!this.azione && this.L.uscita && p.gx === this.L.uscita.x && p.gy === this.L.uscita.y) this.esito = 'vinto';
+      if (!this.azione && !this.uscita && this.L.uscita && p.gx === this.L.uscita.x && p.gy === this.L.uscita.y) { this.uscita = { t: 0, durata: 120 }; p.anim = 'uscita'; p.animTick = 0; }
     }
-    for (const pl of this.piastre) pl.frame = Math.min(2, pl.frame + (pl.premuta ? (this.tickN % 3 === 0 ? 1 : 0) : 0));
+    const nPremi = (this.anim.pulsante_premi || []).length || 3;
+    for (const pl of this.piastre) pl.frame = Math.min(nPremi - 1, pl.frame + (pl.premuta ? (this.tickN % 2 === 0 ? 1 : 0) : 0));
     for (const d of this.porte) {
       const viaPiastra = d.apre_con.some(id => this.piastre.find(pl => pl.id === id)?.premuta);
       const viaChiave = d.chiave ? this.chiavi.find(k => k.id === d.chiave)?.presa : false;
@@ -119,11 +129,23 @@ export class ScenaPlatform extends Scena {
     for (const pe of L.pericoli) this.tassello(ctx, T, pe.tipo, pe.x, pe.y);
     for (const pl of this.piastre) this.tassello(ctx, T, `pulsante_premi_0${pl.frame + 1}`, pl.x, pl.y);
     for (const k of this.chiavi) if (!k.presa) this.tassello(ctx, T, 'chiave', k.x, k.y);
+    for (const e of this.effetti) {
+      const seq = this.anim[e.nome] || []; if (!seq.length) continue;
+      this.tassello(ctx, T, seq[Math.min(seq.length - 1, Math.floor((e.t / e.durata) * seq.length))], e.x, e.y);
+    }
     this.disegnaPlayer(ctx, T);
+    if (this.uscita && L.uscita) {                       // entra nel bianco della porta
+      const k = this.uscita.t / this.uscita.durata, a = Math.max(0, Math.min(1, (k - 0.4) / 0.6));
+      const cx = (L.uscita.x + 0.5) * T, cy = (L.uscita.y + 0.2) * T;
+      const g = ctx.createRadialGradient(cx, cy, T * 0.1, cx, cy, T * 1.3);
+      g.addColorStop(0, `rgba(253,242,219,${a})`); g.addColorStop(1, 'rgba(253,242,219,0)');
+      ctx.fillStyle = g; ctx.fillRect(cx - T * 1.4, cy - T * 1.4, T * 2.8, T * 2.8);
+    }
   }
   fotogramma() {
     const p = this.player, S = this.risorse.spritesMeta, a = this.azione;
     if (p.anim === 'morte') return ['morte', Math.min(S.morte.fotogrammi - 1, Math.floor(this.morteTick * S.morte.fps / 60))];
+    if (p.anim === 'uscita' && S.uscita && this.uscita) return ['uscita', Math.min(S.uscita.fotogrammi - 1, Math.floor(this.uscita.t * S.uscita.fps / 60))];
     if (p.anim === 'salto' && a) return ['salto', Math.min(S.salto.fotogrammi - 1, 4 + Math.floor((a.t / a.durata) * 20))];
     if (p.anim === 'caduta') return ['salto', 20];
     const az = p.anim === 'corsa' ? 'corsa' : 'attesa';
@@ -132,10 +154,15 @@ export class ScenaPlatform extends Scena {
   disegnaPlayer(ctx, T) {
     const p = this.player, R = this.risorse; const [az, f] = this.fotogramma();
     const m = R.spritesMeta[az], img = R.sprites[az]; if (!img) return;
-    const s = T / m.tassello_px, dw = m.larghezza * s, dh = m.altezza * s;
+    let s = T / m.tassello_px, salita = 0, dissolvenza = 1;
+    if (this.uscita) {                                    // dopo essersi girato, si allontana: più piccolo, un po' più in alto, poi svanisce nel bianco
+      const k = Math.max(0, (this.uscita.t / this.uscita.durata - 0.25) / 0.75);
+      s *= 1 - 0.32 * k; salita = 0.16 * T * k; dissolvenza = 1 - Math.max(0, (k - 0.55) / 0.45);
+    }
+    const dw = m.larghezza * s, dh = m.altezza * s;
     const sx = (f % m.colonne) * m.larghezza, sy = Math.floor(f / m.colonne) * m.altezza;
-    const cx = (p.px + 0.5) * T, y = (p.py + 1) * T - dh + m.piedi_dal_basso * s;
-    ctx.save(); ctx.translate(cx, 0); if (p.dir < 0) ctx.scale(-1, 1);
+    const cx = (p.px + 0.5) * T, y = (p.py + 1) * T - dh + m.piedi_dal_basso * s - salita;
+    ctx.save(); ctx.globalAlpha = dissolvenza; ctx.translate(cx, 0); if (p.dir < 0 && az !== 'uscita') ctx.scale(-1, 1);
     ctx.drawImage(img, sx, sy, m.larghezza, m.altezza, -dw / 2, y, dw, dh);
     ctx.restore();
   }

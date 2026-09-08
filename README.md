@@ -8,7 +8,7 @@ npm run dev        # http://localhost:8080  (anteprima alle misure dell'iPhone: 
 
 Cosa c'è nel prototipo:
 - `src/motore/`: loop a 60 tick al secondo (`loop.js`), azioni (`azioni.js`), canvas con densità di pixel (`renderer.js`).
-- `src/scene/platform/`: la scena vista di lato. `livello.js` legge la mappa a caratteri e la legenda; `index.js` muove il personaggio a tasselli (passo, salto che sale un gradino o supera una buca, gravità, urto), gestisce piastre a scatto, porte legate alle piastre o a una chiave, chiavi, uscita, spuntoni e morte, e disegna tutto con i PNG di `public/assets/scene/platform`.
+- `src/scene/platform/`: la scena vista di lato. `livello.js` legge la mappa a caratteri e la legenda; `index.js` muove il personaggio a tasselli (passo, salto che sale un gradino o supera una buca, gravità, urto), gestisce piastre a scatto (animate con i fotogrammi pulsante_premi), porte legate alle piastre o a una chiave, chiavi (con l'effetto chiave_presa quando le raccogli), l'uscita (sequenza di 2 secondi: si gira di spalle, cammina dentro la porta e svanisce nel bianco, poi il livello finisce), spuntoni e morte, e disegna tutto con i PNG di `public/assets/scene/platform`.
 - `src/interprete/index.js`: interprete provvisorio, solo chiamate a comandi una per riga, con errori in italiano e suggerimenti sui nomi. Sarà sostituito dal parser acorn con valutatore a generatori (M1) mantenendo la stessa interfaccia `compila(codice, api)`.
 - `src/sfida/sessione.js`: stati pronto, esecuzione, passo, pausa, finito; collega editor, interprete e scena.
 - Il livello ha il pulsante `?` che mostra gli aiuti uno alla volta.

@@ -50,7 +50,7 @@ export class Sessione {
   prossimaAzione() {
     while (true) {
       const r = this.gen.next();
-      if (r.done) { this.editor.evidenzia(null); this.imposta('finito'); this.ui.messaggio(null); return; }
+      if (r.done) { this.editor.evidenzia(null); if (this.scena.uscita) return; this.imposta('finito'); this.ui.messaggio(null); return; }   // se sta entrando nella porta, la scena continua fino alla fine
       const v = r.value;
       if (v.tipo === 'riga') { this.editor.evidenzia(v.riga); continue; }
       if (v.tipo === 'azione') { this.scena.avvia(this.api_fn(v.nome)(...v.args)); this.azioneInCorso = true; return; }
