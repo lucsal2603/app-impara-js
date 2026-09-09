@@ -3,6 +3,7 @@ import palestra from '../content/it/palestra.json';
 import { Editor } from './ui/editor.js';
 import { provaEsercizio } from './sfida/palestra.js';
 import { leggiProgresso, salvaPalestra } from './sfida/progresso.js';
+import { riempi } from './ui/testo.js';
 
 const A = `${import.meta.env.BASE_URL}assets`;
 const root = document.getElementById('palestra'); root.className = 'lezione palestra';
@@ -32,7 +33,7 @@ function esercizio(e) {
     <div class="corpo">
       <article class="scheda scheda-esercizio">
         <div class="domanda"><h2>${e.titolo}</h2></div>
-        <p>${e.consegna}</p>
+        <p data-r="consegna"></p>
         <p class="esempio">Esempio: ${Object.entries(e.esempio).map(([k, v]) => `${k} = ${JSON.stringify(v)}`).join(', ')} → <code>${e.casi[0].atteso.join(' · ') || '(niente)'}</code></p>
       </article>
       <section class="editor-wrap palestra-editor">
@@ -45,6 +46,7 @@ function esercizio(e) {
     </div>
     <footer class="pie-lezione"><div class="feedback" hidden></div><button class="avanti" type="button"><span>Prova</span><i>›</i></button></footer>`;
   const $ = r => root.querySelector(`[data-r="${r}"]`);
+  riempi($('consegna'), e.consegna);
   const sensori = Object.keys(e.casi[0].variabili || {});
   const editor = new Editor({ contenitore: $('editor'), palette: $('palette'), simboli: $('simboli'), api: [], sensori: [], sintassi: e.sintassi, starter: e.starter || '' });
   for (const n of sensori) editor.bottone($('palette'), n, () => editor.inserisci(n, true), 'sensore');

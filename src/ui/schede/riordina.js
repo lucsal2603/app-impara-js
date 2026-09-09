@@ -1,9 +1,10 @@
 // Scheda "metti in ordine": le righe di un programma sono mescolate, si spostano con le frecce su/giù.
 import { intestazioneDomanda } from './domanda.js';
+import { riempi } from '../testo.js';
 export function render(scheda, { onPronto }) {
   const el = document.createElement('article'); el.className = 'scheda scheda-riordina';
   el.appendChild(intestazioneDomanda(scheda.domanda));
-  if (scheda.testo) { const p = document.createElement('p'); p.textContent = scheda.testo; el.appendChild(p); }
+  if (scheda.testo) { const p = document.createElement('p'); riempi(p, scheda.testo); el.appendChild(p); }
   const lista = document.createElement('div'); lista.className = 'righe-ordine'; el.appendChild(lista);
   let ordine = (scheda.mescolate || mescola(scheda.righe.map((_, i) => i))).slice();
   function disegna() {

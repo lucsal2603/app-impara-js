@@ -58,13 +58,22 @@ canvas { display: block; width: 100%; height: 100%; touch-action: none; }
 .scheda h2 { margin: 0 0 14px; font-size: 21px; line-height: 1.25; }
 .scheda p { color: #d5dbe2; font-size: 16px; line-height: 1.5; margin: 0 0 12px; }
 .scheda .mascotte { display: block; height: 130px; margin: -12px auto 6px; }
+.scheda .codice { margin: 0 0 14px; padding: 12px 14px; border-radius: 12px; background: #0f1418; border: 2px solid #2b323a; color: #3ddc84; font: 16px/1.55 Menlo, "SF Mono", monospace; white-space: pre-wrap; }
+.slot { display: inline-block; min-width: 64px; padding: 2px 10px; margin: 0 2px; border-radius: 8px; border: 2px dashed #6b7787; background: #1a1f25; color: var(--testo); font: inherit; vertical-align: baseline; }
+.slot.attivo { border-color: #f5c542; } .slot.pieno { border-style: solid; }
+.slot.giusto { border-color: #3ddc84; background: #163425; } .slot.sbagliato { border-color: #e04848; background: #3a1f1f; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip-scelta { padding: 12px 16px; border-radius: 12px; border: 2px solid #3b4653; background: #1c232b; color: #ffd166; font: 600 16px Menlo, "SF Mono", monospace; }
 .domanda { display: grid; grid-template-columns: 78px 1fr; gap: 10px; align-items: center; margin: -6px 0 10px; }
 .domanda::before { content: ""; width: 78px; height: 78px; background: var(--img-bolla) center / contain no-repeat; }
 .domanda h2 { margin: 0; font-size: 20px; }
-.domanda em { font-style: normal; color: #f5c542; } .domanda code { color: #f5c542; font: 700 18px Menlo, "SF Mono", monospace; }
-.opzioni { display: grid; gap: 4px; }
-.opzione { display: grid; grid-template-columns: 44px 1fr; align-items: center; gap: 14px; text-align: left; padding: 0; min-height: 40px; border: 30px solid transparent; border-image: var(--img-pillola) 120 fill / 30px stretch; margin: -8px 0; background: none; color: var(--testo); font: 16px Menlo, "SF Mono", monospace; }
-.opzione em { display: grid; place-items: center; width: 44px; height: 44px; margin: -4px 0; background: var(--img-lettera) center / contain no-repeat; font: 800 18px/1 -apple-system, Helvetica, sans-serif; font-style: normal; color: #f5f2eb; }
+.domanda em, em.evid { font-style: normal; color: #f5c542; }
+code.inl { color: #ffd166; background: rgba(0, 0, 0, .28); border-radius: 6px; padding: 1px 6px; font: 600 .92em Menlo, "SF Mono", monospace; white-space: nowrap; }
+.domanda h2 code.inl { font-size: .9em; }
+.feedback code.inl { color: #ffe08a; }
+.opzioni { display: grid; gap: 12px; margin-top: 4px; }
+.opzione { display: grid; grid-template-columns: 44px 1fr; align-items: center; gap: 14px; text-align: left; padding: 0 6px 0 0; min-height: 24px; border: 28px solid transparent; border-image: var(--img-pillola) 120 fill / 28px stretch; margin: 0; background: none; color: var(--testo); font: 16px Menlo, "SF Mono", monospace; line-height: 1.35; }
+.opzione em { display: grid; place-items: center; width: 44px; height: 44px; margin: -10px 0 -10px -6px; background: var(--img-lettera) center / contain no-repeat; font: 800 18px/1 -apple-system, Helvetica, sans-serif; font-style: normal; color: #f5f2eb; }
 .opzione span { padding-right: 4px; }
 .opzione.prosa { font-family: inherit; font-size: 16px; }
 .opzione.selezionata { filter: brightness(1.25) drop-shadow(0 0 6px rgba(245,197,66,.5)); }
@@ -86,12 +95,6 @@ canvas { display: block; width: 100%; height: 100%; touch-action: none; }
 .contenitore-codice .scheda-codice { height: 100%; }
 .fine { text-align: center; }
 .fine .mascotte { height: 180px; }
-.stelle { display: flex; justify-content: center; gap: 14px; margin: 8px 0 16px; }
-.stella { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 96px; color: #5a636d; }
-.stella span { font-size: 40px; line-height: 1; }
-.stella small { font-size: 12px; line-height: 1.25; }
-.stella.presa { color: #f5c542; }
-.stella.presa small { color: var(--testo); }
 .fine .azioni { display: grid; gap: 10px; margin-top: 8px; }
 
 /* l'attributo hidden deve vincere anche sugli elementi con display flex/grid */
@@ -142,9 +145,9 @@ canvas { display: block; width: 100%; height: 100%; touch-action: none; }
 .riga-codice.selezionata { border-color: #f5c542; } .riga-codice.giusta { border-color: #3ddc84; background: #163425; } .riga-codice.sbagliata { border-color: #e04848; background: #3a1f1f; }
 
 /* ---------- palestra ---------- */
-.esercizi { display: grid; gap: 2px; margin-top: 6px; }
-.esercizio { display: grid; grid-template-columns: 44px 1fr; align-items: center; gap: 14px; min-height: 36px; border: 30px solid transparent; border-image: var(--img-pillola) 120 fill / 30px stretch; margin: -10px 0; color: var(--testo); text-decoration: none; }
-.esercizio em { display: grid; place-items: center; width: 44px; height: 44px; margin: -6px 0; background: var(--img-lettera) center / contain no-repeat; font: 800 17px/1 -apple-system, Helvetica, sans-serif; font-style: normal; }
+.esercizi { display: grid; gap: 12px; margin-top: 8px; }
+.esercizio { display: grid; grid-template-columns: 44px 1fr; align-items: center; gap: 14px; min-height: 24px; border: 28px solid transparent; border-image: var(--img-pillola) 120 fill / 28px stretch; margin: 0; color: var(--testo); text-decoration: none; }
+.esercizio em { display: grid; place-items: center; width: 44px; height: 44px; margin: -10px 0 -10px -6px; background: var(--img-lettera) center / contain no-repeat; font: 800 17px/1 -apple-system, Helvetica, sans-serif; font-style: normal; }
 .esercizio.fatto em { color: #3ddc84; }
 .esercizio span b { display: block; font-size: 16px; } .esercizio span small { color: var(--muto); font-size: 12px; }
 .scheda-esercizio .esempio { color: var(--muto); font-size: 14px; } .scheda-esercizio .esempio code { color: #3ddc84; font: 14px Menlo, "SF Mono", monospace; }

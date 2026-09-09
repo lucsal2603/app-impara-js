@@ -1,9 +1,10 @@
 // Scheda "trova l'errore": un programma con una riga sbagliata, si tocca la riga colpevole.
 import { intestazioneDomanda } from './domanda.js';
+import { riempi } from '../testo.js';
 export function render(scheda, { onPronto }) {
   const el = document.createElement('article'); el.className = 'scheda scheda-errore';
   el.appendChild(intestazioneDomanda(scheda.domanda));
-  if (scheda.testo) { const p = document.createElement('p'); p.textContent = scheda.testo; el.appendChild(p); }
+  if (scheda.testo) { const p = document.createElement('p'); riempi(p, scheda.testo); el.appendChild(p); }
   const pre = document.createElement('div'); pre.className = 'codice-righe'; el.appendChild(pre);
   let scelta = null; const righe = [];
   scheda.codice.split('\n').forEach((t, i) => {

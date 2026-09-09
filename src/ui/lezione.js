@@ -7,6 +7,7 @@ import * as trova_errore from './schede/trova_errore.js';
 import { salvaLezione } from '../sfida/progresso.js';
 import { montaCodice } from './schede/codice.js';
 import { mostraFine } from './fine.js';
+import { riempi } from './testo.js';
 
 const RENDER = { spiegazione: spiegazione.render, scelta: scelta.render, completa: completa.render, riordina: riordina.render, trova_errore: trova_errore.render };
 
@@ -30,7 +31,7 @@ export function avviaLezione(root, lezione, { homeUrl = 'home.html' } = {}) {
 
   function aggiornaBarra() { barra.style.width = `calc(${Math.round((i / schede.length) * 100)}% + 18px)`; passo.textContent = `${Math.min(i + 1, schede.length)}/${schede.length}`; }
   function etichetta(t) { avanti.querySelector('span').textContent = t; }
-  function mostraFeedback(testo, ok) { feedback.hidden = !testo; feedback.textContent = testo || ''; feedback.classList.toggle('ok', !!ok); feedback.classList.toggle('no', testo && !ok); }
+  function mostraFeedback(testo, ok) { feedback.hidden = !testo; riempi(feedback, testo || ''); feedback.classList.toggle('ok', !!ok); feedback.classList.toggle('no', testo && !ok); }
 
   function mostra() {
     aggiornaBarra(); mostraFeedback(null); corpo.innerHTML = ''; root.classList.remove('in-codice');
