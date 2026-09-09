@@ -6,10 +6,10 @@
   "schede": [
     {
       "tipo": "spiegazione",
-      "titolo": "Ciao! Sono il tuo compagno di codice",
+      "titolo": "Ciao! Io sono Bit",
       "immagine": "/assets/mascotte/saluto.png",
       "testo": [
-        "In questo gioco non mi muovi con il dito. Mi dici cosa fare scrivendo dei comandi.",
+        "Sono Bit, il tuo compagno di codice. In questo gioco non mi muovi con il dito: mi dici cosa fare scrivendo dei comandi.",
         "Ogni comando è una riga di codice JavaScript, lo stesso linguaggio con cui sono fatti i siti e le app. Impari giocando, una riga alla volta."
       ]
     },

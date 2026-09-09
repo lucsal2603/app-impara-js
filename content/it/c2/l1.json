@@ -69,7 +69,7 @@
     },
     {
       "tipo": "spiegazione",
-      "titolo": "Il piano",
+      "titolo": "Il piano di Bit",
       "testo": [
         "Due laser con tempi diversi. Crea una variabile per l'attesa e usala due volte: se poi vuoi cambiare i secondi, li cambi in un posto solo.",
         "La moneta è sul pavimento, un passo davanti a te."

@@ -64,7 +64,7 @@
       "tipo": "spiegazione",
       "titolo": "Stanze diverse, stesso programma",
       "testo": [
-        "Da questo livello il tuo programma viene provato in più stanze una dopo l'altra: in una il laser parte acceso, nell'altra spento.",
+        "Da questo livello il tuo programma viene provato in più stanze una dopo l'altra: Bit rientra dall'inizio, in una il laser parte acceso, nell'altra spento.",
         "Deve funzionare in tutte. Ci riesce solo se decide con if, invece di indovinare i tempi."
       ]
     },

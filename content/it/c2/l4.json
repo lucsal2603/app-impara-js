@@ -24,7 +24,7 @@
     },
     {
       "tipo": "scelta",
-      "domanda": "Il laser è spento e davanti non c'è nessun buco. Dove arriva l'omino, partendo da x = 0?",
+      "domanda": "Il laser è spento e davanti non c'è nessun buco. Dove arriva Bit, partendo da x = 0?",
       "opzioni": [
         "x = 2",
         "x = 3",

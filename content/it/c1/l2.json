@@ -10,7 +10,7 @@
       "titolo": "Missione 2: il laser",
       "immagine": "/assets/mascotte/riposo.png",
       "testo": [
-        "Nuova stanza, nuovi guai: degli spuntoni sul pavimento e un laser che sbarra la strada verso l'uscita.",
+        "Nuova stanza, nuovi guai per Bit: degli spuntoni sul pavimento e un laser che sbarra la strada verso l'uscita.",
         "Sugli spuntoni non si cammina. Si saltano: jump() supera una casella e atterra oltre."
       ]
     },

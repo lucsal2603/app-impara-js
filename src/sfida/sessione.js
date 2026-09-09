@@ -42,7 +42,7 @@ export class Sessione {
     const s = this.scena;
     if (s.esito === 'morto') {
       s.tick();
-      if (s.morteFinita()) { this.ui.messaggio('Ahi! Riprova.'); this.ricomincia(); }
+      if (s.morteFinita()) { this.ui.messaggio('Ahi! Bit riparte dall\'inizio.'); this.ricomincia(); }
       return;
     }
     if (this.stato === 'cambio') {          // stessa programma, stanza diversa: piccola pausa e si riparte
@@ -56,7 +56,7 @@ export class Sessione {
         if (this.variante < this.varianti.length - 1) { this.ui.messaggio(`Stanza ${this.variante + 1} di ${this.varianti.length} superata!`); this.attesaCambio = 70; this.editor.evidenzia(null); this.imposta('cambio'); return; }
         const v = s.verifica(); this.ui.messaggio(v.messaggio); this.editor.evidenzia(null); this.imposta('finito'); this.onVittoria?.(); return;
       }
-      if (s.esito === 'morto') { this.ui.messaggio('Ahi!'); return; }
+      if (s.esito === 'morto') { this.ui.messaggio('Ahi, Bit!'); return; }
       if (!fine) return;
       if (this.stato === 'passo' && this.azioneInCorso) { this.azioneInCorso = false; this.imposta('pausa'); return; }
       this.prossimaAzione();

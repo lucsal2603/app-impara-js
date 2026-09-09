@@ -6,8 +6,8 @@ const FRAMES = 24, COLONNE = 6, RIGHE_FOGLIO = 4, DURATA_GIRO = 780;
 export function mostraFine(root, { stelle, capitolo, titolo, epilogo, continuaHref, homeUrl, onRigioca, onContinua }) {
   const prese = stelle.filter(s => s.ok).length, mancanti = stelle.filter(s => !s.ok);
   const el = document.createElement('div'); el.className = 'fine-overlay';
-  const testo = prese === stelle.length ? (onContinua ? 'Tutte le stelle! La lezione continua.' : 'Tutte le stelle! Sei pronto per la prossima lezione.')
-    : `Manca ${mancanti.length === 1 ? 'una stella' : mancanti.length + ' stelle'}: ${mancanti.map(m => m.testo.toLowerCase()).join(', ')}. Rigioca il livello quando vuoi.`;
+  const testo = prese === stelle.length ? (onContinua ? 'Tutte le stelle! Bit è pronto, la lezione continua.' : 'Tutte le stelle! Bit è pronto per la prossima lezione.')
+    : `Manca ${mancanti.length === 1 ? 'una stella' : mancanti.length + ' stelle'}: ${mancanti.map(m => m.testo.toLowerCase()).join(', ')}. Bit rigioca il livello quando vuoi.`;
   el.innerHTML = `
     <div class="fine-sfondo"></div>
     <div class="fine-card">

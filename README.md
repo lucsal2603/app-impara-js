@@ -1,4 +1,6 @@
-# App per imparare JavaScript · prototipo della scena platform
+# Code Play · impara JavaScript giocando con Bit
+
+La mascotte, il televisorino verde con `</>` sul petto, si chiama **Bit** (scelto il 9/9/2026). Nelle lezioni parla in prima persona.
 
 Web app senza framework, Vite per lo sviluppo. Concept completo in `docs/CONCEPT.md`.
 
