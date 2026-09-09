@@ -433,6 +433,166 @@
     256
    ]
   },
+  "moneta_giro_01": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_giro_02": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_giro_03": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_giro_04": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_giro_05": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_giro_06": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_giro_07": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_giro_08": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_giro_09": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_giro_10": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_giro_11": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_giro_12": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_01": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_02": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_03": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_04": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_05": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_06": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_07": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_08": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
   "portale": {
    "w": 2,
    "h": 2,
@@ -634,6 +794,30 @@
    "pulsante_premi_04",
    "pulsante_premi_05",
    "pulsante_premi_06"
+  ],
+  "moneta_giro": [
+   "moneta_giro_01",
+   "moneta_giro_02",
+   "moneta_giro_03",
+   "moneta_giro_04",
+   "moneta_giro_05",
+   "moneta_giro_06",
+   "moneta_giro_07",
+   "moneta_giro_08",
+   "moneta_giro_09",
+   "moneta_giro_10",
+   "moneta_giro_11",
+   "moneta_giro_12"
+  ],
+  "moneta_presa": [
+   "moneta_presa_01",
+   "moneta_presa_02",
+   "moneta_presa_03",
+   "moneta_presa_04",
+   "moneta_presa_05",
+   "moneta_presa_06",
+   "moneta_presa_07",
+   "moneta_presa_08"
   ],
   "chiave_presa": [
    "chiave_presa_01",

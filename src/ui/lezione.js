@@ -5,6 +5,7 @@ import * as completa from './schede/completa.js';
 import * as riordina from './schede/riordina.js';
 import * as trova_errore from './schede/trova_errore.js';
 import { salvaLezione } from '../sfida/progresso.js';
+import { aggiornaStreak, disegnaStreak } from '../sfida/streak.js';
 import { montaCodice } from './schede/codice.js';
 import { mostraFine } from './fine.js';
 import { riempi } from './testo.js';
@@ -20,11 +21,12 @@ export function avviaLezione(root, lezione, { homeUrl = 'home.html' } = {}) {
     <header class="testa-lezione">
       <a class="indietro" href="${homeUrl}" aria-label="Torna alla home"><img src="${A}/lezione/indietro.png" alt=""></a>
       <img class="logo" src="${A}/home/logo.png" alt="Code Play">
-      <div class="chip-streak"><img src="${A}/home/fuoco_loop.gif" alt=""><div><strong>7</strong><small>giorni di fila</small></div></div>
+      <div class="chip-streak" data-r="streak"><img src="${A}/home/fuoco_grigio.png" alt=""><div><strong>1</strong><small>giorno di fila</small></div></div>
     </header>
     <div class="progresso-wrap"><div class="progresso"><b></b></div><span class="passo"></span></div>
     <div class="corpo"></div>
     <footer class="pie-lezione"><div class="feedback" hidden></div><button class="avanti" type="button"><span>Continua</span><i>›</i></button></footer>`;
+  disegnaStreak(root.querySelector('[data-r="streak"]'), aggiornaStreak(), import.meta.env.BASE_URL);
   const corpo = root.querySelector('.corpo'), pie = root.querySelector('.pie-lezione'), feedback = root.querySelector('.feedback'), avanti = root.querySelector('.avanti');
   const barra = root.querySelector('.progresso b'), passo = root.querySelector('.passo');
   const schede = lezione.schede; let i = 0, corrente = null, codice = null;

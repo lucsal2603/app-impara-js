@@ -17,7 +17,7 @@ export class ScenaPlatform extends Scena {
     this.piastre = L.piastre.map(p => ({ ...p, premuta: false, frame: 0 }));
     this.porte = L.porte.map(d => ({ ...d, aperta: false, frame: 0 }));
     this.chiavi = L.chiavi.map(k => ({ ...k, presa: false }));
-    this.monete = L.monete.map(m => ({ ...m, presa: false }));
+    this.monete = L.monete.map((m, i) => ({ ...m, presa: false, fase: i * 70 }));   // ogni moneta gira in un momento diverso
     this.casse = L.casse.map(c => ({ ...c }));
     this.player.cassa = null;
     this.cam = { x: 0, manuale: false };
@@ -133,7 +133,7 @@ export class ScenaPlatform extends Scena {
     const p = this.player, c = this.cella();
     if (logica && p.vivo) {
       for (const k of this.chiavi) if (!k.presa && k.x === c.x && k.y === c.y) { k.presa = true; this.effetti.push({ nome: 'chiave_presa', x: k.x, y: k.y, t: 0, durata: 32 }); }
-      for (const m of this.monete) if (!m.presa && m.x === c.x && m.y === c.y) { m.presa = true; this.effetti.push({ nome: 'moneta_presa', x: m.x, y: m.y, t: 0, durata: 20 }); }
+      for (const m of this.monete) if (!m.presa && m.x === c.x && m.y === c.y) { m.presa = true; this.effetti.push({ nome: 'moneta_presa', x: m.x, y: m.y, t: 0, durata: 28 }); }
       for (const pe of this.L.pericoli) if (pe.x === c.x && pe.y === c.y) { this.muori(); return; }
       for (const l of this.L.laser) if (this.laserAcceso(l) && this.celleLaser(l).some(cl => cl.x === c.x && cl.y === c.y)) { this.muori(); return; }
       if (!this.azione && !this.uscita && this.L.uscita && p.gx === this.L.uscita.x && p.gy === this.L.uscita.y) { this.uscita = { t: 0, durata: 120 }; p.anim = 'uscita'; p.animTick = 0; }
@@ -189,7 +189,11 @@ export class ScenaPlatform extends Scena {
       this.tassello(ctx, T, 'laser_emettitore_giu', l.x, l.y);
       if (this.laserAcceso(l)) { ctx.save(); ctx.globalAlpha = 0.82 + 0.18 * Math.sin(this.tickN * 0.6); for (const cl of this.celleLaser(l)) this.tassello(ctx, T, 'laser_verticale', cl.x, cl.y); ctx.restore(); }
     }
-    for (const m of this.monete) if (!m.presa) this.tassello(ctx, T, 'moneta', m.x, m.y);
+    for (const m of this.monete) if (!m.presa) {      // ogni tanto la moneta gira su se stessa con un saltellino (fotogrammi moneta_giro da Blender)
+      const giro = this.anim.moneta_giro || [], per = 210, dur = 36, t = (this.tickN + m.fase) % per;
+      if (giro.length && t < dur) { const k = t / dur; this.tassello(ctx, T, giro[Math.min(giro.length - 1, Math.floor(k * giro.length))], m.x, m.y - 0.16 * Math.sin(Math.PI * k)); }
+      else this.tassello(ctx, T, 'moneta', m.x, m.y);
+    }
     for (const cs of this.casse) this.tassello(ctx, T, 'cassa', cs.x, cs.y);
     for (const pl of this.piastre) this.tassello(ctx, T, `pulsante_premi_0${pl.frame + 1}`, pl.x, pl.y);
     for (const k of this.chiavi) if (!k.presa) this.tassello(ctx, T, 'chiave', k.x, k.y);

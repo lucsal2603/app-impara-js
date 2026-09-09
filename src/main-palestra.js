@@ -4,6 +4,7 @@ import { Editor } from './ui/editor.js';
 import { provaEsercizio } from './sfida/palestra.js';
 import { leggiProgresso, salvaPalestra } from './sfida/progresso.js';
 import { riempi } from './ui/testo.js';
+import { aggiornaStreak, disegnaStreak } from './sfida/streak.js';
 
 const A = `${import.meta.env.BASE_URL}assets`;
 const root = document.getElementById('palestra'); root.className = 'lezione palestra';
@@ -16,7 +17,7 @@ function elenco() {
   root.innerHTML = `
     <header class="testa-lezione">
       <a class="indietro" href="home.html" aria-label="Torna alla home"><img src="${A}/lezione/indietro.png" alt=""></a>
-      <img class="logo" src="${A}/home/logo.png" alt="Code Play"><span></span>
+      <img class="logo" src="${A}/home/logo.png" alt="Code Play"><div class="chip-streak" data-r="streak"><img src="${A}/home/fuoco_grigio.png" alt=""><div><strong>1</strong><small>giorno di fila</small></div></div>
     </header>
     <div class="corpo"><article class="scheda">
       <div class="domanda"><h2>${palestra.titolo}</h2></div><p>${palestra.sottotitolo}</p>
@@ -28,7 +29,7 @@ function esercizio(e) {
   root.innerHTML = `
     <header class="testa-lezione">
       <a class="indietro" href="palestra.html" aria-label="Torna alla palestra"><img src="${A}/lezione/indietro.png" alt=""></a>
-      <img class="logo" src="${A}/home/logo.png" alt="Code Play"><span></span>
+      <img class="logo" src="${A}/home/logo.png" alt="Code Play"><div class="chip-streak" data-r="streak"><img src="${A}/home/fuoco_grigio.png" alt=""><div><strong>1</strong><small>giorno di fila</small></div></div>
     </header>
     <div class="corpo">
       <article class="scheda scheda-esercizio">
@@ -66,3 +67,4 @@ function esercizio(e) {
 
 const e = palestra.esercizi.find(x => x.id === q.get('e'));
 if (e) esercizio(e); else elenco();
+for (const el of root.querySelectorAll('[data-r="streak"]')) disegnaStreak(el, aggiornaStreak(), import.meta.env.BASE_URL);

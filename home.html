@@ -16,7 +16,7 @@
   .riga-alto { display: flex; justify-content: flex-end; gap: 10px; position: relative; z-index: 3; }
   .chip { display: flex; align-items: center; gap: 8px; background: rgba(17,20,24,.75); border: 2px solid #2b323a; border-radius: 14px; padding: 8px 12px; font-size: 12px; color: var(--muto); }
   .chip strong { color: var(--testo); font-size: 18px; line-height: 1; }
-  .chip .fuoco { width: 30px; height: 30px; object-fit: contain; }
+  .chip .fuoco { width: 30px; height: 30px; object-fit: contain; } .chip .fuoco.spenta { opacity: .8; } .chip small { font-size: 12px; }
   .chip.ingranaggio { padding: 8px; width: 46px; height: 46px; justify-content: center; cursor: pointer; }
   .chip.ingranaggio img { width: 26px; height: 26px; object-fit: contain; }
   .titolo { position: absolute; left: 14px; top: calc(env(safe-area-inset-top) + 14px); width: 172px; }
@@ -55,7 +55,7 @@
   <div class="hero">
     <video src="assets/home/home_loop.mp4" poster="assets/home/home_base.png" autoplay muted loop playsinline></video>
     <div class="sopra">
-      <div class="riga-alto"><div class="chip"><img class="fuoco" src="assets/home/fuoco_loop.gif" alt=""><div><strong>7</strong><br>giorni di fila</div></div><button class="chip ingranaggio" aria-label="Impostazioni"><img src="assets/home/ingranaggio.png" alt=""></button></div>
+      <div class="riga-alto"><div class="chip chip-streak-home" data-r="streak"><img class="fuoco" src="assets/home/fuoco_grigio.png" alt=""><div><strong>1</strong><br><small>giorno di fila</small></div></div><button class="chip ingranaggio" aria-label="Impostazioni"><img src="assets/home/ingranaggio.png" alt=""></button></div>
       <div class="titolo"><img src="assets/home/logo.png" alt="Code Play"><p>Impara JavaScript <em>giocando</em> con Bit.</p></div>
       <a class="cta" href="lezione.html"><span class="play"></span> Inizia a giocare</a>
     </div>
@@ -108,6 +108,10 @@
   </section>
   <nav class="tab"><div class="attiva"><span>🏠</span>Home</div><div><span>🗺️</span>Percorso</div><div><span>🏆</span>Sfide</div><div><span>👤</span>Profilo</div></nav>
 </main>
+<script type="module">
+  import { aggiornaStreak, disegnaStreak } from './src/sfida/streak.js';
+  disegnaStreak(document.querySelector('[data-r="streak"]'), aggiornaStreak());
+</script>
 <script>
   // progresso salvato sul telefono: stelle accanto a ogni missione, capitoli sbloccati, palestra
   try {
