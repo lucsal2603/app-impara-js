@@ -1,0 +1,135 @@
+{
+  "id": "c3-l5",
+  "capitolo": "Cicli",
+  "titolo": "Il grande salone",
+  "durata": "10 min",
+  "prossima": null,
+  "epilogo": "Capitolo Cicli finito. Da qui in poi nessun programma tuo dovrà più ripetersi: for quando sai quante volte, while quando lo decide il mondo.",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Tutto insieme",
+      "testo": [
+        "Un salone lungo: due buchi, un laser, un gradino e una moneta. Nessuna riga uguale ripetuta tre volte di fila: usa i cicli.",
+        "Il programma gira in due stanze diverse: cambiano la posizione dei buchi e il ritmo del laser."
+      ],
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Consiglio",
+      "testo": [
+        "Dividi il problema: prima il tratto con i buchi (un if dentro un for che fa sei giri), poi il laser (un while), poi il tratto finale (un for), il gradino e l'ultimo passo.",
+        "Prova un pezzo alla volta con PASSO, guardando i sensori."
+      ],
+      "codice": "for (let i = 0; i < 6; i++) {\n  if (frontIsGap()) {\n    jump()\n  } else {\n    moveRight()\n  }\n}"
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 21",
+      "sottotitolo": "Il grande salone",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.............",
+          "................",
+          "................",
+          ".........R......",
+          "..............X.",
+          "S.......M....###",
+          "===.==.========="
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "R": {
+            "tipo": "laser",
+            "id": "l1",
+            "lunghezza": 2,
+            "acceso": 180,
+            "spento": 180,
+            "fase": 0
+          },
+          "M": "moneta"
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Attraversa il salone in tutte e due le stanze"
+      },
+      "starter": "for (let i = 0; i < 6; i++) {\n  \n}\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if",
+        "for",
+        "while"
+      ],
+      "sensori": [
+        "laser",
+        "frontIsGap",
+        "frontIsWall",
+        "coinsLeft"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "nienteRipetizioni",
+          "testo": "Nessuna riga ripetuta tre volte"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "Sei giri di for con if (frontIsGap()) { jump() } else { moveRight() } ti portano davanti al laser.",
+        "while (laser.isOn) { wait(1) }, poi un for da quattro passi, jump() sul gradino e moveRight().",
+        "for (let i = 0; i < 6; i++) {\n  if (frontIsGap()) {\n    jump()\n  } else {\n    moveRight()\n  }\n}\nwhile (laser.isOn) {\n  wait(1)\n}\nfor (let i = 0; i < 4; i++) {\n  moveRight()\n}\njump()\nmoveRight()"
+      ],
+      "varianti": [
+        {
+          "mappa": [
+            "..L.............",
+            "................",
+            "................",
+            ".........R......",
+            "..............X.",
+            "S.......M....###",
+            "====.==.========"
+          ],
+          "legenda": {
+            "=": "pavimento",
+            "#": "blocco",
+            "L": "lampada",
+            "S": "spawn",
+            "X": "uscita",
+            "^": "spuntoni",
+            "R": {
+              "tipo": "laser",
+              "id": "l1",
+              "lunghezza": 2,
+              "acceso": 180,
+              "spento": 180,
+              "fase": 180
+            },
+            "M": "moneta"
+          }
+        }
+      ]
+    }
+  ]
+}

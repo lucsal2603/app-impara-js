@@ -1,0 +1,170 @@
+{
+  "id": "c3-l3",
+  "capitolo": "Cicli",
+  "titolo": "Finché",
+  "durata": "7 min",
+  "prossima": "c3-l4",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Quando non sai quante volte",
+      "testo": [
+        "for va bene quando sai il numero di giri. while ripete finché la condizione resta vera: qui cammina finché davanti non c'è un muro.",
+        "Non serve sapere quanto è lungo il corridoio: il sensore lo scopre strada facendo."
+      ],
+      "codice": "while (!frontIsWall()) {\n  moveRight()\n}",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Attenzione al ciclo infinito",
+      "testo": [
+        "Se la condizione non diventa mai falsa, il ciclo non finisce. Il gioco lo ferma e ti avvisa.",
+        "Dentro un while ci deve essere qualcosa che cambia la situazione: un passo, un salto, un'attesa."
+      ],
+      "codice": "while (true) {\n  console.log(\"per sempre\")\n}"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quale while fa aspettare **finché il laser è acceso**?",
+      "opzioni": [
+        "while (laser.isOn) { wait(1) }",
+        "while (!laser.isOn) { wait(1) }",
+        "while (laser.isOn) { moveRight() }"
+      ],
+      "risposta": 0,
+      "spiegazione": "La condizione è laser acceso, e nel blocco si aspetta un secondo per volta."
+    },
+    {
+      "tipo": "riordina",
+      "domanda": "Metti in ordine: cammina fino al muro, poi salta.",
+      "righe": [
+        "while (!frontIsWall()) {",
+        "  moveRight()",
+        "}",
+        "jump()"
+      ],
+      "mescolate": [
+        3,
+        1,
+        0,
+        2
+      ],
+      "spiegazione": "Il while con il passo nel blocco, e il salto dopo la graffa chiusa."
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Il piano",
+      "testo": [
+        "Tre stanze con corridoi di lunghezza diversa e un muretto alla fine. Cammina finché davanti non c'è il muro, salta per salirci e scendi dall'altra parte fino all'uscita.",
+        "Una sola regola: usa while, non contare i passi."
+      ]
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 19",
+      "sottotitolo": "Fino al muro",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.........",
+          "............",
+          "............",
+          "............",
+          "............",
+          "S...#.X.....",
+          "============"
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni"
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Arriva all'uscita in tutte e tre le stanze"
+      },
+      "starter": "while (!frontIsWall()) {\n  \n}\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if",
+        "for",
+        "while"
+      ],
+      "sensori": [
+        "frontIsWall"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "usaWhile",
+          "testo": "Usa un while"
+        },
+        {
+          "tipo": "maxRighe",
+          "testo": "Massimo 6 righe",
+          "valore": 6
+        }
+      ],
+      "aiuti": [
+        "while (!frontIsWall()) { moveRight() } cammina fino al muretto.",
+        "Poi jump() per salire e due moveRight() per scendere ed entrare.",
+        "while (!frontIsWall()) {\n  moveRight()\n}\njump()\nmoveRight()\nmoveRight()"
+      ],
+      "varianti": [
+        {
+          "mappa": [
+            "..L.........",
+            "............",
+            "............",
+            "............",
+            "............",
+            "S......#.X..",
+            "============"
+          ],
+          "legenda": {
+            "=": "pavimento",
+            "#": "blocco",
+            "L": "lampada",
+            "S": "spawn",
+            "X": "uscita",
+            "^": "spuntoni"
+          }
+        },
+        {
+          "mappa": [
+            "..L.........",
+            "............",
+            "............",
+            "............",
+            "............",
+            "S........#.X",
+            "============"
+          ],
+          "legenda": {
+            "=": "pavimento",
+            "#": "blocco",
+            "L": "lampada",
+            "S": "spawn",
+            "X": "uscita",
+            "^": "spuntoni"
+          }
+        }
+      ]
+    }
+  ]
+}

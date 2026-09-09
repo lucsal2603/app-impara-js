@@ -1,7 +1,8 @@
 // Scheda "completa il codice": il codice ha uno o più buchi ___, si riempiono toccando le scelte.
+import { intestazioneDomanda } from './domanda.js';
 export function render(scheda, { onPronto }) {
   const el = document.createElement('article'); el.className = 'scheda scheda-completa';
-  const h = document.createElement('h2'); h.textContent = scheda.domanda; el.appendChild(h);
+  el.appendChild(intestazioneDomanda(scheda.domanda));
   const pre = document.createElement('pre'); pre.className = 'codice'; el.appendChild(pre);
   const parti = scheda.codice.split('___'); const slot = [];
   parti.forEach((p, i) => {

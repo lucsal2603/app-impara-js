@@ -42,6 +42,10 @@
   .missioni a { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--card); border: 2px solid #2b323a; color: inherit; text-decoration: none; }
   .missioni b { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: #163425; color: var(--verde-ch); }
   .missioni span { font-weight: 700; } .missioni small { color: var(--muto); font-size: 12px; }
+  .missioni a { grid-template-columns: 34px 1fr auto; } .missioni a i { grid-column: 3; grid-row: 1 / 3; color: #5a636d; font-style: normal; font-size: 14px; letter-spacing: 1px; } .missioni a i.ok { color: var(--giallo); }
+  .missioni a span { grid-column: 2; } .missioni a small { grid-column: 2; }
+  .capitolo { margin: 14px 0 8px; font-size: 14px; color: var(--muto); text-transform: uppercase; letter-spacing: .08em; }
+  .tappa.sbloccata i { background: #163425; color: var(--verde-ch); }
   .tab { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); padding: 10px 8px calc(env(safe-area-inset-bottom) + 10px); border-top: 2px solid #1e242b; background: #0f1317; font-size: 12px; color: var(--muto); text-align: center; }
   .tab span { display: block; font-size: 22px; margin-bottom: 2px; } .tab .attiva { color: var(--giallo); font-weight: 700; }
 </style>
@@ -59,7 +63,7 @@
   <section>
     <h2>Il tuo percorso <a href="#">Vedi tutto ›</a></h2>
     <div class="percorso">
-      <div class="tappa attiva"><i>&lt;/&gt;</i>Le basi</div><div class="tappa"><i>🔒</i>Logica</div><div class="tappa"><i>🔒</i>Cicli</div><div class="tappa"><i>🔒</i>Funzioni</div><div class="tappa"><i>🔒</i>Progetti</div>
+      <div class="tappa attiva" data-cap="c1"><i>&lt;/&gt;</i>Le basi</div><div class="tappa" data-cap="c2"><i>🔒</i>Logica</div><div class="tappa" data-cap="c3"><i>🔒</i>Cicli</div><div class="tappa"><i>🔒</i>Funzioni</div><div class="tappa"><i>🔒</i>Progetti</div>
     </div>
   </section>
   <section>
@@ -68,20 +72,53 @@
   </section>
   <section>
     <h2>Le missioni</h2>
-    <div class="missioni">
-      <a href="lezione.html?l=1"><b>1</b><span>Il primo passo</span><small>comandi e parentesi</small></a>
-      <a href="lezione.html?l=2"><b>2</b><span>Il laser</span><small>moveLeft e wait</small></a>
-      <a href="lezione.html?l=3"><b>3</b><span>La chiave</span><small>l'ordine delle righe</small></a>
-      <a href="lezione.html?l=4"><b>4</b><span>Corri!</span><small>il tempo dei comandi</small></a>
-      <a href="lezione.html?l=5"><b>5</b><span>Il laboratorio</span><small>tutto insieme</small></a>
-      <a href="lezione.html?l=6"><b>6</b><span>La scatola</span><small>pickUp, putDown e le maiuscole</small></a>
-      <a href="lezione.html?l=7"><b>7</b><span>Due porte</span><small>i numeri con il punto</small></a>
-      <a href="lezione.html?l=8"><b>8</b><span>La torre</span><small>i commenti</small></a>
-      <a href="lezione.html?l=9"><b>9</b><span>Il corridoio</span><small>leggere gli errori</small></a>
-      <a href="lezione.html?l=10"><b>10</b><span>L'uscita segreta</span><small>un assaggio dei cicli</small></a>
+    <h3 class="capitolo">Le basi</h3>
+    <div class="missioni" data-cap="c1">
+      <a href="lezione.html?l=c1-l1" data-id="c1-l1"><b>1</b><span>Il primo passo</span><small>comandi e parentesi</small><i></i></a>
+      <a href="lezione.html?l=c1-l2" data-id="c1-l2"><b>2</b><span>Il laser</span><small>moveLeft e wait</small><i></i></a>
+      <a href="lezione.html?l=c1-l3" data-id="c1-l3"><b>3</b><span>La chiave</span><small>l'ordine delle righe</small><i></i></a>
+      <a href="lezione.html?l=c1-l4" data-id="c1-l4"><b>4</b><span>Corri!</span><small>il tempo dei comandi</small><i></i></a>
+      <a href="lezione.html?l=c1-l5" data-id="c1-l5"><b>5</b><span>Il laboratorio</span><small>tutto insieme</small><i></i></a>
+      <a href="lezione.html?l=c1-l6" data-id="c1-l6"><b>6</b><span>La scatola</span><small>pickUp, putDown e le maiuscole</small><i></i></a>
+      <a href="lezione.html?l=c1-l7" data-id="c1-l7"><b>7</b><span>Due porte</span><small>i numeri con il punto</small><i></i></a>
+      <a href="lezione.html?l=c1-l8" data-id="c1-l8"><b>8</b><span>La torre</span><small>i commenti</small><i></i></a>
+      <a href="lezione.html?l=c1-l9" data-id="c1-l9"><b>9</b><span>Il corridoio</span><small>leggere gli errori</small><i></i></a>
+      <a href="lezione.html?l=c1-l10" data-id="c1-l10"><b>10</b><span>L'uscita segreta</span><small>un assaggio dei cicli</small><i></i></a>
     </div>
+    <h3 class="capitolo">Logica</h3>
+    <div class="missioni" data-cap="c2">
+      <a href="lezione.html?l=c2-l1" data-id="c2-l1"><b>11</b><span>Le variabili</span><small>let, console.log e il pannello</small><i></i></a>
+      <a href="lezione.html?l=c2-l2" data-id="c2-l2"><b>12</b><span>Il se</span><small>if e il sensore laser.isOn</small><i></i></a>
+      <a href="lezione.html?l=c2-l3" data-id="c2-l3"><b>13</b><span>Altrimenti</span><small>else, confronti, stanze diverse</small><i></i></a>
+      <a href="lezione.html?l=c2-l4" data-id="c2-l4"><b>14</b><span>Due condizioni</span><small>quattro stanze, due if</small><i></i></a>
+      <a href="lezione.html?l=c2-l5" data-id="c2-l5"><b>15</b><span>E, oppure, non</span><small>&amp;&amp;, || e !</small><i></i></a>
+    </div>
+    <h3 class="capitolo">Cicli</h3>
+    <div class="missioni" data-cap="c3">
+      <a href="lezione.html?l=c3-l1" data-id="c3-l1"><b>16</b><span>Funziona, ma...</span><small>dodici righe, poi il for</small><i></i></a>
+      <a href="lezione.html?l=c3-l2" data-id="c3-l2"><b>17</b><span>Il contatore</span><small>la variabile i e la scala</small><i></i></a>
+      <a href="lezione.html?l=c3-l3" data-id="c3-l3"><b>18</b><span>Finché</span><small>while e frontIsWall()</small><i></i></a>
+      <a href="lezione.html?l=c3-l4" data-id="c3-l4"><b>19</b><span>Il momento giusto</span><small>while con laser e monete</small><i></i></a>
+      <a href="lezione.html?l=c3-l5" data-id="c3-l5"><b>20</b><span>Il grande salone</span><small>for, while, if insieme</small><i></i></a>
+    </div>
+  </section>
+  <section>
+    <h2>Palestra</h2>
+    <a class="card palestra-card" href="palestra.html"><div><h3>Esercizi con i test</h3><p>Dieci sfide senza scena: il codice viene messo alla prova da casi nascosti. Fino a FizzBuzz.</p><div class="barra"><b data-r="barra-palestra" style="width:0"></b></div></div></a>
   </section>
   <nav class="tab"><div class="attiva"><span>🏠</span>Home</div><div><span>🗺️</span>Percorso</div><div><span>🏆</span>Sfide</div><div><span>👤</span>Profilo</div></nav>
 </main>
+<script>
+  // progresso salvato sul telefono: stelle accanto a ogni missione, capitoli sbloccati, palestra
+  try {
+    const p = JSON.parse(localStorage.getItem('codeplay.progresso') || '{}'); const lez = p.lezioni || {};
+    for (const a of document.querySelectorAll('.missioni a[data-id]')) { const n = lez[a.dataset.id] || 0; const i = a.querySelector('i'); i.textContent = '★'.repeat(n) + '☆'.repeat(Math.max(0, 3 - n)); if (n) i.classList.add('ok'); }
+    if (lez['c1-l10']) document.querySelector('.tappa[data-cap="c2"]').classList.add('sbloccata');
+    if (lez['c2-l5']) document.querySelector('.tappa[data-cap="c3"]').classList.add('sbloccata');
+    for (const t of document.querySelectorAll('.tappa.sbloccata i')) t.textContent = '✓';
+    const fatti = Object.keys(p.palestra || {}).length; document.querySelector('[data-r="barra-palestra"]').style.width = Math.round(fatti / 10 * 100) + '%';
+    const totale = Object.values(lez).filter(Boolean).length; document.querySelector('.card .barra b').style.width = Math.round(totale / 20 * 100) + '%';
+  } catch (e) {}
+</script>
 </body>
 </html>

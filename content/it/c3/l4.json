@@ -1,0 +1,181 @@
+{
+  "id": "c3-l4",
+  "capitolo": "Cicli",
+  "titolo": "Il momento giusto",
+  "durata": "7 min",
+  "prossima": "c3-l5",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Aspettare il momento giusto",
+      "testo": [
+        "Invece di indovinare quanti secondi aspettare, controlla ogni secondo: finché il laser è acceso, aspetta un secondo. Appena si spegne il ciclo finisce e passi.",
+        "Funziona con qualunque laser, qualunque sia il suo ritmo."
+      ],
+      "codice": "while (laser.isOn) {\n  wait(1)\n}\nmoveRight()",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Contare le monete",
+      "testo": [
+        "coinsLeft() dice quante monete mancano. Il ciclo cammina finché ne manca almeno una: raccolte tutte, si ferma da solo."
+      ],
+      "codice": "while (coinsLeft() > 0) {\n  moveRight()\n}"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Con 3 monete in fila davanti, quante volte gira il blocco?",
+      "opzioni": [
+        "3",
+        "0",
+        "Per sempre"
+      ],
+      "risposta": 0,
+      "spiegazione": "Ogni passo raccoglie una moneta: dopo tre passi coinsLeft() vale 0 e la condizione è falsa.",
+      "codice": "while (coinsLeft() > 0) {\n  moveRight()\n}"
+    },
+    {
+      "tipo": "trova_errore",
+      "domanda": "Questo programma resta fermo per sempre. Quale riga è il problema?",
+      "codice": "while (laser.isOn) {\n  console.log(\"acceso\")\n}\nmoveRight()",
+      "riga": 2,
+      "spiegazione": "Nel blocco non passa il tempo: il laser resta acceso e la condizione non cambia mai. Ci vuole wait(1).",
+      "indizio": "Cosa cambia tra un giro e l'altro?"
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 20",
+      "sottotitolo": "Il momento giusto",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.......",
+          "..........",
+          "...#......",
+          "...R......",
+          "..........",
+          "S....MMMX.",
+          "=========="
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "R": {
+            "tipo": "laser",
+            "id": "l1",
+            "lunghezza": 2,
+            "acceso": 180,
+            "spento": 180,
+            "fase": 0
+          },
+          "M": "moneta"
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Passa il laser al momento giusto e prendi tutte le monete"
+      },
+      "starter": "moveRight()\nmoveRight()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if",
+        "for",
+        "while"
+      ],
+      "sensori": [
+        "laser",
+        "coinsLeft"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "usaWhile",
+          "testo": "Due while",
+          "valore": 2
+        },
+        {
+          "tipo": "monete",
+          "testo": "Tutte le monete"
+        }
+      ],
+      "aiuti": [
+        "Due passi, poi while (laser.isOn) { wait(1) } e un passo per passare.",
+        "Le monete: while (coinsLeft() > 0) { moveRight() }, poi un ultimo passo.",
+        "moveRight()\nmoveRight()\nwhile (laser.isOn) {\n  wait(1)\n}\nmoveRight()\nwhile (coinsLeft() > 0) {\n  moveRight()\n}\nmoveRight()"
+      ],
+      "varianti": [
+        {
+          "mappa": [
+            "..L.......",
+            "..........",
+            "...#......",
+            "...R......",
+            "..........",
+            "S....MMMX.",
+            "=========="
+          ],
+          "legenda": {
+            "=": "pavimento",
+            "#": "blocco",
+            "L": "lampada",
+            "S": "spawn",
+            "X": "uscita",
+            "^": "spuntoni",
+            "R": {
+              "tipo": "laser",
+              "id": "l1",
+              "lunghezza": 2,
+              "acceso": 180,
+              "spento": 180,
+              "fase": 90
+            },
+            "M": "moneta"
+          }
+        },
+        {
+          "mappa": [
+            "..L.......",
+            "..........",
+            "...#......",
+            "...R......",
+            "..........",
+            "S....MMMX.",
+            "=========="
+          ],
+          "legenda": {
+            "=": "pavimento",
+            "#": "blocco",
+            "L": "lampada",
+            "S": "spawn",
+            "X": "uscita",
+            "^": "spuntoni",
+            "R": {
+              "tipo": "laser",
+              "id": "l1",
+              "lunghezza": 2,
+              "acceso": 180,
+              "spento": 180,
+              "fase": 200
+            },
+            "M": "moneta"
+          }
+        }
+      ]
+    }
+  ]
+}

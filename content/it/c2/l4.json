@@ -1,0 +1,203 @@
+{
+  "id": "c2-l4",
+  "capitolo": "Logica",
+  "titolo": "Due condizioni",
+  "durata": "7 min",
+  "prossima": "c2-l5",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Più decisioni",
+      "testo": [
+        "Un programma può avere tutti gli if che vuole, uno dopo l'altro. Ogni if guarda il mondo nel momento in cui arriva la sua riga, non prima.",
+        "Per questo l'ordine conta: chiedi del laser quando sei davanti al laser, del buco quando sei davanti al buco."
+      ],
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "trova_errore",
+      "domanda": "Questo programma non passa mai il laser. Quale riga è sbagliata?",
+      "codice": "moveRight()\nif (laser.isOn) {\n  moveRight()\n}\nmoveRight()",
+      "riga": 3,
+      "spiegazione": "Se il laser è acceso bisogna aspettare, non andare avanti: la riga 3 deve essere wait(3).",
+      "indizio": "Cosa dovrebbe fare quando il laser è acceso?"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Il laser è spento e davanti non c'è nessun buco. Dove arriva l'omino, partendo da x = 0?",
+      "opzioni": [
+        "x = 2",
+        "x = 3",
+        "x = 4"
+      ],
+      "risposta": 1,
+      "spiegazione": "Un passo, niente attesa, un altro passo (non c'è il buco), un passo: tre passi in tutto.",
+      "codice": "moveRight()\nif (laser.isOn) {\n  wait(3)\n}\nif (frontIsGap()) {\n  jump()\n} else {\n  moveRight()\n}\nmoveRight()"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Il piano",
+      "testo": [
+        "Quattro stanze: il laser parte acceso o spento, e a metà strada c'è un buco oppure no.",
+        "Due if bastano per tutte: uno per il laser all'inizio, uno per il buco quando ci sei davanti."
+      ]
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 14",
+      "sottotitolo": "Due condizioni",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.....",
+          "........",
+          "..#.....",
+          "..R.....",
+          "........",
+          "S.....X.",
+          "========"
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "R": {
+            "tipo": "laser",
+            "id": "l1",
+            "lunghezza": 2,
+            "acceso": 180,
+            "spento": 180,
+            "fase": 0
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Supera laser e buco in tutte e quattro le stanze"
+      },
+      "starter": "if (laser.isOn) {\n  wait(3)\n}\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if"
+      ],
+      "sensori": [
+        "laser",
+        "frontIsGap"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "usaIf",
+          "testo": "Due if",
+          "valore": 2
+        },
+        {
+          "tipo": "maxRighe",
+          "testo": "Massimo 14 righe",
+          "valore": 14
+        }
+      ],
+      "aiuti": [
+        "Prima di partire: if (laser.isOn) { wait(3) }. Poi tre passi.",
+        "A x = 3 chiedi if (frontIsGap()): salta, altrimenti due passi. Poi un ultimo passo.",
+        "if (laser.isOn) {\n  wait(3)\n}\nmoveRight()\nmoveRight()\nmoveRight()\nif (frontIsGap()) {\n  jump()\n} else {\n  moveRight()\n  moveRight()\n}\nmoveRight()"
+      ],
+      "varianti": [
+        {
+          "mappa": [
+            "..L.....",
+            "........",
+            "..#.....",
+            "..R.....",
+            "........",
+            "S.....X.",
+            "========"
+          ],
+          "legenda": {
+            "=": "pavimento",
+            "#": "blocco",
+            "L": "lampada",
+            "S": "spawn",
+            "X": "uscita",
+            "^": "spuntoni",
+            "R": {
+              "tipo": "laser",
+              "id": "l1",
+              "lunghezza": 2,
+              "acceso": 180,
+              "spento": 180,
+              "fase": 180
+            }
+          }
+        },
+        {
+          "mappa": [
+            "..L.....",
+            "........",
+            "..#.....",
+            "..R.....",
+            "........",
+            "S.....X.",
+            "====.==="
+          ],
+          "legenda": {
+            "=": "pavimento",
+            "#": "blocco",
+            "L": "lampada",
+            "S": "spawn",
+            "X": "uscita",
+            "^": "spuntoni",
+            "R": {
+              "tipo": "laser",
+              "id": "l1",
+              "lunghezza": 2,
+              "acceso": 180,
+              "spento": 180,
+              "fase": 0
+            }
+          }
+        },
+        {
+          "mappa": [
+            "..L.....",
+            "........",
+            "..#.....",
+            "..R.....",
+            "........",
+            "S.....X.",
+            "====.==="
+          ],
+          "legenda": {
+            "=": "pavimento",
+            "#": "blocco",
+            "L": "lampada",
+            "S": "spawn",
+            "X": "uscita",
+            "^": "spuntoni",
+            "R": {
+              "tipo": "laser",
+              "id": "l1",
+              "lunghezza": 2,
+              "acceso": 180,
+              "spento": 180,
+              "fase": 180
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

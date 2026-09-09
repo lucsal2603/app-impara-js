@@ -5,6 +5,7 @@ import { Renderer } from '../../motore/renderer.js';
 import { ScenaPlatform } from '../../scene/platform/index.js';
 import { Sessione } from '../../sfida/sessione.js';
 import { Editor } from '../editor.js';
+import { valutaStelle } from '../../sfida/stelle.js';
 
 const BASE = `${import.meta.env.BASE_URL}assets/scene/platform`;
 let risorseCache = null;
@@ -20,6 +21,7 @@ export async function caricaRisorse() {
   ]);
   return (risorseCache = { tiles, tilesMeta, sprites, spritesMeta });
 }
+function mostraValore(v) { if (typeof v === 'string') return `"${v}"`; if (Array.isArray(v)) return '[' + v.map(mostraValore).join(', ') + ']'; if (v && typeof v === 'object') return JSON.stringify(v); return String(v); }
 
 const TEMPLATE = `
   <header class="barra">
@@ -29,14 +31,12 @@ const TEMPLATE = `
   </header>
   <div class="scena-wrap"><canvas data-r="canvas"></canvas><div class="messaggio" data-r="messaggio" hidden></div></div>
   <div class="hud"><span data-r="obiettivo"></span><span><span data-r="stato">pronto</span> <button class="aiuto" data-r="btn-aiuto" aria-label="Aiuto">?</button></span></div>
+  <div class="monitor" data-r="monitor" hidden><div class="variabili" data-r="variabili"></div><div class="console" data-r="console"></div></div>
   <section class="editor-wrap">
-    <div class="editor">
-      <pre class="righe" data-r="righe" aria-hidden="true"></pre>
-      <pre class="evidenzia" data-r="evidenzia" aria-hidden="true"></pre>
-      <textarea data-r="codice" wrap="off" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" aria-label="Codice"></textarea>
-    </div>
+    <div class="editor" data-r="editor"></div>
     <div class="errore" data-r="errore" hidden></div>
     <div class="suggerimento" data-r="aiuto" hidden></div>
+    <div class="simboli" data-r="simboli"></div>
     <div class="palette" data-r="palette"></div>
     <div class="controlli">
       <button data-r="btn-esegui" class="primario">ESEGUI</button>
@@ -45,16 +45,6 @@ const TEMPLATE = `
       <button data-r="btn-ricomincia">RICOMINCIA</button>
     </div>
   </section>`;
-
-export function valutaStelle(livello, scena, editor) {
-  return (livello.stelle || []).map(s => {
-    if (s.tipo === 'completa') return { ...s, ok: true };
-    if (s.tipo === 'maxRighe') return { ...s, ok: editor.righeCodice() <= s.valore };
-    if (s.tipo === 'chiave') return { ...s, ok: scena.chiavi.length > 0 && scena.chiavi.every(k => k.presa) };
-    if (s.tipo === 'monete') return { ...s, ok: scena.monete.length > 0 && scena.monete.every(m => m.presa) };
-    return { ...s, ok: false };
-  });
-}
 
 export async function montaCodice(root, livello, opzioni = {}) {
   const risorse = await caricaRisorse();
@@ -65,13 +55,25 @@ export async function montaCodice(root, livello, opzioni = {}) {
 
   const scena = new ScenaPlatform(livello.config, risorse);
   const renderer = new Renderer($('canvas'), COLONNE, RIGHE);
-  const editor = new Editor({ textarea: $('codice'), righe: $('righe'), evidenzia: $('evidenzia'), palette: $('palette'), api: livello.api, contatore: $('contatore'), starter: livello.starter || '' });
+  const sintassi = livello.sintassi || ['call'], sensori = livello.sensori || [];
+  const editor = new Editor({ contenitore: $('editor'), palette: $('palette'), simboli: $('simboli'), api: livello.api, sensori, sintassi, contatore: $('contatore'), starter: livello.starter || '' });
+  const monitor = $('monitor'), mostraMonitor = sintassi.includes('let'); monitor.hidden = !mostraMonitor;
   const ui = {
-    stato: (s) => { $('stato').textContent = { pronto: 'pronto', esecuzione: 'in esecuzione', passo: 'passo', pausa: 'in pausa', finito: 'finito' }[s] || s; $('btn-pausa').textContent = s === 'pausa' ? 'RIPRENDI' : 'PAUSA'; },
+    stato: (s) => { $('stato').textContent = { pronto: 'pronto', esecuzione: 'in esecuzione', passo: 'passo', pausa: 'in pausa', cambio: 'stanza dopo', finito: 'finito' }[s] || s; $('btn-pausa').textContent = s === 'pausa' ? 'RIPRENDI' : 'PAUSA'; },
     errore: (e) => { const el = $('errore'); if (!e) { el.hidden = true; return; } el.hidden = false; el.textContent = `Riga ${e.riga}: ${e.messaggio}`; },
     messaggio: (m) => { const el = $('messaggio'); if (!m) { el.hidden = true; return; } el.hidden = false; el.textContent = m; },
+    variabili: (v) => {   // pannello "cosa c'è dentro": una chip per variabile, aggiornata a ogni riga
+      const el = $('variabili'); if (!v) { el.replaceChildren(); return; }
+      el.replaceChildren(...Object.entries(v).map(([k, val]) => { const c = document.createElement('span'); c.className = 'var'; c.innerHTML = `<b></b> = <i></i>`; c.querySelector('b').textContent = k; c.querySelector('i').textContent = mostraValore(val); return c; }));
+      if (Object.keys(v).length) monitor.hidden = false;
+    },
+    console: (t) => {
+      const el = $('console'); if (t === null) { el.replaceChildren(); return; }
+      const r = document.createElement('div'); r.textContent = '› ' + t; el.appendChild(r); while (el.children.length > 4) el.firstChild.remove(); monitor.hidden = false; el.scrollTop = el.scrollHeight;
+    },
   };
-  const sessione = new Sessione({ scena, editor, api: livello.api, ui, onVittoria: () => opzioni.onVittoria?.(valutaStelle(livello, scena, editor)) });
+  const varianti = [livello.config, ...(livello.varianti || [])];
+  const sessione = new Sessione({ scena, editor, api: livello.api, ui, sintassi, varianti, onVittoria: () => opzioni.onVittoria?.(valutaStelle(livello, scena, editor.righeCodice(), sessione.ast)) });
   $('btn-esegui').addEventListener('click', () => sessione.esegui());
   $('btn-pausa').addEventListener('click', () => sessione.pausa());
   $('btn-passo').addEventListener('click', () => sessione.passo());

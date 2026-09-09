@@ -3,7 +3,7 @@
   "capitolo": "Le basi",
   "titolo": "L'uscita segreta",
   "durata": "9 min",
-  "prossima": null,
+  "prossima": "c2-l1",
   "epilogo": "Per fare dieci passi oggi scrivi dieci righe. Nel capitolo dei cicli scriverai for (let i = 0; i < 10; i++) { moveRight() } e saranno tre righe. Ci vediamo lì.",
   "schede": [
     {

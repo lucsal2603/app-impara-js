@@ -1,0 +1,165 @@
+{
+  "id": "c2-l5",
+  "capitolo": "Logica",
+  "titolo": "E, oppure, non",
+  "durata": "6 min",
+  "prossima": "c3-l1",
+  "epilogo": "Hai finito il capitolo Logica: il tuo programma ora guarda il mondo e decide. Nel prossimo capitolo smetterà di ripetersi.",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Mettere insieme le condizioni",
+      "testo": [
+        "&& vuol dire e: la condizione è vera solo se lo sono tutte e due. || vuol dire oppure: basta che una sia vera.",
+        "Il punto esclamativo davanti rovescia: !laser.isOn è vero quando il laser è spento, !hasKey() quando non hai la chiave."
+      ],
+      "codice": "if (laser.isOn && coinsLeft() > 0) {\n  wait(1)\n}\nif (!hasKey()) {\n  jump()\n}",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quanto vale **true && false**?",
+      "opzioni": [
+        "true",
+        "false"
+      ],
+      "risposta": 1,
+      "spiegazione": "Con && servono tutte e due vere: una è falsa, quindi false."
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quanto vale **!false || false**?",
+      "opzioni": [
+        "true",
+        "false"
+      ],
+      "risposta": 0,
+      "spiegazione": "!false è true, e con || basta una vera."
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Completa: se NON hai la chiave, salta a prenderla.",
+      "codice": "if (___hasKey()) {\n  jump()\n}",
+      "scelte": [
+        "!",
+        "&&",
+        "||"
+      ],
+      "risposta": [
+        "!"
+      ],
+      "spiegazione": "Il punto esclamativo rovescia hasKey(): vero quando la chiave manca."
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Il piano",
+      "testo": [
+        "Nella stanza A la chiave è sul pavimento, un passo davanti a te. Nella stanza B è sopra un blocco: ci vuole un salto per prenderla.",
+        "Dopo il primo passo chiedi se hai la chiave: se no, salta. Poi cammina fino alla porta, che si apre da sola con la chiave in tasca."
+      ]
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 15",
+      "sottotitolo": "La chiave nascosta",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.....",
+          "........",
+          "........",
+          "........",
+          ".....A..",
+          "SK...AX.",
+          "========"
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "K": {
+            "tipo": "chiave",
+            "id": "k1"
+          },
+          "A": {
+            "tipo": "porta",
+            "id": "d1",
+            "chiave": "k1"
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Prendi la chiave e apri la porta in tutte e due le stanze"
+      },
+      "starter": "moveRight()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if"
+      ],
+      "sensori": [
+        "hasKey"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "usaIf",
+          "testo": "Usa un if"
+        },
+        {
+          "tipo": "maxRighe",
+          "testo": "Massimo 10 righe",
+          "valore": 10
+        }
+      ],
+      "aiuti": [
+        "Un passo, poi if (!hasKey()) { jump() }.",
+        "Dopo l'if bastano cinque passi: la porta si apre appena hai la chiave.",
+        "moveRight()\nif (!hasKey()) {\n  jump()\n}\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()"
+      ],
+      "varianti": [
+        {
+          "mappa": [
+            "..L.....",
+            "........",
+            "........",
+            "........",
+            "..K..A..",
+            "S.#..AX.",
+            "========"
+          ],
+          "legenda": {
+            "=": "pavimento",
+            "#": "blocco",
+            "L": "lampada",
+            "S": "spawn",
+            "X": "uscita",
+            "^": "spuntoni",
+            "K": {
+              "tipo": "chiave",
+              "id": "k1"
+            },
+            "A": {
+              "tipo": "porta",
+              "id": "d1",
+              "chiave": "k1"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

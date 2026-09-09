@@ -1,0 +1,159 @@
+{
+  "id": "c2-l3",
+  "capitolo": "Logica",
+  "titolo": "Altrimenti",
+  "durata": "7 min",
+  "prossima": "c2-l4",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Se no...",
+      "testo": [
+        "else vuol dire altrimenti: il suo blocco gira solo quando la condizione è falsa. Così il programma sceglie sempre una delle due strade, mai tutte e due.",
+        "Qui: se davanti c'è un buco salta, altrimenti fai un passo."
+      ],
+      "codice": "if (frontIsGap()) {\n  jump()\n} else {\n  moveRight()\n}",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Vero o falso",
+      "testo": [
+        "Una condizione è qualcosa che vale true o false. Si confrontano i valori con > (maggiore), < (minore) e === (uguale).",
+        "Uguale si scrive con tre segni: uno solo assegna un valore alla variabile, tre lo confrontano."
+      ],
+      "codice": "coinsLeft() > 0\ncoinsLeft() === 0\n3 < 5"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quanto vale **5 > 2**?",
+      "opzioni": [
+        "true",
+        "false",
+        "5"
+      ],
+      "risposta": 0,
+      "spiegazione": "5 è maggiore di 2, quindi il confronto è vero: true."
+    },
+    {
+      "tipo": "riordina",
+      "domanda": "Metti in ordine: se davanti c'è un buco salta, altrimenti cammina.",
+      "righe": [
+        "if (frontIsGap()) {",
+        "  jump()",
+        "} else {",
+        "  moveRight()",
+        "}"
+      ],
+      "mescolate": [
+        1,
+        3,
+        0,
+        4,
+        2
+      ],
+      "spiegazione": "Prima l'if con la condizione e il suo blocco, poi else con il suo."
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Il piano",
+      "testo": [
+        "Nella stanza A il pavimento è intero e c'è una moneta a metà strada: bisogna camminarci sopra, saltando la si perde.",
+        "Nella stanza B nello stesso punto c'è un buco: bisogna saltarlo. Un solo programma per tutte e due, con if e else. In entrambe c'è una moneta da prendere."
+      ]
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 13",
+      "sottotitolo": "Altrimenti",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.....",
+          "........",
+          "........",
+          "........",
+          "........",
+          "S..M..X.",
+          "========"
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "M": {
+            "tipo": "moneta",
+            "id": "m1"
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Arriva all'uscita in tutte e due le stanze, con le monete"
+      },
+      "starter": "moveRight()\nmoveRight()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if"
+      ],
+      "sensori": [
+        "frontIsGap",
+        "coinsLeft"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "usaIf",
+          "testo": "Usa if e else"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Monete raccolte"
+        }
+      ],
+      "aiuti": [
+        "Due passi, poi if (frontIsGap()) { jump() } else { moveRight() moveRight() }.",
+        "Dopo il blocco ti trovi a x = 4 in entrambe le stanze: due passi ancora.",
+        "moveRight()\nmoveRight()\nif (frontIsGap()) {\n  jump()\n} else {\n  moveRight()\n  moveRight()\n}\nmoveRight()\nmoveRight()"
+      ],
+      "varianti": [
+        {
+          "mappa": [
+            "..L.....",
+            "........",
+            "........",
+            "........",
+            "........",
+            "S....MX.",
+            "===.===="
+          ],
+          "legenda": {
+            "=": "pavimento",
+            "#": "blocco",
+            "L": "lampada",
+            "S": "spawn",
+            "X": "uscita",
+            "^": "spuntoni",
+            "M": {
+              "tipo": "moneta",
+              "id": "m1"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

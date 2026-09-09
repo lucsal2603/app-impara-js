@@ -1,0 +1,159 @@
+{
+  "id": "c2-l1",
+  "capitolo": "Logica",
+  "titolo": "Le variabili",
+  "durata": "6 min",
+  "prossima": "c2-l2",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Una scatola con un nome",
+      "testo": [
+        "Una variabile è una scatola con un nome, dentro cui metti un valore. let attesa = 3 crea la scatola attesa e ci mette il numero 3.",
+        "Da quel momento puoi usare il nome al posto del numero: wait(attesa) aspetta tre secondi."
+      ],
+      "codice": "let attesa = 3\nwait(attesa)",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "let, il nome, l'uguale",
+      "testo": [
+        "let dice a JavaScript: sto creando una variabile. Poi viene il nome, poi l'uguale, poi il valore.",
+        "console.log(passi) scrive il valore nella console: è il modo per sbirciare dentro la scatola. Nel gioco lo vedi nel pannello sotto la scena, insieme alle variabili."
+      ],
+      "codice": "let passi = 2\nconsole.log(passi)"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quale riga crea la variabile **salti** con dentro 4?",
+      "opzioni": [
+        "salti = let 4",
+        "let salti = 4",
+        "let 4 = salti"
+      ],
+      "risposta": 1,
+      "spiegazione": "Prima let, poi il nome, poi l'uguale e il valore."
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Completa: la scatola si chiama tempo e vale 2, poi aspetto per quel tempo.",
+      "codice": "let ___ = 2\nwait(___)",
+      "scelte": [
+        "tempo",
+        "wait",
+        "2"
+      ],
+      "risposta": [
+        "tempo",
+        "tempo"
+      ],
+      "spiegazione": "La variabile si chiama tempo, e wait(tempo) usa il suo valore."
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Cambiare valore",
+      "testo": [
+        "Una variabile si può cambiare: dopo la prima volta non serve più let, bastano il nome e l'uguale.",
+        "Guarda il pannello delle variabili mentre il programma gira: i valori cambiano riga per riga."
+      ],
+      "codice": "let tempo = 3\ntempo = 1\nwait(tempo)"
+    },
+    {
+      "tipo": "trova_errore",
+      "domanda": "Una riga non va. Quale?",
+      "codice": "let attesa = 3\nwait(attesa)\nmoveRight()\nlet attesa = 1",
+      "riga": 4,
+      "spiegazione": "attesa esiste già: per cambiarla basta scrivere attesa = 1, senza let.",
+      "indizio": "Quante volte viene scritto let attesa?"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Il piano",
+      "testo": [
+        "Due laser con tempi diversi. Crea una variabile per l'attesa e usala due volte: se poi vuoi cambiare i secondi, li cambi in un posto solo.",
+        "La moneta è sul pavimento, un passo davanti a te."
+      ]
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 11",
+      "sottotitolo": "Le variabili",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.....",
+          "........",
+          "..#..#..",
+          "..R..Q..",
+          "........",
+          "SM....X.",
+          "========"
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "M": {
+            "tipo": "moneta",
+            "id": "m1"
+          },
+          "R": {
+            "tipo": "laser",
+            "id": "l1",
+            "lunghezza": 2,
+            "acceso": 180,
+            "spento": 180,
+            "fase": 0
+          },
+          "Q": {
+            "tipo": "laser",
+            "id": "l2",
+            "lunghezza": 2,
+            "acceso": 180,
+            "spento": 180,
+            "fase": 180
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Passa i due laser usando una variabile"
+      },
+      "starter": "let attesa = 3\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let"
+      ],
+      "sensori": [],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "usaVariabile",
+          "testo": "Usa una variabile"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "Il primo laser è acceso per i primi tre secondi: wait(attesa) prima di partire.",
+        "Dopo il primo laser fai quattro passi e aspetta ancora wait(attesa): il secondo laser ha i tempi al contrario.",
+        "let attesa = 3\nwait(attesa)\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()\nwait(attesa)\nmoveRight()\nmoveRight()"
+      ]
+    }
+  ]
+}

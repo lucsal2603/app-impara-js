@@ -1,16 +1,18 @@
 // Pagina del solo livello (prototipo e test): monta la scheda codice dell'ultima scheda della lezione 1.
-const MODULI = import.meta.glob('../content/it/c1/l*.json', { eager: true });
-const LEZIONI = Object.fromEntries(Object.entries(MODULI).map(([k, m]) => [k.match(/l(\d+)\.json$/)[1], m.default]));
-const lezione = LEZIONI[new URLSearchParams(location.search).get('l') || '1'] || LEZIONI['1'];
+const MODULI = import.meta.glob('../content/it/c*/l*.json', { eager: true });
+const LEZIONI = Object.fromEntries(Object.entries(MODULI).map(([k, m]) => { const [, c, l] = k.match(/c(\d+)\/l(\d+)\.json$/); return [`c${c}-l${l}`, m.default]; }));
+const q = new URLSearchParams(location.search);
+const id = (q.get('l') || '1').includes('-') ? q.get('l') : `c1-l${q.get('l') || '1'}`;
+const lezione = LEZIONI[id] || LEZIONI['c1-l1'];
 import { montaCodice } from './ui/schede/codice.js';
 
-const livello = lezione.schede.find(s => s.tipo === 'codice');
+const livello = lezione.schede.filter(s => s.tipo === 'codice').at(-1);
 montaCodice(document.getElementById('app'), livello, { onMenu: () => { location.href = 'home.html'; } }).then(app => {
   window.__app = app;
   // ?demo=N: carica la soluzione, la esegue e avanza di N tick (per screenshot e test deterministici)
   const demo = new URLSearchParams(location.search).get('demo');
   if (demo !== null) {
-    app.editor.ta.value = livello.aiuti[livello.aiuti.length - 1] + '\n'; app.editor.aggiorna();
+    app.editor.imposta(livello.aiuti[livello.aiuti.length - 1] + '\n');
     app.sessione.esegui();
     for (let i = 0; i < Number(demo); i++) app.sessione.tick();
     app.loop.tick = () => {};                     // fotogramma fisso: la logica si ferma, il disegno continua

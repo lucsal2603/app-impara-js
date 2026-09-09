@@ -1,0 +1,178 @@
+{
+  "id": "c3-l1",
+  "capitolo": "Cicli",
+  "titolo": "Funziona, ma...",
+  "durata": "8 min",
+  "prossima": "c3-l2",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Un corridoio lungo",
+      "testo": [
+        "Questa stanza è lunga: dodici passi fino all'uscita, con una moneta a metà. Scrivili tutti, uno per riga. Sì, tutti quanti.",
+        "La scena è più larga dello schermo: trascina con il dito per guardarti intorno."
+      ],
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 16",
+      "sottotitolo": "Il corridoio lungo",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L...........",
+          "..............",
+          "..............",
+          "..............",
+          "..............",
+          "S.....M.....X.",
+          "=============="
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "M": {
+            "tipo": "moneta",
+            "id": "m1"
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Dodici passi fino all'uscita"
+      },
+      "starter": "moveRight()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if"
+      ],
+      "sensori": [],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "Sono dodici moveRight() di fila.",
+        "moveRight()\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()\n"
+      ]
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Funziona, ma...",
+      "testo": [
+        "Dodici righe uguali. Funziona, ma se il corridoio fosse lungo cento? E se dovessi cambiare moveRight in jump, lo cambieresti dodici volte?",
+        "I programmatori odiano ripetersi. Per questo esiste il ciclo for: dice al computer ripeti questo blocco un certo numero di volte."
+      ],
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Il ciclo for",
+      "testo": [
+        "Leggilo così: parti con i = 0; finché i è minore di 12, esegui il blocco e poi aumenta i di uno (i++). Il blocco gira dodici volte.",
+        "Tre righe al posto di dodici. E per cento passi cambi solo un numero."
+      ],
+      "codice": "for (let i = 0; i < 12; i++) {\n  moveRight()\n}"
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Completa il ciclo che salta 4 volte.",
+      "codice": "for (let i = 0; i < ___; i++) {\n  ___()\n}",
+      "scelte": [
+        "4",
+        "jump",
+        "12",
+        "moveRight"
+      ],
+      "risposta": [
+        "4",
+        "jump"
+      ],
+      "spiegazione": "i va da 0 a 3: quattro giri, e in ogni giro un salto."
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 17",
+      "sottotitolo": "Lo stesso corridoio",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L...........",
+          "..............",
+          "..............",
+          "..............",
+          "..............",
+          "S.....M.....X.",
+          "=============="
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "M": {
+            "tipo": "moneta",
+            "id": "m1"
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Lo stesso corridoio, con un ciclo"
+      },
+      "starter": "for (let i = 0; i < 12; i++) {\n  \n}\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if",
+        "for"
+      ],
+      "sensori": [],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "usaFor",
+          "testo": "Usa un ciclo for"
+        },
+        {
+          "tipo": "maxRighe",
+          "testo": "Massimo 4 righe",
+          "valore": 4
+        }
+      ],
+      "aiuti": [
+        "Il tasto for nella barra scrive il ciclo: metti moveRight() nel blocco e 12 come limite.",
+        "for (let i = 0; i < 12; i++) {\n  moveRight()\n}"
+      ]
+    }
+  ]
+}

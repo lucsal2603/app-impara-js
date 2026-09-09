@@ -1,0 +1,116 @@
+{
+  "id": "c3-l2",
+  "capitolo": "Cicli",
+  "titolo": "Il contatore",
+  "durata": "7 min",
+  "prossima": "c3-l3",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "La variabile del ciclo",
+      "testo": [
+        "i è una variabile come le altre: nel blocco vale 0, poi 1, poi 2. Guardala cambiare nel pannello mentre il programma gira.",
+        "Puoi chiamarla come vuoi, ma i (da indice) è la tradizione."
+      ],
+      "codice": "for (let i = 0; i < 3; i++) {\n  console.log(i)\n}",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quante volte gira questo blocco?",
+      "opzioni": [
+        "4",
+        "5",
+        "1"
+      ],
+      "risposta": 0,
+      "spiegazione": "i vale 1, 2, 3, 4: quattro giri. Quando arriva a 5 la condizione i < 5 è falsa e il ciclo finisce.",
+      "codice": "for (let i = 1; i < 5; i++) {\n  jump()\n}"
+    },
+    {
+      "tipo": "trova_errore",
+      "domanda": "Questo ciclo non finisce mai. Quale riga è colpevole?",
+      "codice": "for (let i = 0; i < 3; i--) {\n  moveRight()\n}",
+      "riga": 1,
+      "spiegazione": "i-- fa scendere i: parte da 0 e va a -1, -2... non arriva mai a 3. Ci vuole i++.",
+      "indizio": "Guarda come cambia i a ogni giro."
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Più righe nel blocco",
+      "testo": [
+        "Nel blocco ci possono stare più righe: qui a ogni giro salta e poi fa un passo. Le scale si salgono così.",
+        "Un programma può avere più cicli uno dopo l'altro: uno per la scala, uno per il corridoio in cima."
+      ],
+      "codice": "for (let i = 0; i < 3; i++) {\n  jump()\n  moveRight()\n}"
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 18",
+      "sottotitolo": "La scala",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.......",
+          "..........",
+          "........MX",
+          "......####",
+          "....######",
+          "S.########",
+          "=========="
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "M": {
+            "tipo": "moneta",
+            "id": "m1"
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Sali la scala con due cicli"
+      },
+      "starter": "for (let i = 0; i < 3; i++) {\n  \n}\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if",
+        "for"
+      ],
+      "sensori": [],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "usaFor",
+          "testo": "Due cicli for",
+          "valore": 2
+        },
+        {
+          "tipo": "maxRighe",
+          "testo": "Massimo 8 righe",
+          "valore": 8
+        }
+      ],
+      "aiuti": [
+        "Tre gradini: in ogni giro jump() e poi moveRight().",
+        "In cima mancano due passi: un secondo for con moveRight().",
+        "for (let i = 0; i < 3; i++) {\n  jump()\n  moveRight()\n}\nfor (let i = 0; i < 2; i++) {\n  moveRight()\n}"
+      ]
+    }
+  ]
+}

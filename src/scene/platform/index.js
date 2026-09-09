@@ -25,6 +25,22 @@ export class ScenaPlatform extends Scena {
   }
 
   api() { return azioni; }
+  impostaConfig(config) { this.config = config; this.reset(); }
+
+  // Sensori: valori letti dal programma nel momento in cui la riga viene eseguita (mai copie).
+  sensori() {
+    const s = this, p = this.player;
+    const vicino = (lista) => lista.length ? lista.reduce((a, b) => Math.abs(a.x - p.gx) <= Math.abs(b.x - p.gx) ? a : b) : null;
+    return {
+      frontIsWall: () => { const tx = p.gx + p.dir; return tx < 0 || tx >= s.colonne || !s.libera(tx, p.gy); },
+      frontIsGap: () => { const tx = p.gx + p.dir; return tx >= 0 && tx < s.colonne && s.libera(tx, p.gy) && s.libera(tx, p.gy + 1); },
+      hasBox: () => !!p.cassa,
+      coinsLeft: () => s.monete.filter(m => !m.presa).length,
+      hasKey: () => s.chiavi.some(k => k.presa),
+      laser: { get isOn() { const l = vicino(s.L.laser); return l ? s.laserAcceso(l) : false; } },
+      door: { get isOpen() { const d = vicino(s.porte); return d ? d.aperta : true; } },
+    };
+  }
 
   libera(x, y) {
     if (x < 0 || x >= this.colonne) return false;

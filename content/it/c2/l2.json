@@ -1,0 +1,173 @@
+{
+  "id": "c2-l2",
+  "capitolo": "Logica",
+  "titolo": "Il se",
+  "durata": "7 min",
+  "prossima": "c2-l3",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Decidere",
+      "testo": [
+        "Finora il programma faceva sempre le stesse cose. Con if può decidere: se il laser è acceso aspetta, altrimenti va avanti.",
+        "if si legge se. Tra le parentesi tonde c'è la condizione, tra le graffe il blocco: le righe che girano solo se la condizione è vera."
+      ],
+      "codice": "if (laser.isOn) {\n  wait(3)\n}",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "I sensori",
+      "testo": [
+        "laser.isOn è un sensore: guarda il laser più vicino e risponde true (acceso) o false (spento) nel momento esatto in cui quella riga viene eseguita.",
+        "Ne esistono altri: frontIsWall() dice se davanti c'è un ostacolo, frontIsGap() se c'è un buco, hasBox() se hai una scatola in mano, coinsLeft() quante monete mancano."
+      ],
+      "codice": "laser.isOn\nfrontIsGap()\ncoinsLeft()"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Le graffe",
+      "testo": [
+        "Il blocco tra { } si scrive spostato a destra di due spazi: si chiama indentazione e serve a leggere a colpo d'occhio cosa sta dentro l'if.",
+        "Nell'editor il tasto for/if scrive già le graffe al posto giusto: tu riempi il blocco."
+      ],
+      "codice": "if (laser.isOn) {\n  wait(3)\n}\nmoveRight()"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Cosa succede con questo codice se il laser è **spento**?",
+      "opzioni": [
+        "Aspetta 3 secondi e poi va avanti",
+        "Va avanti subito",
+        "Non fa niente"
+      ],
+      "risposta": 1,
+      "spiegazione": "La condizione è falsa, il blocco viene saltato e si passa a moveRight().",
+      "codice": "if (laser.isOn) {\n  wait(3)\n}\nmoveRight()"
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Completa: se il laser è acceso, aspetta tre secondi.",
+      "codice": "___ (laser.isOn) {\n  ___(3)\n}",
+      "scelte": [
+        "if",
+        "wait",
+        "let"
+      ],
+      "risposta": [
+        "if",
+        "wait"
+      ],
+      "spiegazione": "if con la condizione, wait dentro il blocco."
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Stanze diverse, stesso programma",
+      "testo": [
+        "Da questo livello il tuo programma viene provato in più stanze una dopo l'altra: in una il laser parte acceso, nell'altra spento.",
+        "Deve funzionare in tutte. Ci riesce solo se decide con if, invece di indovinare i tempi."
+      ]
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 12",
+      "sottotitolo": "Il se",
+      "scena": "platform",
+      "config": {
+        "mappa": [
+          "..L.....",
+          "........",
+          "...#....",
+          "...R....",
+          "........",
+          "S.....X.",
+          "========"
+        ],
+        "legenda": {
+          "=": "pavimento",
+          "#": "blocco",
+          "L": "lampada",
+          "S": "spawn",
+          "X": "uscita",
+          "^": "spuntoni",
+          "R": {
+            "tipo": "laser",
+            "id": "l1",
+            "lunghezza": 2,
+            "acceso": 180,
+            "spento": 180,
+            "fase": 0
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Supera il laser in tutte e due le stanze"
+      },
+      "starter": "moveRight()\n",
+      "api": [
+        "moveRight",
+        "moveLeft",
+        "jump",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if"
+      ],
+      "sensori": [
+        "laser"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "usaIf",
+          "testo": "Usa un if"
+        },
+        {
+          "tipo": "maxRighe",
+          "testo": "Massimo 10 righe",
+          "valore": 10
+        }
+      ],
+      "aiuti": [
+        "Fai un passo, poi chiedi al sensore: if (laser.isOn) { wait(3) }.",
+        "Dopo l'if, cinque passi fino all'uscita.",
+        "moveRight()\nif (laser.isOn) {\n  wait(3)\n}\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()\nmoveRight()"
+      ],
+      "varianti": [
+        {
+          "mappa": [
+            "..L.....",
+            "........",
+            "...#....",
+            "...R....",
+            "........",
+            "S.....X.",
+            "========"
+          ],
+          "legenda": {
+            "=": "pavimento",
+            "#": "blocco",
+            "L": "lampada",
+            "S": "spawn",
+            "X": "uscita",
+            "^": "spuntoni",
+            "R": {
+              "tipo": "laser",
+              "id": "l1",
+              "lunghezza": 2,
+              "acceso": 180,
+              "spento": 180,
+              "fase": 180
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
