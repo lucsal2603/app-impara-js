@@ -87,11 +87,18 @@ export async function montaCodice(root, livello, opzioni = {}) {
     const testo = aiuti[nAiuto - 1]; el.textContent = ''; el.append(`Aiuto ${nAiuto} di ${aiuti.length}: `);
     if (testo.includes('\n')) { const pre = document.createElement('pre'); pre.textContent = testo; el.appendChild(pre); } else el.append(testo);
   });
-  // livelli più larghi dello schermo: si trascina la scena col dito per guardarsi intorno; con ESEGUI la camera torna a seguire
-  const canvas = $('canvas'); let trascino = null;
-  canvas.addEventListener('pointerdown', e => { trascino = { x: e.clientX, cam: scena.cam.x }; canvas.setPointerCapture(e.pointerId); });
-  canvas.addEventListener('pointermove', e => { if (!trascino) return; const dx = (e.clientX - trascino.x) / (canvas.clientWidth / COLONNE); if (Math.abs(dx) > 0.05) { scena.cam.manuale = true; scena.cam.x = trascino.cam - dx; } });
-  const fineTrascino = () => { trascino = null; }; canvas.addEventListener('pointerup', fineTrascino); canvas.addEventListener('pointercancel', fineTrascino);
+  // livelli più larghi dello schermo: si trascina la scena col dito per guardarsi intorno; con ESEGUI la camera torna a seguire Bit.
+  // Pointer events per mouse e penna, touch events espliciti per il telefono (su iOS sono i più affidabili), presa su tutta l'area della scena.
+  const canvas = $('canvas'), area = canvas.parentElement; let trascino = null;
+  const inizio = (x) => { trascino = { x, cam: scena.cam.x }; };
+  const muovi = (x) => { if (!trascino) return; const dx = (x - trascino.x) / (canvas.clientWidth / COLONNE); if (Math.abs(dx) > 0.05) { scena.cam.manuale = true; scena.cam.x = trascino.cam - dx; } };
+  const fine = () => { trascino = null; };
+  area.addEventListener('touchstart', e => { if (e.touches.length === 1) { e.preventDefault(); inizio(e.touches[0].clientX); } }, { passive: false });
+  area.addEventListener('touchmove', e => { if (trascino && e.touches.length === 1) { e.preventDefault(); muovi(e.touches[0].clientX); } }, { passive: false });
+  area.addEventListener('touchend', fine); area.addEventListener('touchcancel', fine);
+  area.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') return; inizio(e.clientX); area.setPointerCapture?.(e.pointerId); });
+  area.addEventListener('pointermove', e => { if (e.pointerType === 'touch') return; muovi(e.clientX); });
+  area.addEventListener('pointerup', e => { if (e.pointerType !== 'touch') fine(); }); area.addEventListener('pointercancel', e => { if (e.pointerType !== 'touch') fine(); });
   const loop = new Loop({ tick: () => sessione.tick(), disegna: () => renderer.disegna(scena) });
   loop.avvia();
   return { scena, sessione, editor, loop, renderer, distruggi() { loop.ferma(); root.innerHTML = ''; root.classList.remove('scheda-codice'); } };

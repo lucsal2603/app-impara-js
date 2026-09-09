@@ -54,7 +54,6 @@ export class ScenaPlatform extends Scena {
   avvia(az) {
     const p = this.player;
     if (!p.vivo || this.esito) return;
-    this.cam.manuale = false;
     if (az.tipo === 'pickUp') {
       const tx = p.gx + p.dir, i = this.casse.findIndex(c => c.x === tx && c.y === p.gy);
       if (i >= 0 && !p.cassa) p.cassa = this.casse.splice(i, 1)[0];
@@ -92,7 +91,7 @@ export class ScenaPlatform extends Scena {
 
   aggiornaCamera() {
     const max = Math.max(0, this.colonne - COLONNE);
-    if (!this.cam.manuale) { const target = Math.max(0, Math.min(max, this.player.px + 0.5 - COLONNE / 2)); this.cam.x += (target - this.cam.x) * 0.12; }
+    if (!this.cam.manuale) { const target = Math.round(Math.max(0, Math.min(max, this.player.px + 0.5 - COLONNE / 2))); this.cam.x += (target - this.cam.x) * 0.12; if (Math.abs(target - this.cam.x) < 0.01) this.cam.x = target; }   // a riposo su colonne intere: i tasselli ai bordi non restano mai tagliati
     this.cam.x = Math.max(0, Math.min(max, this.cam.x));
   }
 

@@ -21,10 +21,12 @@ export class Sessione {
     this.ui.console?.(null); this.ui.variabili?.(null);
   }
   esegui() {
+    this.scena.cam.manuale = false;                       // la camera torna a seguire il personaggio
     if (this.stato === 'pausa') return this.imposta('esecuzione');
     if (this.stato === 'pronto' && this.prepara()) this.imposta('esecuzione');
   }
   passo() {
+    this.scena.cam.manuale = false;
     if (this.stato === 'pronto' && !this.prepara()) return;
     if (['pronto', 'pausa'].includes(this.stato)) { this.attesaPasso = true; this.imposta('passo'); }
   }
