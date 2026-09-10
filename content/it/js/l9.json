@@ -1,0 +1,150 @@
+{
+  "id": "js-l9",
+  "capitolo": "Il linguaggio",
+  "titolo": "Oggetti",
+  "durata": "8 min",
+  "prossima": "js-l10",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Proprietà con un nome",
+      "testo": [
+        "Un oggetto tiene insieme dei valori con un nome ciascuno: { nome: \"Bit\", eta: 3 }. Si legge con il punto: bit.nome. Si cambia allo stesso modo: bit.eta = 4.",
+        "Un oggetto descrive una cosa sola; un array è una lista di cose."
+      ],
+      "codice": "const bit = { nome: \"Bit\", eta: 3 }\nconsole.log(bit.nome)\nbit.eta = bit.eta + 1\nconsole.log(bit.eta)",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Oggetti dentro array",
+      "testo": [
+        "Una lista di oggetti è il modo più comune di tenere dei dati: persone, prodotti, livelli. Si scorre con for of e si legge ogni proprietà con il punto."
+      ],
+      "codice": "const persone = [\n  { nome: \"Ada\", eta: 36 },\n  { nome: \"Bit\", eta: 3 }\n]\nfor (const p of persone) {\n  console.log(p.nome, p.eta)\n}"
+    },
+    {
+      "tipo": "prova",
+      "titolo": "Prova gli oggetti",
+      "testo": [
+        "Esegui, poi aggiungi una proprietà (per esempio colore) e stampala."
+      ],
+      "codice": "const gioco = { titolo: \"Code Play\", livelli: 26, gratis: true }\nconsole.log(gioco.titolo)\ngioco.livelli = gioco.livelli + 1\nconsole.log(gioco.livelli)\nconsole.log(`${gioco.titolo} ha ${gioco.livelli} livelli`)"
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Stampa il nome dell'oggetto.",
+      "codice": "const b = { nome: \"Bit\", eta: 3 }\nconsole.log(b.___)",
+      "scelte": [
+        "nome",
+        "eta",
+        "\"nome\""
+      ],
+      "risposta": [
+        "nome"
+      ],
+      "spiegazione": "Con il punto e il nome della proprietà, senza virgolette."
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "Gli adulti",
+      "consegna": [
+        "C'è un array persone di oggetti con nome ed eta. Stampa, uno per riga, i nomi di chi ha almeno 18 anni, nell'ordine dell'array."
+      ],
+      "starter": "for (const p of persone) {\n  \n}\n",
+      "casi": [
+        {
+          "atteso": [
+            "Ada",
+            "Luca"
+          ],
+          "variabili": {
+            "persone": [
+              {
+                "nome": "Ada",
+                "eta": 36
+              },
+              {
+                "nome": "Bit",
+                "eta": 3
+              },
+              {
+                "nome": "Luca",
+                "eta": 18
+              }
+            ]
+          }
+        },
+        {
+          "atteso": [],
+          "variabili": {
+            "persone": [
+              {
+                "nome": "Bit",
+                "eta": 3
+              }
+            ]
+          }
+        }
+      ],
+      "soluzione": "for (const p of persone) {\n  if (p.eta >= 18) {\n    console.log(p.nome)\n  }\n}",
+      "aiuti": [
+        "if (p.eta >= 18) console.log(p.nome)."
+      ],
+      "esempio": "Esempio: Ada 36, Bit 3, Luca 18 → Ada, Luca"
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "Il totale del carrello",
+      "consegna": [
+        "C'è un array carrello di oggetti con nome e prezzo. Stampa la somma dei prezzi."
+      ],
+      "starter": "let totale = 0\n",
+      "casi": [
+        {
+          "atteso": [
+            "12"
+          ],
+          "variabili": {
+            "carrello": [
+              {
+                "nome": "pane",
+                "prezzo": 2
+              },
+              {
+                "nome": "latte",
+                "prezzo": 10
+              }
+            ]
+          }
+        },
+        {
+          "atteso": [
+            "0"
+          ],
+          "variabili": {
+            "carrello": []
+          }
+        },
+        {
+          "atteso": [
+            "5.5"
+          ],
+          "variabili": {
+            "carrello": [
+              {
+                "nome": "gelato",
+                "prezzo": 5.5
+              }
+            ]
+          }
+        }
+      ],
+      "soluzione": "let totale = 0\nfor (const p of carrello) {\n  totale = totale + p.prezzo\n}\nconsole.log(totale)",
+      "aiuti": [
+        "for of sul carrello, totale = totale + p.prezzo."
+      ],
+      "esempio": "Esempio: pane 2, latte 10 → 12"
+    }
+  ]
+}

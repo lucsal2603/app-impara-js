@@ -1,0 +1,165 @@
+{
+  "id": "js-l8",
+  "capitolo": "Il linguaggio",
+  "titolo": "Array",
+  "durata": "8 min",
+  "prossima": "js-l9",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Una lista di valori",
+      "testo": [
+        "Un array è una lista tra parentesi quadre: [3, 9, 2]. Gli elementi si contano da 0: lista[0] è il primo, lista.length quanti sono.",
+        "L'ultimo elemento è lista[lista.length - 1]."
+      ],
+      "codice": "const lista = [\"a\", \"b\", \"c\"]\nconsole.log(lista[0])\nconsole.log(lista.length)\nconsole.log(lista[lista.length - 1])",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Aggiungere e cercare",
+      "testo": [
+        "push aggiunge in fondo, pop toglie l'ultimo. includes dice se c'è, indexOf dove sta (o -1). join attacca tutto in una stringa."
+      ],
+      "codice": "const n = [3, 9]\nn.push(2)\nconsole.log(n)\nconsole.log(n.includes(9), n.indexOf(2))\nconsole.log(n.join(\", \"))"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Scorrere",
+      "testo": [
+        "for (const x of lista) passa su ogni elemento. forEach fa lo stesso con una funzione; map crea un nuovo array trasformando ogni elemento."
+      ],
+      "codice": "const n = [1, 2, 3]\nfor (const x of n) {\n  console.log(x * 10)\n}\nconsole.log(n.map(x => x * x))"
+    },
+    {
+      "tipo": "prova",
+      "titolo": "Prova gli array",
+      "testo": [
+        "Esegui e poi aggiungi elementi, prova pop(), prova filter(x => x > 2)."
+      ],
+      "codice": "const numeri = [4, 1, 3]\nnumeri.push(7)\nconsole.log(numeri, numeri.length)\nfor (const x of numeri) {\n  console.log(x)\n}\nconsole.log(numeri.map(x => x * 2))"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quanto vale **[10, 20, 30][1]**?",
+      "opzioni": [
+        "20",
+        "10",
+        "30"
+      ],
+      "risposta": 0,
+      "spiegazione": "Gli indici partono da 0: l'elemento 1 è il secondo, 20."
+    },
+    {
+      "tipo": "trova_errore",
+      "domanda": "Questo programma stampa undefined. Quale riga sbaglia?",
+      "codice": "const lettere = [\"a\", \"b\", \"c\"]\nconsole.log(lettere[3])",
+      "riga": 2,
+      "spiegazione": "Tre elementi hanno gli indici 0, 1 e 2: lettere[3] non esiste. L'ultimo è lettere[2].",
+      "indizio": "Da che numero partono gli indici?"
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "Il più grande",
+      "consegna": [
+        "C'è un array numeri. Stampa il numero più grande. Parti dal primo e scorri gli altri con un for of."
+      ],
+      "starter": "let max = numeri[0]\nfor (const x of numeri) {\n  \n}\nconsole.log(max)\n",
+      "casi": [
+        {
+          "atteso": [
+            "9"
+          ],
+          "variabili": {
+            "numeri": [
+              3,
+              9,
+              2
+            ]
+          }
+        },
+        {
+          "atteso": [
+            "1"
+          ],
+          "variabili": {
+            "numeri": [
+              1
+            ]
+          }
+        },
+        {
+          "atteso": [
+            "-2"
+          ],
+          "variabili": {
+            "numeri": [
+              -5,
+              -2,
+              -9
+            ]
+          }
+        }
+      ],
+      "soluzione": "let max = numeri[0]\nfor (const x of numeri) {\n  if (x > max) {\n    max = x\n  }\n}\nconsole.log(max)",
+      "aiuti": [
+        "Nel for: if (x > max) max = x."
+      ],
+      "esempio": "Esempio: numeri = [3, 9, 2] → 9"
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "Conta i grandi",
+      "consegna": [
+        "Array numeri e variabile soglia. Stampa quanti numeri sono maggiori della soglia."
+      ],
+      "starter": "let quanti = 0\n",
+      "casi": [
+        {
+          "atteso": [
+            "2"
+          ],
+          "variabili": {
+            "numeri": [
+              5,
+              12,
+              30,
+              7
+            ],
+            "soglia": 10
+          }
+        },
+        {
+          "atteso": [
+            "0"
+          ],
+          "variabili": {
+            "numeri": [
+              1,
+              2
+            ],
+            "soglia": 10
+          }
+        },
+        {
+          "atteso": [
+            "3"
+          ],
+          "variabili": {
+            "numeri": [
+              11,
+              12,
+              13
+            ],
+            "soglia": 10
+          }
+        }
+      ],
+      "soluzione": "let quanti = 0\nfor (const x of numeri) {\n  if (x > soglia) {\n    quanti++\n  }\n}\nconsole.log(quanti)",
+      "aiuti": [
+        "for of sui numeri, if (x > soglia) quanti++."
+      ],
+      "esempio": "Esempio: numeri = [5, 12, 30, 7], soglia = 10 → 2"
+    }
+  ]
+}

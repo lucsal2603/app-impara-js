@@ -4,13 +4,15 @@ import * as scelta from './schede/scelta.js';
 import * as completa from './schede/completa.js';
 import * as riordina from './schede/riordina.js';
 import * as trova_errore from './schede/trova_errore.js';
+import * as prova from './schede/prova.js';
+import * as esercizio from './schede/esercizio.js';
 import { salvaLezione } from '../sfida/progresso.js';
 import { aggiornaStreak, disegnaStreak } from '../sfida/streak.js';
 import { montaCodice } from './schede/codice.js';
 import { mostraFine } from './fine.js';
 import { riempi } from './testo.js';
 
-const RENDER = { spiegazione: spiegazione.render, scelta: scelta.render, completa: completa.render, riordina: riordina.render, trova_errore: trova_errore.render };
+const RENDER = { spiegazione: spiegazione.render, scelta: scelta.render, completa: completa.render, riordina: riordina.render, trova_errore: trova_errore.render, prova: prova.render, esercizio: esercizio.render };
 
 export function avviaLezione(root, lezione, { homeUrl = 'home.html' } = {}) {
   root.className = 'lezione';
@@ -71,7 +73,7 @@ export function avviaLezione(root, lezione, { homeUrl = 'home.html' } = {}) {
       return;
     }
     if (avanti.dataset.modo === 'riprova') { corrente.azzera(); mostraFeedback(null); etichetta('Conferma risposta'); avanti.dataset.modo = 'verifica'; return; }
-    i++; if (i < schede.length) mostra();
+    i++; if (i < schede.length) mostra(); else fine([{ tipo: 'completa', testo: 'Lezione completata', ok: true }, { tipo: 'esercizi', testo: 'Esercizi superati', ok: true }, { tipo: 'primo', testo: 'Senza saltare nulla', ok: true }]);
   });
   mostra();
   return { vai(n) { i = n; mostra(); }, fine, get indice() { return i; } };

@@ -1,0 +1,122 @@
+{
+  "id": "js-l6",
+  "capitolo": "Il linguaggio",
+  "titolo": "Ripetere",
+  "durata": "7 min",
+  "prossima": "js-l7",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "for: quando sai quante volte",
+      "testo": [
+        "for (let i = 0; i < 5; i++) ripete cinque volte, con i che vale 0, 1, 2, 3, 4. Puoi far partire i da 1 o contare all'indietro con i--.",
+        "Dentro il blocco puoi usare i: è così che si stampano tabelline e sequenze."
+      ],
+      "codice": "for (let i = 1; i <= 5; i++) {\n  console.log(i * 3)\n}",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "while: finché è vero",
+      "testo": [
+        "while ripete finché la condizione resta vera. Qualcosa dentro deve cambiarla, o non finisce mai.",
+        "break esce dal ciclo subito; continue salta al giro dopo."
+      ],
+      "codice": "let n = 1\nwhile (n < 100) {\n  n = n * 2\n}\nconsole.log(n)"
+    },
+    {
+      "tipo": "prova",
+      "titolo": "La tabellina",
+      "testo": [
+        "Esegui, poi cambia il numero della tabellina e quante righe stampa."
+      ],
+      "codice": "const tab = 7\nfor (let i = 1; i <= 10; i++) {\n  console.log(`${tab} x ${i} = ${tab * i}`)\n}"
+    },
+    {
+      "tipo": "trova_errore",
+      "domanda": "Questo ciclo non finisce mai. Quale riga?",
+      "codice": "let i = 0\nwhile (i < 3) {\n  console.log(i)\n}",
+      "riga": 2,
+      "spiegazione": "Dentro il while nessuno cambia i: resta 0 e la condizione è sempre vera. Ci vuole i++ nel blocco.",
+      "indizio": "Cosa cambia tra un giro e l'altro?"
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "Somma dei pari",
+      "consegna": [
+        "C'è una variabile n. Stampa la somma di tutti i numeri pari da 1 a n compreso. Per 10: 2 + 4 + 6 + 8 + 10 = 30."
+      ],
+      "starter": "let somma = 0\nfor (let i = 1; i <= n; i++) {\n  \n}\nconsole.log(somma)\n",
+      "casi": [
+        {
+          "atteso": [
+            "30"
+          ],
+          "variabili": {
+            "n": 10
+          }
+        },
+        {
+          "atteso": [
+            "6"
+          ],
+          "variabili": {
+            "n": 5
+          }
+        },
+        {
+          "atteso": [
+            "0"
+          ],
+          "variabili": {
+            "n": 1
+          }
+        }
+      ],
+      "soluzione": "let somma = 0\nfor (let i = 1; i <= n; i++) {\n  if (i % 2 === 0) {\n    somma = somma + i\n  }\n}\nconsole.log(somma)",
+      "aiuti": [
+        "Dentro il for: if (i % 2 === 0) somma = somma + i."
+      ],
+      "esempio": "Esempio: n = 10 → 30"
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "I multipli di 7",
+      "consegna": [
+        "Stampa tutti i multipli di 7 da 7 fino a n compreso, uno per riga. Se non ce ne sono, non stampare niente."
+      ],
+      "starter": "",
+      "casi": [
+        {
+          "atteso": [
+            "7",
+            "14",
+            "21"
+          ],
+          "variabili": {
+            "n": 21
+          }
+        },
+        {
+          "atteso": [
+            "7"
+          ],
+          "variabili": {
+            "n": 10
+          }
+        },
+        {
+          "atteso": [],
+          "variabili": {
+            "n": 5
+          }
+        }
+      ],
+      "soluzione": "for (let i = 7; i <= n; i = i + 7) {\n  console.log(i)\n}",
+      "aiuti": [
+        "Un for che parte da 7 e cresce di 7: i = i + 7.",
+        "Oppure un for da 1 a n con if (i % 7 === 0)."
+      ]
+    }
+  ]
+}

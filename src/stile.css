@@ -158,3 +158,16 @@ code.inl { color: #ffd166; background: rgba(0, 0, 0, .28); border-radius: 6px; p
 .caso { display: grid; grid-template-columns: 22px 1fr; column-gap: 8px; padding: 8px 10px; border-radius: 10px; background: #14181d; font-size: 13px; }
 .caso b { font-size: 16px; } .caso.ok b { color: #3ddc84; } .caso.no b { color: #ff8080; }
 .caso span { color: var(--muto); } .caso code { grid-column: 2; color: #c3e88d; font: 13px Menlo, "SF Mono", monospace; white-space: pre-wrap; } .caso small { grid-column: 2; color: #ffb3b3; }
+
+/* ---------- schede prova ed esercizio (codice senza scena) ---------- */
+.mini-editor { border-radius: 12px; background: #0f1418; border: 2px solid #2b323a; overflow: hidden; margin: 4px 0 10px; }
+.mini-editor .editor { position: relative; min-height: 150px; height: 150px; }
+.mini-editor .simboli { padding-top: 4px; } .mini-editor .palette { padding-top: 4px; }
+.esegui-mini { display: inline-block; padding: 10px 16px; border-radius: 10px; border: 0; background: var(--verde); color: #fff; font-weight: 800; font-size: 15px; margin-bottom: 10px; }
+.console-prova { padding: 10px 12px; border-radius: 10px; background: #0b0f12; color: #c3e88d; font: 14px/1.5 Menlo, "SF Mono", monospace; white-space: pre-wrap; margin-bottom: 8px; }
+.console-prova.giusta { outline: 2px solid #3ddc84; } .console-prova.sbagliata { outline: 2px solid #e04848; }
+.console-prova .esito { margin-top: 6px; color: #aab0b8; font-family: inherit; }
+.console-prova.giusta .esito { color: #3ddc84; }
+.scheda-esercizio .esempio { color: var(--muto); font-size: 14px; }
+.scheda .risultati { padding: 0; margin-bottom: 8px; }
+.caso.tutti { grid-template-columns: 1fr; color: #3ddc84; font-weight: 700; }

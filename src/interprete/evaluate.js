@@ -31,6 +31,40 @@ class Scope {
   }
 }
 
+// Un "riferimento" a cui assegnare: una variabile, oppure una proprietà/indice di un oggetto o array.
+function* riferimento(n, scope, stato, riga) {
+  if (n.type === 'Identifier') return { get: () => scope.leggi(n.name, riga), set: (v) => scope.assegna(n.name, v, riga) };
+  if (n.type === 'MemberExpression') {
+    const o = yield* espr(n.object, scope, stato); const k = n.computed ? yield* espr(n.property, scope, stato) : n.property.name;
+    if (o === null || o === undefined || (typeof o !== 'object')) throw new ErroreCodice(`Non posso scrivere ${k} su qualcosa che non è un oggetto o un array.`, riga);
+    if (['__proto__', 'constructor', 'prototype'].includes(k)) throw new ErroreCodice('Questa proprietà non è disponibile.', riga);
+    return { get: () => o[k], set: (v) => { o[k] = v; } };
+  }
+  throw new ErroreCodice('Si può assegnare un valore solo a una variabile o a una proprietà.', riga);
+}
+function* chiama(fn, args, stato, riga, nome = 'funzione') {
+  if (stato.profondita > LIMITE_PROFONDITA) throw new ErroreCodice(`${nome} si chiama da sola troppe volte.`, riga);
+  const s = new Scope(fn.chiusura);
+  fn.node.params.forEach((p, i) => { if (p.type === 'Identifier') s.dichiara(p.name, args[i], 'let', riga); else throw new ErroreCodice('I parametri devono essere nomi semplici.', riga); });
+  stato.profondita++;
+  try {
+    if (fn.node.body.type !== 'BlockStatement') return yield* espr(fn.node.body, s, stato);   // freccia con corpo a espressione
+    yield* blocco(fn.node.body.body, s, stato); return undefined;
+  }
+  catch (e) { if (e instanceof Ritorno) return e.valore; throw e; }
+  finally { stato.profondita--; }
+}
+// una funzione dell'utente passata a un metodo nativo (map, forEach, filter, sort...) va eseguita subito, senza azioni della scena
+function avvolgi(fn, stato, riga) {
+  return (...args) => {
+    const g = chiama(fn, args, stato, riga); let r;
+    while (!(r = g.next()).done) {
+      if (r.value && r.value.tipo === 'azione') throw new ErroreCodice('Dentro una funzione passata a un metodo (map, forEach...) non si possono usare i comandi del gioco.', riga);
+      if (r.value && r.value.tipo === 'log') (stato.logs = stato.logs || []).push(r.value);
+    }
+    return r.value;
+  };
+}
 function testo(v) { if (typeof v === 'string') return v; if (Array.isArray(v)) return '[' + v.map(testo).join(', ') + ']'; if (v && typeof v === 'object') return JSON.stringify(v); return String(v); }
 
 export function* esegui(ast, ctx) {
@@ -39,6 +73,8 @@ export function* esegui(ast, ctx) {
   for (const [n, v] of Object.entries(ctx.sensori || {})) sistema.vars.set(n, { valore: v, kind: 'const' });
   sistema.vars.set('console', { valore: { log: { __native: (...a) => ({ __log: a.map(testo).join(' ') }), nome: 'console.log' } }, kind: 'const' });
   sistema.vars.set('Math', { valore: Math, kind: 'const' });
+  for (const [n, f] of Object.entries({ String: (v) => String(v), Number: (v) => Number(v), parseInt: (v, b) => parseInt(v, b), parseFloat: (v) => parseFloat(v), isNaN: (v) => isNaN(v), Boolean: (v) => Boolean(v) }))
+    sistema.vars.set(n, { valore: { __native: f, nome: n }, kind: 'const' });
   const stato = { passi: 0, vuoto: 0, profondita: 0 };
   const utente = new Scope(sistema);
   yield* blocco(ast.body, utente, stato);
@@ -106,8 +142,9 @@ function* istruzioneInterna(n, scope, stato, riga) {
       } while (yield* espr(n.test, scope, stato));
       return;
     case 'ForOfStatement': {
-      const lista = yield* espr(n.right, scope, stato);
-      if (!Array.isArray(lista)) throw new ErroreCodice('for of vuole un array dopo of.', riga);
+      let lista = yield* espr(n.right, scope, stato);
+      if (typeof lista === 'string') lista = [...lista];                 // for of su una stringa: lettera per lettera
+      if (!Array.isArray(lista)) throw new ErroreCodice('for of vuole un array (o una stringa) dopo of.', riga);
       const nome = n.left.type === 'VariableDeclaration' ? n.left.declarations[0].id.name : n.left.name;
       for (const el of lista) {
         const s = new Scope(scope); s.dichiara(nome, el, 'let', riga);
@@ -151,17 +188,18 @@ function* espr(n, scope, stato) {
     }
     case 'UnaryExpression': { const v = yield* espr(n.argument, scope, stato); switch (n.operator) { case '!': return !v; case '-': return -v; case '+': return +v; case 'typeof': return typeof v; default: throw new ErroreCodice(`Operatore non supportato: ${n.operator}`, riga); } }
     case 'UpdateExpression': {
-      if (n.argument.type !== 'Identifier') throw new ErroreCodice('++ e -- si usano su una variabile.', riga);
-      const vecchio = scope.leggi(n.argument.name, riga); const nuovo = n.operator === '++' ? vecchio + 1 : vecchio - 1;
-      scope.assegna(n.argument.name, nuovo, riga); return n.prefix ? nuovo : vecchio;
+      const leggi = yield* riferimento(n.argument, scope, stato, riga);
+      const vecchio = leggi.get(); const nuovo = n.operator === '++' ? vecchio + 1 : vecchio - 1;
+      leggi.set(nuovo); return n.prefix ? nuovo : vecchio;
     }
     case 'AssignmentExpression': {
-      if (n.left.type !== 'Identifier') throw new ErroreCodice('Si può assegnare un valore solo a una variabile.', riga);
+      const rif = yield* riferimento(n.left, scope, stato, riga);
       let v = yield* espr(n.right, scope, stato);
-      if (n.operator !== '=') { const a = scope.leggi(n.left.name, riga); switch (n.operator) { case '+=': v = a + v; break; case '-=': v = a - v; break; case '*=': v = a * v; break; case '/=': v = a / v; break; default: throw new ErroreCodice(`Operatore non supportato: ${n.operator}`, riga); } }
-      scope.assegna(n.left.name, v, riga); return v;
+      if (n.operator !== '=') { const a = rif.get(); switch (n.operator) { case '+=': v = a + v; break; case '-=': v = a - v; break; case '*=': v = a * v; break; case '/=': v = a / v; break; case '%=': v = a % v; break; default: throw new ErroreCodice(`Operatore non supportato: ${n.operator}`, riga); } }
+      rif.set(v); return v;
     }
     case 'ConditionalExpression': return (yield* espr(n.test, scope, stato)) ? yield* espr(n.consequent, scope, stato) : yield* espr(n.alternate, scope, stato);
+    case 'FunctionExpression': case 'ArrowFunctionExpression': return { __funzione: true, node: n, chiusura: scope };
     case 'MemberExpression': {
       const o = yield* espr(n.object, scope, stato);
       const k = n.computed ? yield* espr(n.property, scope, stato) : n.property.name;
@@ -181,16 +219,12 @@ function* espr(n, scope, stato) {
         if (r && typeof r === 'object' && r.tipo) { stato.vuoto = 0; yield { tipo: 'azione', azione: r, riga }; return undefined; }
         return r;
       }
-      if (fn && fn.__funzione) {
-        if (stato.profondita > LIMITE_PROFONDITA) throw new ErroreCodice(`${nome} si chiama da sola troppe volte.`, riga);
-        const s = new Scope(fn.chiusura);
-        fn.node.params.forEach((p, i) => s.dichiara(p.name, args[i], 'let', riga));
-        stato.profondita++;
-        try { yield* blocco(fn.node.body.body, s, stato); return undefined; }
-        catch (e) { if (e instanceof Ritorno) return e.valore; throw e; }
-        finally { stato.profondita--; }
+      if (fn && fn.__funzione) return yield* chiama(fn, args, stato, riga, nome);
+      if (typeof fn === 'function') {
+        const ris = fn(...args.map(a => (a && a.__funzione) ? avvolgi(a, stato, riga) : a));
+        if (stato.logs && stato.logs.length) for (const l of stato.logs.splice(0)) yield l;
+        return ris;
       }
-      if (typeof fn === 'function') return fn(...args);
       throw new ErroreCodice(`${nome} non è un comando: non si può chiamare con le parentesi.`, riga);
     }
     default: throw new ErroreCodice(`Espressione non supportata: ${n.type}.`, riga);

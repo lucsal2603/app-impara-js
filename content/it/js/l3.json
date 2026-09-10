@@ -1,0 +1,106 @@
+{
+  "id": "js-l3",
+  "capitolo": "Il linguaggio",
+  "titolo": "Stringhe",
+  "durata": "7 min",
+  "prossima": "js-l4",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Testo tra virgolette",
+      "testo": [
+        "Una stringa è un testo. Con + si attaccano due stringhe: \"Ciao, \" + nome. Lo spazio va messo dentro le virgolette, non lo mette nessuno per te.",
+        "Con i backtick (`) puoi infilare un valore nel testo con ${}: `Ciao, ${nome}!`. Si chiama template."
+      ],
+      "codice": "const nome = \"Bit\"\nconsole.log(\"Ciao, \" + nome + \"!\")\nconsole.log(`Ciao, ${nome}!`)",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Cosa sanno fare le stringhe",
+      "testo": [
+        "Ogni stringa porta con sé dei metodi: si chiamano con il punto. s.length è la lunghezza (senza parentesi), s.toUpperCase() la mette in maiuscolo, s.includes(\"x\") dice se contiene x.",
+        "s.slice(0, 3) prende i primi tre caratteri, s.repeat(3) la ripete tre volte."
+      ],
+      "codice": "const s = \"banana\"\nconsole.log(s.length)\nconsole.log(s.toUpperCase())\nconsole.log(s.includes(\"nan\"))\nconsole.log(s.slice(0, 3))"
+    },
+    {
+      "tipo": "prova",
+      "titolo": "Gioca con il testo",
+      "testo": [
+        "Esegui e poi cambia la parola. Prova anche s.toLowerCase(), s.indexOf(\"a\"), s.repeat(2)."
+      ],
+      "codice": "const s = \"Code Play\"\nconsole.log(s.length)\nconsole.log(s.toUpperCase())\nconsole.log(s.includes(\"Play\"))\nconsole.log(`${s} è lungo ${s.length}`)"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quanto vale **\"ciao\".length**?",
+      "opzioni": [
+        "4",
+        "5",
+        "\"4\""
+      ],
+      "risposta": 0,
+      "spiegazione": "Quattro lettere: length è un numero, non una stringa."
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Stampa la parola in maiuscolo.",
+      "codice": "let s = \"bit\"\nconsole.log(s.___())",
+      "scelte": [
+        "toUpperCase",
+        "toLowerCase",
+        "length"
+      ],
+      "risposta": [
+        "toUpperCase"
+      ],
+      "spiegazione": "toUpperCase() restituisce la stringa in maiuscolo; length non ha le parentesi."
+    },
+    {
+      "tipo": "prova",
+      "titolo": "Da bit a BIT!",
+      "testo": [
+        "Cambia il codice perché stampi BIT! (maiuscolo, con il punto esclamativo) partendo dalla variabile s."
+      ],
+      "codice": "let s = \"bit\"\nconsole.log(s)",
+      "atteso": [
+        "BIT!"
+      ],
+      "soluzione": "let s = \"bit\"\nconsole.log(s.toUpperCase() + \"!\")",
+      "spiegazione": "toUpperCase() e poi + \"!\": i metodi si possono combinare con la concatenazione."
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "Il saluto",
+      "consegna": [
+        "C'è una variabile nome. Stampa Ciao, NOME! con il nome tutto in maiuscolo, la virgola, lo spazio e il punto esclamativo."
+      ],
+      "starter": "console.log(`Ciao, ${}!`)\n",
+      "casi": [
+        {
+          "atteso": [
+            "Ciao, BIT!"
+          ],
+          "variabili": {
+            "nome": "bit"
+          }
+        },
+        {
+          "atteso": [
+            "Ciao, LUCA!"
+          ],
+          "variabili": {
+            "nome": "luca"
+          }
+        }
+      ],
+      "soluzione": "console.log(`Ciao, ${nome.toUpperCase()}!`)",
+      "aiuti": [
+        "nome.toUpperCase() dentro ${}.",
+        "Attenzione allo spazio dopo la virgola."
+      ],
+      "esempio": "Esempio: nome = \"bit\" → Ciao, BIT!"
+    }
+  ]
+}

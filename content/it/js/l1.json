@@ -1,0 +1,94 @@
+{
+  "id": "js-l1",
+  "capitolo": "Il linguaggio",
+  "titolo": "Valori e tipi",
+  "durata": "6 min",
+  "prossima": "js-l2",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Non solo comandi",
+      "testo": [
+        "Finora hai usato JavaScript per dire a Bit cosa fare. Ma JavaScript è un linguaggio completo: con lo stesso codice si fanno siti, app e giochi.",
+        "In questa sezione lo usiamo da solo. Al posto della scena c'è la console: console.log(...) scrive lì quello che gli passi."
+      ],
+      "codice": "console.log(\"ciao\")\nconsole.log(3 + 4)",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "I tipi di valore",
+      "testo": [
+        "I numeri si scrivono così: 3, 2.5, -1. Le stringhe, cioè i testi, vanno tra virgolette: \"ciao\". I booleani sono solo due: true e false.",
+        "typeof dice di che tipo è un valore: typeof 3 è \"number\", typeof \"3\" è \"string\", anche se dentro c'è una cifra."
+      ],
+      "codice": "console.log(typeof 3)\nconsole.log(typeof \"3\")\nconsole.log(typeof true)"
+    },
+    {
+      "tipo": "prova",
+      "titolo": "Prova la console",
+      "testo": [
+        "Premi Esegui, guarda cosa stampa, poi cambia i numeri e le parole e riesegui. Rompere qualcosa non costa niente."
+      ],
+      "codice": "console.log(3 + 4)\nconsole.log(\"3\" + \"4\")\nconsole.log(typeof 3, typeof \"3\")\nconsole.log(10 > 4)"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quanto vale **typeof \"3\"**?",
+      "opzioni": [
+        "string",
+        "number",
+        "boolean"
+      ],
+      "risposta": 0,
+      "spiegazione": "Tra virgolette è una stringa, anche se sembra un numero."
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Cosa stampa questo codice?",
+      "opzioni": [
+        "10",
+        "8",
+        "232"
+      ],
+      "risposta": 1,
+      "spiegazione": "Prima la moltiplicazione, poi la somma: 2 + 6 = 8. Le stesse regole della matematica.",
+      "codice": "console.log(2 + 3 * 2)"
+    },
+    {
+      "tipo": "prova",
+      "titolo": "Fai stampare 12",
+      "testo": [
+        "Cambia il codice perché stampi esattamente 12. Vale qualsiasi modo: una somma, un prodotto, un numero e basta."
+      ],
+      "codice": "console.log(5 + 5)",
+      "atteso": [
+        "12"
+      ],
+      "soluzione": "console.log(5 + 7)",
+      "spiegazione": "Bravo: la console mostra il risultato del calcolo, non il calcolo."
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "Presentati",
+      "consegna": [
+        "Stampa due righe: nella prima la stringa Bit, nella seconda il numero 12.",
+        "Ogni console.log stampa una riga."
+      ],
+      "starter": "console.log(\"\")\n",
+      "casi": [
+        {
+          "atteso": [
+            "Bit",
+            "12"
+          ]
+        }
+      ],
+      "soluzione": "console.log(\"Bit\")\nconsole.log(12)",
+      "aiuti": [
+        "Due console.log, uno per riga.",
+        "Il nome va tra virgolette, il numero no."
+      ]
+    }
+  ]
+}

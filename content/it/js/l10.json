@@ -1,0 +1,195 @@
+{
+  "id": "js-l10",
+  "capitolo": "Il linguaggio",
+  "titolo": "Piccoli programmi",
+  "durata": "10 min",
+  "prossima": null,
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Mettere insieme",
+      "testo": [
+        "Quattro esercizi veri, di quelli che si danno ai colloqui: ogni riga che scrivi usa qualcosa che hai imparato in questa sezione.",
+        "Non c'è una sola soluzione giusta: contano i test."
+      ],
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "FizzBuzz",
+      "consegna": [
+        "Per ogni numero da 1 a n: stampa Fizz se è multiplo di 3, Buzz se è multiplo di 5, FizzBuzz se di entrambi, altrimenti il numero."
+      ],
+      "starter": "for (let i = 1; i <= n; i++) {\n  \n}\n",
+      "casi": [
+        {
+          "atteso": [
+            "1",
+            "2",
+            "Fizz",
+            "4",
+            "Buzz"
+          ],
+          "variabili": {
+            "n": 5
+          }
+        },
+        {
+          "atteso": [
+            "1",
+            "2",
+            "Fizz",
+            "4",
+            "Buzz",
+            "Fizz",
+            "7",
+            "8",
+            "Fizz",
+            "Buzz",
+            "11",
+            "Fizz",
+            "13",
+            "14",
+            "FizzBuzz"
+          ],
+          "variabili": {
+            "n": 15
+          }
+        }
+      ],
+      "soluzione": "for (let i = 1; i <= n; i++) {\n  if (i % 15 === 0) {\n    console.log(\"FizzBuzz\")\n  } else if (i % 3 === 0) {\n    console.log(\"Fizz\")\n  } else if (i % 5 === 0) {\n    console.log(\"Buzz\")\n  } else {\n    console.log(i)\n  }\n}",
+      "aiuti": [
+        "Controlla prima il caso FizzBuzz (multiplo di 15), poi 3, poi 5.",
+        "i % 3 === 0 vuol dire multiplo di 3."
+      ]
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "Le vocali",
+      "consegna": [
+        "C'è una variabile parola. Stampa quante vocali contiene (a, e, i, o, u)."
+      ],
+      "starter": "let vocali = 0\nfor (const c of parola) {\n  \n}\nconsole.log(vocali)\n",
+      "casi": [
+        {
+          "atteso": [
+            "3"
+          ],
+          "variabili": {
+            "parola": "banana"
+          }
+        },
+        {
+          "atteso": [
+            "1"
+          ],
+          "variabili": {
+            "parola": "bit"
+          }
+        },
+        {
+          "atteso": [
+            "0"
+          ],
+          "variabili": {
+            "parola": "xyz"
+          }
+        }
+      ],
+      "soluzione": "let vocali = 0\nfor (const c of parola) {\n  if (\"aeiou\".includes(c)) {\n    vocali++\n  }\n}\nconsole.log(vocali)",
+      "aiuti": [
+        "for of funziona anche sulle stringhe, lettera per lettera.",
+        "\"aeiou\".includes(c) dice se c è una vocale."
+      ],
+      "esempio": "Esempio: banana → 3"
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "Al contrario",
+      "consegna": [
+        "Stampa la variabile parola scritta al contrario."
+      ],
+      "starter": "let rovescia = \"\"\n",
+      "casi": [
+        {
+          "atteso": [
+            "tib"
+          ],
+          "variabili": {
+            "parola": "bit"
+          }
+        },
+        {
+          "atteso": [
+            "oaic"
+          ],
+          "variabili": {
+            "parola": "ciao"
+          }
+        },
+        {
+          "atteso": [
+            "a"
+          ],
+          "variabili": {
+            "parola": "a"
+          }
+        }
+      ],
+      "soluzione": "let rovescia = \"\"\nfor (const c of parola) {\n  rovescia = c + rovescia\n}\nconsole.log(rovescia)",
+      "aiuti": [
+        "Parti da una stringa vuota e metti ogni lettera DAVANTI: rovescia = c + rovescia."
+      ],
+      "esempio": "Esempio: bit → tib"
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "La parola più lunga",
+      "consegna": [
+        "C'è un array parole. Stampa la più lunga. Se due hanno la stessa lunghezza, la prima."
+      ],
+      "starter": "let lunga = parole[0]\n",
+      "casi": [
+        {
+          "atteso": [
+            "banana"
+          ],
+          "variabili": {
+            "parole": [
+              "bit",
+              "banana",
+              "sole"
+            ]
+          }
+        },
+        {
+          "atteso": [
+            "re"
+          ],
+          "variabili": {
+            "parole": [
+              "re"
+            ]
+          }
+        },
+        {
+          "atteso": [
+            "ciao"
+          ],
+          "variabili": {
+            "parole": [
+              "ciao",
+              "gino"
+            ]
+          }
+        }
+      ],
+      "soluzione": "let lunga = parole[0]\nfor (const p of parole) {\n  if (p.length > lunga.length) {\n    lunga = p\n  }\n}\nconsole.log(lunga)",
+      "aiuti": [
+        "Come il massimo, ma confrontando p.length."
+      ],
+      "esempio": "Esempio: bit, banana, sole → banana"
+    }
+  ],
+  "epilogo": "Hai finito la sezione sul linguaggio. Da qui puoi tornare alle stanze di Bit con occhi nuovi, o inventare programmi tuoi nella palestra."
+}

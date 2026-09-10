@@ -1,6 +1,6 @@
 import { avviaLezione } from './ui/lezione.js';
-const MODULI = import.meta.glob('../content/it/c*/l*.json', { eager: true });
-const LEZIONI = Object.fromEntries(Object.entries(MODULI).map(([k, m]) => { const [, c, l] = k.match(/c(\d+)\/l(\d+)\.json$/); return [`c${c}-l${l}`, m.default]; }));
+const MODULI = import.meta.glob('../content/it/*/l*.json', { eager: true });
+const LEZIONI = Object.fromEntries(Object.entries(MODULI).map(([k, m]) => { const [, c, l] = k.match(/\/([a-z0-9]+)\/l(\d+)\.json$/); return [`${c}-l${l}`, m.default]; }));
 const q = new URLSearchParams(location.search);
 const id = (q.get('l') || '1').includes('-') ? q.get('l') : `c1-l${q.get('l') || '1'}`;   // ?l=2 vale ancora per il primo capitolo
 const lezione = LEZIONI[id] || LEZIONI['c1-l1'];

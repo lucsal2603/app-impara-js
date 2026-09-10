@@ -5,22 +5,23 @@ const CHIAVE = {
   ForStatement: 'for', ForOfStatement: 'for', WhileStatement: 'while', DoWhileStatement: 'while', BreakStatement: 'while', ContinueStatement: 'while',
   IfStatement: 'if', ConditionalExpression: 'if',
   VariableDeclaration: 'let', VariableDeclarator: 'let', AssignmentExpression: 'let', UpdateExpression: 'let',
-  FunctionDeclaration: 'function', ReturnStatement: 'function',
+  FunctionDeclaration: 'function', ReturnStatement: 'function', FunctionExpression: 'function', ArrowFunctionExpression: 'function',
   ArrayExpression: 'array', ObjectExpression: 'object', Property: 'object',
 };
-const NOMI = { for: 'il ciclo for', while: 'il ciclo while', if: "l'istruzione if", let: 'le variabili', function: 'le funzioni', array: 'gli array', object: 'gli oggetti' };
+const NOMI = { for: 'Il ciclo for arriva', while: 'Il ciclo while arriva', if: "L'istruzione if arriva", let: 'Le variabili arrivano', function: 'Le funzioni arrivano', array: 'Gli array arrivano', object: 'Gli oggetti arrivano' };
 const SEMPRE = new Set(['Program', 'ExpressionStatement', 'CallExpression', 'Identifier', 'Literal', 'BlockStatement', 'BinaryExpression', 'LogicalExpression',
   'UnaryExpression', 'MemberExpression', 'EmptyStatement', 'TemplateLiteral', 'TemplateElement']);
 
+export const GLOBALI = ['console', 'Math', 'String', 'Number', 'parseInt', 'parseFloat', 'isNaN', 'Boolean'];
 export function valida(ast, sintassi, api, sensori = []) {
   const funzioni = new Set(); const dichiarate = new Set();
-  camminata(ast, n => { if (n.type === 'FunctionDeclaration') funzioni.add(n.id.name); if (n.type === 'VariableDeclaration') for (const d of n.declarations) if (d.id.type === 'Identifier') dichiarate.add(d.id.name); if (n.type === 'FunctionDeclaration') for (const p of n.params) if (p.type === 'Identifier') dichiarate.add(p.name); });
-  const noti = [...api, ...funzioni, ...sensori, 'console', 'Math'];
+  camminata(ast, n => { if (n.type === 'FunctionDeclaration') funzioni.add(n.id.name); if (n.type === 'VariableDeclaration') for (const d of n.declarations) if (d.id.type === 'Identifier') dichiarate.add(d.id.name); if (n.type === 'FunctionDeclaration' || n.type === 'FunctionExpression' || n.type === 'ArrowFunctionExpression') for (const p of n.params) if (p.type === 'Identifier') dichiarate.add(p.name); });
+  const noti = [...api, ...funzioni, ...sensori, ...GLOBALI];
   try {
     camminata(ast, n => {
       const riga = n.loc?.start.line || 1;
       const k = CHIAVE[n.type];
-      if (k && !sintassi.includes(k)) throw new ErroreCodice(`${NOMI[k][0].toUpperCase() + NOMI[k].slice(1)} arriva più avanti nel corso: qui usa solo i comandi che hai già imparato.`, riga);
+      if (k && !sintassi.includes(k)) throw new ErroreCodice(`${NOMI[k]} più avanti nel corso: qui usa solo quello che hai già imparato.`, riga);
       if (!k && !SEMPRE.has(n.type)) throw new ErroreCodice(`Questo costrutto non è disponibile nel gioco (${n.type}).`, riga);
       if (n.type === 'ExpressionStatement' && n.expression.type === 'Identifier') {
         const s = suggerisci(n.expression.name, api) || n.expression.name;

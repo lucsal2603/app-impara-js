@@ -1,0 +1,127 @@
+{
+  "id": "js-l7",
+  "capitolo": "Il linguaggio",
+  "titolo": "Funzioni",
+  "durata": "8 min",
+  "prossima": "js-l8",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Un pezzo di codice con un nome",
+      "testo": [
+        "Una funzione raggruppa delle righe sotto un nome, per riusarle. Si dichiara con function, si chiama con il nome e le parentesi.",
+        "I parametri sono le variabili che la funzione riceve: saluta(\"Bit\") mette \"Bit\" dentro nome."
+      ],
+      "codice": "function saluta(nome) {\n  console.log(\"Ciao, \" + nome)\n}\nsaluta(\"Bit\")\nsaluta(\"Luca\")",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "return",
+      "testo": [
+        "return restituisce un valore a chi ha chiamato la funzione: doppio(4) vale 8 e lo puoi usare in un calcolo o stamparlo.",
+        "console.log stampa e basta; return dà indietro il risultato. Dopo return la funzione finisce."
+      ],
+      "codice": "function doppio(n) {\n  return n * 2\n}\nconsole.log(doppio(4))\nconsole.log(doppio(4) + 1)"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Le funzioni freccia",
+      "testo": [
+        "Lo stesso si scrive in breve con la freccia: const doppio = n => n * 2. Quando il corpo è una sola espressione, il return è sottinteso.",
+        "Con più righe servono le graffe e il return."
+      ],
+      "codice": "const doppio = n => n * 2\nconst somma = (a, b) => a + b\nconsole.log(doppio(5), somma(2, 3))"
+    },
+    {
+      "tipo": "prova",
+      "titolo": "Scrivi una funzione",
+      "testo": [
+        "Esegui, poi aggiungi una funzione triplo(n) e chiamala."
+      ],
+      "codice": "function quadrato(n) {\n  return n * n\n}\nconsole.log(quadrato(3))\nconsole.log(quadrato(10))"
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Completa la funzione perché stampi 16.",
+      "codice": "function quadrato(n) {\n  ___ n * n\n}\nconsole.log(quadrato(___))",
+      "scelte": [
+        "return",
+        "console.log",
+        "4",
+        "8"
+      ],
+      "risposta": [
+        "return",
+        "4"
+      ],
+      "spiegazione": "return restituisce n * n; quadrato(4) vale 16."
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "doppio",
+      "consegna": [
+        "Scrivi una funzione doppio(n) che restituisce il doppio di n. I test la chiamano con vari numeri."
+      ],
+      "starter": "function doppio(n) {\n  \n}\n",
+      "casi": [
+        {
+          "atteso": [
+            "6"
+          ],
+          "chiama": "doppio(3)"
+        },
+        {
+          "atteso": [
+            "20"
+          ],
+          "chiama": "doppio(10)"
+        },
+        {
+          "atteso": [
+            "0"
+          ],
+          "chiama": "doppio(0)"
+        }
+      ],
+      "soluzione": "function doppio(n) {\n  return n * 2\n}",
+      "aiuti": [
+        "Dentro: return n * 2."
+      ],
+      "esempio": "doppio(3) → 6"
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "massimo",
+      "consegna": [
+        "Scrivi una funzione massimo(a, b) che restituisce il più grande dei due. Senza usare Math.max: con un if."
+      ],
+      "starter": "function massimo(a, b) {\n  \n}\n",
+      "casi": [
+        {
+          "atteso": [
+            "9"
+          ],
+          "chiama": "massimo(3, 9)"
+        },
+        {
+          "atteso": [
+            "12"
+          ],
+          "chiama": "massimo(12, 5)"
+        },
+        {
+          "atteso": [
+            "4"
+          ],
+          "chiama": "massimo(4, 4)"
+        }
+      ],
+      "soluzione": "function massimo(a, b) {\n  if (a > b) {\n    return a\n  }\n  return b\n}",
+      "aiuti": [
+        "if (a > b) return a, altrimenti return b."
+      ],
+      "esempio": "massimo(3, 9) → 9"
+    }
+  ]
+}

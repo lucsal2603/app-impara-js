@@ -1,0 +1,118 @@
+{
+  "id": "js-l5",
+  "capitolo": "Il linguaggio",
+  "titolo": "Decidere",
+  "durata": "7 min",
+  "prossima": "js-l6",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "if, else if, else",
+      "testo": [
+        "if esegue il blocco solo se la condizione è vera. else if prova un'altra condizione, else prende tutti gli altri casi.",
+        "Le condizioni si scrivono con i confronti: === uguale, !== diverso, <, >, <=, >=."
+      ],
+      "codice": "const voto = 8\nif (voto >= 9) {\n  console.log(\"ottimo\")\n} else if (voto >= 6) {\n  console.log(\"promosso\")\n} else {\n  console.log(\"bocciato\")\n}",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Mettere insieme",
+      "testo": [
+        "&& è e: vera se tutte e due lo sono. || è oppure: basta una. ! rovescia.",
+        "Una condizione è un valore booleano: puoi metterla in una variabile e usarla dopo."
+      ],
+      "codice": "const eta = 15\nconst adulto = eta >= 18\nconsole.log(adulto)\nconsole.log(eta > 10 && eta < 20)"
+    },
+    {
+      "tipo": "prova",
+      "titolo": "Prova a decidere",
+      "testo": [
+        "Esegui, poi cambia il valore di ore e guarda quale ramo si accende."
+      ],
+      "codice": "const ore = 14\nif (ore < 12) {\n  console.log(\"buongiorno\")\n} else if (ore < 18) {\n  console.log(\"buon pomeriggio\")\n} else {\n  console.log(\"buonasera\")\n}"
+    },
+    {
+      "tipo": "riordina",
+      "domanda": "Metti in ordine: se n è maggiore di 10 stampa grande, altrimenti piccolo.",
+      "righe": [
+        "if (n > 10) {",
+        "  console.log(\"grande\")",
+        "} else {",
+        "  console.log(\"piccolo\")",
+        "}"
+      ],
+      "mescolate": [
+        2,
+        0,
+        4,
+        1,
+        3
+      ],
+      "spiegazione": "if con la condizione, il suo blocco, else e il suo blocco."
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Completa: maggiorenne a partire da 18 anni.",
+      "codice": "if (eta ___ 18) {\n  console.log(\"adulto\")\n} ___ {\n  console.log(\"minorenne\")\n}",
+      "scelte": [
+        ">=",
+        ">",
+        "else",
+        "if"
+      ],
+      "risposta": [
+        ">=",
+        "else"
+      ],
+      "spiegazione": ">= include il 18; else prende tutti gli altri casi."
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "Il voto",
+      "consegna": [
+        "C'è una variabile voto da 1 a 10. Stampa bocciato se è minore di 6, lode se è 10, promosso in tutti gli altri casi."
+      ],
+      "starter": "if (voto < 6) {\n  \n}\n",
+      "casi": [
+        {
+          "atteso": [
+            "bocciato"
+          ],
+          "variabili": {
+            "voto": 4
+          }
+        },
+        {
+          "atteso": [
+            "promosso"
+          ],
+          "variabili": {
+            "voto": 6
+          }
+        },
+        {
+          "atteso": [
+            "lode"
+          ],
+          "variabili": {
+            "voto": 10
+          }
+        },
+        {
+          "atteso": [
+            "promosso"
+          ],
+          "variabili": {
+            "voto": 9
+          }
+        }
+      ],
+      "soluzione": "if (voto < 6) {\n  console.log(\"bocciato\")\n} else if (voto === 10) {\n  console.log(\"lode\")\n} else {\n  console.log(\"promosso\")\n}",
+      "aiuti": [
+        "Tre rami: if, else if, else.",
+        "Controlla il 10 con ===."
+      ]
+    }
+  ]
+}

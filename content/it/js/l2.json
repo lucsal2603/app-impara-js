@@ -1,0 +1,105 @@
+{
+  "id": "js-l2",
+  "capitolo": "Il linguaggio",
+  "titolo": "Variabili e costanti",
+  "durata": "7 min",
+  "prossima": "js-l3",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Una scatola con un nome",
+      "testo": [
+        "let crea una variabile: una scatola con un nome dentro cui metti un valore. Poi usi il nome al posto del valore, e puoi cambiarlo quando vuoi.",
+        "Dopo la prima volta non serve più let: basta nome = nuovoValore."
+      ],
+      "codice": "let punti = 10\npunti = punti + 5\nconsole.log(punti)",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "const: non cambia più",
+      "testo": [
+        "const crea una costante: un valore che non può essere riassegnato. Se ci provi, JavaScript si ferma con un errore.",
+        "Regola pratica: usa const, e passa a let solo quando il valore deve davvero cambiare."
+      ],
+      "codice": "const nome = \"Bit\"\nconsole.log(nome)"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "I nomi",
+      "testo": [
+        "Un nome inizia con una lettera, non ha spazi e distingue maiuscole e minuscole: punti e Punti sono due variabili diverse.",
+        "Per i nomi lunghi si usa il camelCase: punteggioMassimo, nomeGiocatore."
+      ],
+      "codice": "let punteggioMassimo = 100\nlet nomeGiocatore = \"Bit\""
+    },
+    {
+      "tipo": "prova",
+      "titolo": "Prova le variabili",
+      "testo": [
+        "Esegui, poi prova a cambiare i valori. Prova anche a riassegnare la const: leggi l'errore."
+      ],
+      "codice": "let punti = 10\npunti = punti + 5\nconsole.log(punti)\nconst nome = \"Bit\"\nconsole.log(nome + \" ha \" + punti + \" punti\")"
+    },
+    {
+      "tipo": "trova_errore",
+      "domanda": "Questo programma si ferma con un errore. Quale riga?",
+      "codice": "const vite = 3\nvite = vite - 1\nconsole.log(vite)",
+      "riga": 2,
+      "spiegazione": "vite è una const e non si può cambiare: alla riga 1 ci voleva let.",
+      "indizio": "Che parola c'è davanti a vite alla riga 1?"
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Crea la variabile x con 5 e aumentala di 1.",
+      "codice": "___ x = 5\nx = x ___ 1\nconsole.log(x)",
+      "scelte": [
+        "let",
+        "const",
+        "+",
+        "-"
+      ],
+      "risposta": [
+        "let",
+        "+"
+      ],
+      "spiegazione": "let perché x cambia, e + 1 per aumentarla."
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "Somma e prodotto",
+      "consegna": [
+        "Ci sono due variabili già pronte, a e b. Crea una variabile somma con a + b e stampala. Poi stampa a * b."
+      ],
+      "starter": "let somma = \n",
+      "casi": [
+        {
+          "atteso": [
+            "3",
+            "2"
+          ],
+          "variabili": {
+            "a": 1,
+            "b": 2
+          }
+        },
+        {
+          "atteso": [
+            "16",
+            "63"
+          ],
+          "variabili": {
+            "a": 7,
+            "b": 9
+          }
+        }
+      ],
+      "soluzione": "let somma = a + b\nconsole.log(somma)\nconsole.log(a * b)",
+      "aiuti": [
+        "Prima riga: let somma = a + b.",
+        "Poi console.log(somma) e console.log(a * b)."
+      ],
+      "esempio": "Esempio: a = 1, b = 2 → 3 poi 2"
+    }
+  ]
+}

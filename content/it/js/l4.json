@@ -1,0 +1,144 @@
+{
+  "id": "js-l4",
+  "capitolo": "Il linguaggio",
+  "titolo": "Numeri",
+  "durata": "7 min",
+  "prossima": "js-l5",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Fare i conti",
+      "testo": [
+        "+ - * / sono le operazioni di sempre. % dà il resto della divisione: 7 % 3 è 1. ** è la potenza: 2 ** 3 è 8.",
+        "Attenzione: \"3\" + 4 fa \"34\", perché con una stringa il + attacca. 3 + 4 fa 7."
+      ],
+      "codice": "console.log(7 % 3)\nconsole.log(2 ** 3)\nconsole.log(\"3\" + 4)\nconsole.log(3 + 4)",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Math e le conversioni",
+      "testo": [
+        "Math è una cassetta degli attrezzi: Math.floor(4.7) arrotonda per difetto a 4, Math.round(4.5) al più vicino, Math.max(3, 9) prende il maggiore.",
+        "Number(\"5\") trasforma una stringa in numero. parseInt(\"12px\") legge il numero all'inizio: 12."
+      ],
+      "codice": "console.log(Math.floor(4.7))\nconsole.log(Math.round(4.5))\nconsole.log(Math.max(3, 9))\nconsole.log(Number(\"5\") + 1)"
+    },
+    {
+      "tipo": "prova",
+      "titolo": "Calcolatrice",
+      "testo": [
+        "Esegui e poi inventa i tuoi calcoli. Prova 10 / 4, 10 % 4, Math.floor(10 / 4)."
+      ],
+      "codice": "console.log(10 / 4)\nconsole.log(10 % 4)\nconsole.log(Math.floor(10 / 4))\nconsole.log(2 ** 10)"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Cosa stampa **console.log(\"3\" + 4)**?",
+      "opzioni": [
+        "34",
+        "7",
+        "errore"
+      ],
+      "risposta": 0,
+      "spiegazione": "Con una stringa il + attacca: \"3\" e 4 diventano \"34\"."
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Quanto vale **7 % 3**?",
+      "opzioni": [
+        "1",
+        "2",
+        "2.33"
+      ],
+      "risposta": 0,
+      "spiegazione": "7 diviso 3 fa 2 con il resto di 1: % dà il resto."
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "Quante decine",
+      "consegna": [
+        "C'è una variabile n. Stampa quante decine intere ci sono in n: per 47 sono 4, per 9 sono 0.",
+        "Dividi per 10 e arrotonda per difetto."
+      ],
+      "starter": "console.log(Math.floor())\n",
+      "casi": [
+        {
+          "atteso": [
+            "4"
+          ],
+          "variabili": {
+            "n": 47
+          }
+        },
+        {
+          "atteso": [
+            "12"
+          ],
+          "variabili": {
+            "n": 120
+          }
+        },
+        {
+          "atteso": [
+            "0"
+          ],
+          "variabili": {
+            "n": 9
+          }
+        }
+      ],
+      "soluzione": "console.log(Math.floor(n / 10))",
+      "aiuti": [
+        "n / 10 dà 4.7 per 47: serve Math.floor."
+      ],
+      "esempio": "Esempio: n = 47 → 4"
+    },
+    {
+      "tipo": "esercizio",
+      "titolo": "La media",
+      "consegna": [
+        "Tre variabili: a, b, c. Stampa la loro media arrotondata al numero intero più vicino con Math.round."
+      ],
+      "starter": "",
+      "casi": [
+        {
+          "atteso": [
+            "4"
+          ],
+          "variabili": {
+            "a": 3,
+            "b": 4,
+            "c": 5
+          }
+        },
+        {
+          "atteso": [
+            "10"
+          ],
+          "variabili": {
+            "a": 10,
+            "b": 10,
+            "c": 11
+          }
+        },
+        {
+          "atteso": [
+            "2"
+          ],
+          "variabili": {
+            "a": 1,
+            "b": 2,
+            "c": 2
+          }
+        }
+      ],
+      "soluzione": "console.log(Math.round((a + b + c) / 3))",
+      "aiuti": [
+        "La media è (a + b + c) / 3: servono le parentesi attorno alla somma.",
+        "Poi Math.round(...) attorno a tutto."
+      ],
+      "esempio": "Esempio: a = 3, b = 4, c = 5 → 4"
+    }
+  ]
+}
