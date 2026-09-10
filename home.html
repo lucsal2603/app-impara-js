@@ -48,6 +48,19 @@
   .tappa.sbloccata i { background: #163425; color: var(--verde-ch); }
   .tab { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); padding: 10px 8px calc(env(safe-area-inset-bottom) + 10px); border-top: 2px solid #1e242b; background: #0f1317; font-size: 12px; color: var(--muto); text-align: center; }
   .tab span { display: block; font-size: 22px; margin-bottom: 2px; } .tab .attiva { color: var(--giallo); font-weight: 700; }
+  .tab a, .tab button { color: inherit; text-decoration: none; background: none; border: 0; font: inherit; }
+  .progressi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .dato { background: var(--card); border: 2px solid #2b323a; border-radius: 14px; padding: 10px; text-align: center; }
+  .dato strong { display: block; font-size: 26px; line-height: 1.1; color: var(--giallo); } .dato small { color: var(--muto); font-size: 12px; }
+  .barra.grande { height: 14px; border-radius: 7px; margin-top: 10px; }
+  .missioni a.fatta b { background: #1f5a3a; color: #3ddc84; } .missioni a.prossima { border-color: var(--verde-ch); } .missioni a.prossima b { background: var(--verde-ch); color: #0f1317; }
+  .profilo { position: fixed; inset: 0; background: rgba(8,12,16,.75); display: grid; place-items: center; padding: 20px; z-index: 60; }
+  .profilo-box { width: 100%; max-width: 400px; background: var(--card); border: 2px solid #2b323a; border-radius: 18px; padding: 18px; }
+  .profilo-box h3 { margin: 0 0 8px; } .profilo-box p { color: var(--muto); font-size: 14px; margin: 0 0 10px; }
+  .profilo-capitoli { display: grid; gap: 6px; margin-bottom: 14px; font-size: 14px; } .profilo-capitoli div { display: flex; justify-content: space-between; }
+  .bottone-chiudi, .bottone-azzera { display: block; width: 100%; padding: 12px; border-radius: 12px; border: 0; font-weight: 800; font-size: 15px; margin-top: 8px; }
+  .bottone-chiudi { background: var(--verde); color: #fff; } .bottone-azzera { background: transparent; color: #ff8080; border: 2px solid #5a2a2a; }
+  [hidden] { display: none !important; }
 </style>
 </head>
 <body>
@@ -57,7 +70,7 @@
     <div class="sopra">
       <div class="riga-alto"><div class="chip chip-streak-home" data-r="streak"><img class="fuoco" src="assets/home/fuoco_grigio.png" alt=""><div><strong>1</strong><br><small>giorno di fila</small></div></div><button class="chip ingranaggio" aria-label="Impostazioni"><img src="assets/home/ingranaggio.png" alt=""></button></div>
       <div class="titolo"><img src="assets/home/logo.png" alt="Code Play"><p>Impara JavaScript <em>giocando</em> con Bit.</p></div>
-      <a class="cta" href="lezione.html"><span class="play"></span> Inizia a giocare</a>
+      <a class="cta" href="lezione.html" data-r="cta"><span class="play"></span> <span data-r="cta-testo">Inizia a giocare</span></a>
     </div>
   </div>
   <section>
@@ -67,11 +80,20 @@
     </div>
   </section>
   <section>
-    <h2>Livello consigliato</h2>
-    <a class="card" href="lezione.html"><img src="assets/home/home_saluto.png" alt="Bit"><div><h3>Le basi</h3><p>Muovi i primi passi con JavaScript insieme a Bit.</p><div class="barra"><b></b></div></div></a>
+    <h2>I tuoi progressi</h2>
+    <div class="progressi">
+      <div class="dato"><strong data-r="n-lezioni">0</strong><small>lezioni su <span data-r="tot-lezioni">36</span></small></div>
+      <div class="dato"><strong data-r="n-stelle">0</strong><small>stelle su <span data-r="tot-stelle">78</span></small></div>
+      <div class="dato"><strong data-r="n-giorni">1</strong><small>giorni di fila</small></div>
+    </div>
+    <div class="barra grande"><b data-r="barra-totale" style="width:0"></b></div>
   </section>
   <section>
-    <h2>Le missioni</h2>
+    <h2>Prossimo livello</h2>
+    <a class="card" href="lezione.html" data-r="prossima"><img src="assets/home/home_saluto.png" alt="Bit"><div><h3 data-r="prossima-titolo">Le basi</h3><p data-r="prossima-testo">Muovi i primi passi con JavaScript insieme a Bit.</p><div class="barra"><b></b></div></div></a>
+  </section>
+  <section>
+    <h2 id="missioni">Le missioni</h2>
     <h3 class="capitolo">Le basi</h3>
     <div class="missioni" data-cap="c1">
       <a href="lezione.html?l=c1-l1" data-id="c1-l1"><b>1</b><span>Il primo passo</span><small>comandi e parentesi</small><i></i></a>
@@ -131,25 +153,61 @@
     <h2>Palestra</h2>
     <a class="card palestra-card" href="palestra.html"><div><h3>Esercizi con i test</h3><p>Dieci sfide senza scena: il codice viene messo alla prova da casi nascosti. Fino a FizzBuzz.</p><div class="barra"><b data-r="barra-palestra" style="width:0"></b></div></div></a>
   </section>
-  <nav class="tab"><div class="attiva"><span>🏠</span>Home</div><div><span>🗺️</span>Percorso</div><div><span>🏆</span>Sfide</div><div><span>👤</span>Profilo</div></nav>
+  <nav class="tab"><div class="attiva"><span>🏠</span>Home</div><a href="#missioni"><span>🗺️</span>Percorso</a><a href="palestra.html"><span>🏆</span>Palestra</a><button type="button" data-r="apri-profilo"><span>👤</span>Profilo</button></nav>
+  <div class="profilo" data-r="profilo" hidden><div class="profilo-box"><h3>Il tuo profilo</h3><p data-r="profilo-testo"></p><div class="profilo-capitoli" data-r="profilo-capitoli"></div><button type="button" class="bottone-chiudi" data-r="chiudi-profilo">Chiudi</button><button type="button" class="bottone-azzera" data-r="azzera">Azzera i progressi</button></div></div>
 </main>
 <script type="module">
   import { aggiornaStreak, disegnaStreak } from './src/sfida/streak.js';
-  disegnaStreak(document.querySelector('[data-r="streak"]'), aggiornaStreak());
+  const giorni = aggiornaStreak(); disegnaStreak(document.querySelector('[data-r="streak"]'), giorni);
+  document.querySelector('[data-r="n-giorni"]').textContent = giorni;
 </script>
 <script>
-  // progresso salvato sul telefono: stelle accanto a ogni missione, capitoli sbloccati, palestra
-  try {
-    const p = JSON.parse(localStorage.getItem('codeplay.progresso') || '{}'); const lez = p.lezioni || {};
-    for (const a of document.querySelectorAll('.missioni a[data-id]')) { const n = lez[a.dataset.id] || 0; const i = a.querySelector('i'); i.textContent = '★'.repeat(n) + '☆'.repeat(Math.max(0, 3 - n)); if (n) i.classList.add('ok'); }
-    if (lez['c1-l10']) document.querySelector('.tappa[data-cap="c2"]').classList.add('sbloccata');
-    if (lez['c2-l5']) document.querySelector('.tappa[data-cap="c3"]').classList.add('sbloccata');
-    if (lez['c3-l5']) document.querySelector('.tappa[data-cap="c4"]').classList.add('sbloccata');
-    for (const t of document.querySelectorAll('.tappa.sbloccata i')) t.textContent = '✓';
-    const fatti = Object.keys(p.palestra || {}).length; document.querySelector('[data-r="barra-palestra"]').style.width = Math.round(fatti / 10 * 100) + '%';
-    const js = Object.keys(lez).filter(k => k.startsWith('js-')).length; document.querySelector('[data-r="barra-js"]').style.width = Math.round(js / 10 * 100) + '%';
-    const totale = Object.keys(lez).filter(k => k.startsWith('c')).length; document.querySelector('.card .barra b').style.width = Math.round(totale / 26 * 100) + '%';
-  } catch (e) {}
+  // progresso salvato sul telefono: spunte, stelle, prossimo livello, tasto Continua, riepilogo e profilo
+  (function () {
+    const CH = 'codeplay.progresso'; let p = {};
+    try { p = JSON.parse(localStorage.getItem(CH) || '{}'); } catch (e) {}
+    const lez = p.lezioni || {}, inCorso = p.inCorso || {};
+    const voci = [...document.querySelectorAll('.missioni a[data-id]')];
+    const gioco = voci.filter(a => a.dataset.id.startsWith('c'));
+    const $ = r => document.querySelector('[data-r="' + r + '"]');
+    // spunte e stelle
+    for (const a of voci) {
+      const n = lez[a.dataset.id] || 0; const i = a.querySelector('i');
+      if (a.dataset.id.startsWith('js-')) { i.textContent = n ? '✓' : ''; } else { i.textContent = '★'.repeat(n) + '☆'.repeat(Math.max(0, 3 - n)); }
+      if (n) { i.classList.add('ok'); a.classList.add('fatta'); a.querySelector('b').textContent = '✓'; }
+    }
+    // prossimo livello: il primo non finito seguendo l'ordine delle missioni (prima le stanze di Bit, poi il linguaggio)
+    const prossima = voci.find(a => !lez[a.dataset.id]) || null;
+    const fatte = voci.filter(a => lez[a.dataset.id]).length, stelle = gioco.reduce((t, a) => t + (lez[a.dataset.id] || 0), 0);
+    $('n-lezioni').textContent = fatte; $('tot-lezioni').textContent = voci.length; $('n-stelle').textContent = stelle; $('tot-stelle').textContent = gioco.length * 3;
+    $('barra-totale').style.width = Math.round(fatte / voci.length * 100) + '%';
+    if (prossima) {
+      prossima.classList.add('prossima');
+      const titolo = prossima.querySelector('span').textContent, sotto = prossima.querySelector('small').textContent, id = prossima.dataset.id;
+      const aMeta = inCorso[id] > 0;
+      $('cta').href = 'lezione.html?l=' + id + (aMeta ? '&riprendi=1' : ''); $('cta-testo').textContent = fatte ? (aMeta ? 'Riprendi: ' + titolo : 'Continua: ' + titolo) : 'Inizia a giocare';
+      $('prossima').href = 'lezione.html?l=' + id + (aMeta ? '&riprendi=1' : ''); $('prossima-titolo').textContent = (id.startsWith('js-') ? 'Il linguaggio · ' : 'Livello · ') + titolo; $('prossima-testo').textContent = sotto + (aMeta ? ' · eri a metà, si riprende da lì' : '');
+    } else { $('cta-testo').textContent = 'Hai finito tutto!'; $('prossima-titolo').textContent = 'Tutto completato'; $('prossima-testo').textContent = 'Rigioca i livelli per prendere le stelle che mancano.'; }
+    // tappe del percorso e barre
+    const cap = { c1: ['c1-l', 10], c2: ['c2-l', 5], c3: ['c3-l', 5], c4: ['c4-l', 6] };
+    for (const [k, [pref, n]] of Object.entries(cap)) {
+      const t = document.querySelector('.tappa[data-cap="' + k + '"]'); if (!t) continue;
+      const done = Object.keys(lez).filter(id => id.startsWith(pref)).length;
+      if (done === n) { t.classList.add('sbloccata'); t.querySelector('i').textContent = '✓'; }
+      else if (done > 0 || k === 'c1') { t.classList.add('attiva'); t.querySelector('i').textContent = done + '/' + n; }
+    }
+    const js = Object.keys(lez).filter(k => k.startsWith('js-')).length; $('barra-js').style.width = Math.round(js / 10 * 100) + '%';
+    const fattiP = Object.keys(p.palestra || {}).length; $('barra-palestra').style.width = Math.round(fattiP / 10 * 100) + '%';
+    // profilo
+    $('apri-profilo').addEventListener('click', () => {
+      $('profilo-testo').textContent = fatte + ' lezioni su ' + voci.length + ', ' + stelle + ' stelle su ' + (gioco.length * 3) + ', ' + fattiP + ' esercizi della palestra su 10.';
+      const nomi = { c1: 'Le basi', c2: 'Logica', c3: 'Cicli', c4: 'Nuove stanze', js: 'Il linguaggio' };
+      $('profilo-capitoli').innerHTML = Object.entries(nomi).map(([k, nome]) => { const tot = voci.filter(a => a.dataset.id.startsWith(k + '-')).length, d = voci.filter(a => a.dataset.id.startsWith(k + '-') && lez[a.dataset.id]).length; return '<div><span>' + nome + '</span><b>' + d + ' / ' + tot + '</b></div>'; }).join('');
+      $('profilo').hidden = false;
+    });
+    $('chiudi-profilo').addEventListener('click', () => { $('profilo').hidden = true; });
+    $('azzera').addEventListener('click', () => { if (confirm('Cancellare tutti i progressi su questo telefono?')) { localStorage.removeItem(CH); localStorage.removeItem('codeplay.streak'); location.reload(); } });
+  })();
 </script>
 </body>
 </html>

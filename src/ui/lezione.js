@@ -6,7 +6,7 @@ import * as riordina from './schede/riordina.js';
 import * as trova_errore from './schede/trova_errore.js';
 import * as prova from './schede/prova.js';
 import * as esercizio from './schede/esercizio.js';
-import { salvaLezione } from '../sfida/progresso.js';
+import { salvaLezione, salvaScheda } from '../sfida/progresso.js';
 import { aggiornaStreak, disegnaStreak } from '../sfida/streak.js';
 import { montaCodice } from './schede/codice.js';
 import { mostraFine } from './fine.js';
@@ -38,6 +38,7 @@ export function avviaLezione(root, lezione, { homeUrl = 'home.html' } = {}) {
   function mostraFeedback(testo, ok) { feedback.hidden = !testo; riempi(feedback, testo || ''); feedback.classList.toggle('ok', !!ok); feedback.classList.toggle('no', testo && !ok); }
 
   function mostra() {
+    salvaScheda(lezione.id, i);
     aggiornaBarra(); mostraFeedback(null); corpo.innerHTML = ''; root.classList.remove('in-codice');
     if (codice) { codice.distruggi(); codice = null; }
     const s = schede[i];
