@@ -1,0 +1,121 @@
+{
+  "id": "c4-l6",
+  "capitolo": "Nuove stanze",
+  "titolo": "Il momento giusto in cucina",
+  "durata": "8 min",
+  "prossima": null,
+  "epilogo": "Capitolo finito: hai portato pacchi, aperto porte e servito zuppe con lo stesso JavaScript. Le regole cambiano stanza per stanza, il modo di ragionare no.",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Quanto ci mette?",
+      "testo": [
+        "In questa cucina il fornello non è sempre uguale: in una stanza cuoce in due secondi, in un'altra in cinque. Non puoi indovinare il numero.",
+        "pot.isReady è un sensore: vero quando la pentola è pronta. while (!pot.isReady) { wait(1) } aspetta il tempo giusto, qualunque sia."
+      ],
+      "codice": "while (!pot.isReady) {\n  wait(1)\n}",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "trova_errore",
+      "domanda": "Questo programma serve la carota cruda. Quale riga manca di qualcosa?",
+      "codice": "take(\"carota\")\nmoveRight()\nput()\ntake()\nmoveRight()\nmoveRight()\nput()",
+      "riga": 4,
+      "spiegazione": "Alla riga 4 riprende la carota subito, senza aspettare che cuocia: prima serve while (!pot.isReady) { wait(1) }.",
+      "indizio": "Tra put() e take() al fornello cosa deve succedere?"
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 27",
+      "sottotitolo": "Il momento giusto",
+      "scena": "cucina",
+      "config": {
+        "stazioni": [
+          {
+            "tipo": "cassetta",
+            "ingredienti": [
+              "pomodoro",
+              "cipolla",
+              "carota"
+            ]
+          },
+          "fornello",
+          "tagliere",
+          "piatto"
+        ],
+        "ordine": [
+          "carota cotto tagliato",
+          "pomodoro tagliato"
+        ],
+        "tempoCottura": 120,
+        "spawn": 0
+      },
+      "obiettivo": {
+        "tipo": "ordine",
+        "testo": "Servi carota cotta e tagliata, pomodoro tagliato, in tutte le stanze"
+      },
+      "starter": "take(\"carota\")\nmoveRight()\nput()\n",
+      "api": [
+        "moveLeft",
+        "moveRight",
+        "take",
+        "put",
+        "cut",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if",
+        "for",
+        "while"
+      ],
+      "sensori": [
+        "pot",
+        "holding"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "usaWhile",
+          "testo": "Usa un while"
+        },
+        {
+          "tipo": "nienteRipetizioni",
+          "testo": "Nessuna riga ripetuta tre volte"
+        }
+      ],
+      "aiuti": [
+        "Carota: al fornello put(), poi while (!pot.isReady) { wait(1) }, take(), moveRight sul tagliere, put, cut, take, moveRight, put.",
+        "Pomodoro: torna alla cassetta con un for di tre moveLeft, take, due moveRight, put, cut, take, moveRight, put.",
+        "take(\"carota\")\nmoveRight()\nput()\nwhile (!pot.isReady) {\n  wait(1)\n}\ntake()\nmoveRight()\nput()\ncut()\ntake()\nmoveRight()\nput()\nfor (let i = 0; i < 3; i++) {\n  moveLeft()\n}\ntake(\"pomodoro\")\nmoveRight()\nmoveRight()\nput()\ncut()\ntake()\nmoveRight()\nput()"
+      ],
+      "varianti": [
+        {
+          "stazioni": [
+            {
+              "tipo": "cassetta",
+              "ingredienti": [
+                "pomodoro",
+                "cipolla",
+                "carota"
+              ]
+            },
+            "fornello",
+            "tagliere",
+            "piatto"
+          ],
+          "ordine": [
+            "carota cotto tagliato",
+            "pomodoro tagliato"
+          ],
+          "tempoCottura": 300,
+          "spawn": 0
+        }
+      ]
+    }
+  ]
+}

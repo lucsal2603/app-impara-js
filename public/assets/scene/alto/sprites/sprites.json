@@ -1,0 +1,90 @@
+{
+ "alto_attesa_dx": {
+  "file": "alto_attesa_dx.png",
+  "fotogrammi": 24,
+  "larghezza": 256,
+  "altezza": 384,
+  "colonne": 8,
+  "fps": 24,
+  "loop": true,
+  "piedi_dal_basso": 38,
+  "tassello_px": 128
+ },
+ "alto_attesa_giu": {
+  "file": "alto_attesa_giu.png",
+  "fotogrammi": 24,
+  "larghezza": 256,
+  "altezza": 384,
+  "colonne": 8,
+  "fps": 24,
+  "loop": true,
+  "piedi_dal_basso": 38,
+  "tassello_px": 128
+ },
+ "alto_attesa_su": {
+  "file": "alto_attesa_su.png",
+  "fotogrammi": 24,
+  "larghezza": 256,
+  "altezza": 384,
+  "colonne": 8,
+  "fps": 24,
+  "loop": true,
+  "piedi_dal_basso": 38,
+  "tassello_px": 128
+ },
+ "alto_attesa_sx": {
+  "file": "alto_attesa_sx.png",
+  "fotogrammi": 24,
+  "larghezza": 256,
+  "altezza": 384,
+  "colonne": 8,
+  "fps": 24,
+  "loop": true,
+  "piedi_dal_basso": 38,
+  "tassello_px": 128
+ },
+ "alto_corsa_dx": {
+  "file": "alto_corsa_dx.png",
+  "fotogrammi": 16,
+  "larghezza": 256,
+  "altezza": 384,
+  "colonne": 8,
+  "fps": 24,
+  "loop": true,
+  "piedi_dal_basso": 38,
+  "tassello_px": 128
+ },
+ "alto_corsa_giu": {
+  "file": "alto_corsa_giu.png",
+  "fotogrammi": 16,
+  "larghezza": 256,
+  "altezza": 384,
+  "colonne": 8,
+  "fps": 24,
+  "loop": true,
+  "piedi_dal_basso": 38,
+  "tassello_px": 128
+ },
+ "alto_corsa_su": {
+  "file": "alto_corsa_su.png",
+  "fotogrammi": 16,
+  "larghezza": 256,
+  "altezza": 384,
+  "colonne": 8,
+  "fps": 24,
+  "loop": true,
+  "piedi_dal_basso": 38,
+  "tassello_px": 128
+ },
+ "alto_corsa_sx": {
+  "file": "alto_corsa_sx.png",
+  "fotogrammi": 16,
+  "larghezza": 256,
+  "altezza": 384,
+  "colonne": 8,
+  "fps": 24,
+  "loop": true,
+  "piedi_dal_basso": 38,
+  "tassello_px": 128
+ }
+}

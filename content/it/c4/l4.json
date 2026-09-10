@@ -1,0 +1,117 @@
+{
+  "id": "c4-l4",
+  "capitolo": "Nuove stanze",
+  "titolo": "In cucina",
+  "durata": "7 min",
+  "prossima": "c4-l5",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Il bancone",
+      "testo": [
+        "Bit è dietro un bancone con delle postazioni: la cassetta degli ingredienti, il tagliere, il fornello, il piatto. Si sposta con moveLeft() e moveRight(), una postazione alla volta.",
+        "Il cartellino in alto a sinistra dice l'ordine da preparare."
+      ],
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Prendere e mettere",
+      "testo": [
+        "take(\"pomodoro\") prende un pomodoro dalla cassetta: il nome va tra virgolette, perché è una stringa, cioè un testo.",
+        "put() mette quello che hai in mano nella postazione davanti a te. cut() taglia quello che sta sul tagliere."
+      ],
+      "codice": "take(\"pomodoro\")\nmoveRight()\nput()\ncut()"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Come si prende una cipolla dalla cassetta?",
+      "opzioni": [
+        "take(cipolla)",
+        "take(\"cipolla\")",
+        "take cipolla"
+      ],
+      "risposta": 1,
+      "spiegazione": "Il nome dell'ingrediente è una stringa: va tra virgolette e dentro le parentesi."
+    },
+    {
+      "tipo": "completa",
+      "domanda": "Completa: prendi il pomodoro, spostati a destra sul tagliere, mettilo giù e taglialo.",
+      "codice": "take(\"___\")\nmoveRight()\n___()\ncut()",
+      "scelte": [
+        "pomodoro",
+        "put",
+        "take"
+      ],
+      "risposta": [
+        "pomodoro",
+        "put"
+      ],
+      "spiegazione": "Prima take con la stringa, poi put() sul tagliere, poi cut()."
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 25",
+      "sottotitolo": "Pomodoro a fette",
+      "scena": "cucina",
+      "config": {
+        "stazioni": [
+          {
+            "tipo": "cassetta",
+            "ingredienti": [
+              "pomodoro",
+              "cipolla",
+              "carota"
+            ]
+          },
+          "tagliere",
+          "piatto"
+        ],
+        "ordine": [
+          "pomodoro tagliato"
+        ],
+        "tempoCottura": 180,
+        "spawn": 0
+      },
+      "obiettivo": {
+        "tipo": "ordine",
+        "testo": "Servi un pomodoro tagliato"
+      },
+      "starter": "take(\"pomodoro\")\n",
+      "api": [
+        "moveLeft",
+        "moveRight",
+        "take",
+        "put",
+        "cut",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if",
+        "for",
+        "while"
+      ],
+      "sensori": [
+        "holding"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "maxRighe",
+          "testo": "Massimo 8 righe",
+          "valore": 8
+        }
+      ],
+      "aiuti": [
+        "Il tagliere è la postazione a destra della cassetta: take, moveRight, put, cut.",
+        "Dopo il taglio riprendi il pomodoro con take() e portalo sul piatto con moveRight() e put().",
+        "take(\"pomodoro\")\nmoveRight()\nput()\ncut()\ntake()\nmoveRight()\nput()"
+      ]
+    }
+  ]
+}

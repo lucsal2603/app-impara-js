@@ -1,0 +1,101 @@
+{
+  "id": "c4-l3",
+  "capitolo": "Nuove stanze",
+  "titolo": "Il magazzino",
+  "durata": "8 min",
+  "prossima": "c4-l4",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Due pacchi",
+      "testo": [
+        "Due pacchi, due tappeti. Un pacco alla volta: prendi, porta, posa, torna a prendere l'altro.",
+        "Trucco: se cammini contro un pacco, Bit sbatte ma si gira verso di lui. Poi pickUp() lo prende. E putDown() posa sempre nella cella davanti: fermati prima del tappeto."
+      ],
+      "codice": "moveRight()\npickUp()",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "riordina",
+      "domanda": "Metti in ordine una consegna: prendi il pacco, porta a destra, posalo.",
+      "righe": [
+        "pickUp()",
+        "moveRight()",
+        "moveRight()",
+        "putDown()"
+      ],
+      "mescolate": [
+        3,
+        0,
+        2,
+        1
+      ],
+      "spiegazione": "Prima si prende, poi ci si sposta, alla fine si posa."
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 24",
+      "sottotitolo": "Il magazzino",
+      "scena": "alto",
+      "config": {
+        "mappa": [
+          "########",
+          "#S.....#",
+          "#.P...D#",
+          "#......#",
+          "#.P...D#",
+          "#....O.#",
+          "########"
+        ],
+        "obiettivo": "consegna",
+        "legenda": {}
+      },
+      "obiettivo": {
+        "tipo": "consegna",
+        "testo": "Porta i due pacchi sui tappeti"
+      },
+      "starter": "moveDown()\n",
+      "api": [
+        "moveUp",
+        "moveDown",
+        "moveLeft",
+        "moveRight",
+        "pickUp",
+        "putDown",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if",
+        "for",
+        "while"
+      ],
+      "sensori": [
+        "boxesLeft",
+        "frontIsWall",
+        "hasBox"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "nienteRipetizioni",
+          "testo": "Nessuna riga ripetuta tre volte"
+        },
+        {
+          "tipo": "maxRighe",
+          "testo": "Massimo 18 righe",
+          "valore": 18
+        }
+      ],
+      "aiuti": [
+        "Primo pacco: giù, poi moveRight() sbatte contro il pacco ma ti fa girare verso di lui: pickUp(). Quattro passi a destra con un for e putDown() sul tappeto.",
+        "Secondo pacco: due passi giù, poi a sinistra con un for finché non sbatti contro il pacco, pickUp(), due passi a destra, putDown().",
+        "moveDown()\nmoveRight()\npickUp()\nfor (let i = 0; i < 4; i++) {\n  moveRight()\n}\nputDown()\nmoveDown()\nmoveDown()\nfor (let i = 0; i < 4; i++) {\n  moveLeft()\n}\npickUp()\nmoveRight()\nmoveRight()\nputDown()"
+      ]
+    }
+  ]
+}

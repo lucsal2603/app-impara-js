@@ -2,6 +2,9 @@
 // Uso: node scripts/verifica-livelli.mjs [c2-l1 ...]
 import { readdirSync, readFileSync } from 'node:fs';
 import { ScenaPlatform } from '../src/scene/platform/index.js';
+import { ScenaAlto } from '../src/scene/alto/index.js';
+import { ScenaCucina } from '../src/scene/cucina/index.js';
+const SCENE = { platform: ScenaPlatform, alto: ScenaAlto, cucina: ScenaCucina };
 import { Sessione } from '../src/sfida/sessione.js';
 import { valutaStelle } from '../src/sfida/stelle.js';
 
@@ -26,7 +29,7 @@ for (const cap of readdirSync('content/it').filter(d => d.startsWith('c')).sort(
 process.exit(errori ? 1 : 0);
 
 function prova(card, codice) {
-  const scena = new ScenaPlatform(card.config, risorse);
+  const scena = new (SCENE[card.scena || 'platform'])(card.config, risorse);
   const righe = codice.split('\n').filter(l => l.trim() && !l.trim().startsWith('//')).length;
   let err = null, msg = null;
   const editor = { codice: () => codice, evidenzia() {}, solaLettura() {}, righeCodice: () => righe };
@@ -39,7 +42,7 @@ function prova(card, codice) {
     if (err) return { vinto: false, motivo: `errore riga ${err.riga}: ${err.messaggio}`, righe };
     if (scena.esito === 'vinto' && sessione.stato === 'finito') return { vinto: true, righe, stelle: valutaStelle(card, scena, righe, sessione.ast) };
     if (scena.esito === 'morto') return { vinto: false, motivo: `morto in stanza ${sessione.variante + 1} a x=${scena.player.gx}`, righe };
-    if (sessione.stato === 'finito') return { vinto: false, motivo: `programma finito senza uscita (stanza ${sessione.variante + 1}, x=${scena.player.gx}, y=${scena.player.gy})`, righe };
+    if (sessione.stato === 'finito') return { vinto: false, motivo: `programma finito senza vincere (stanza ${sessione.variante + 1}, x=${scena.player.gx}, y=${scena.player.gy})`, righe };
     if (sessione.stato === 'pronto') return { vinto: false, motivo: 'ricominciato: ' + msg, righe };
   }
   return { vinto: false, motivo: 'tempo scaduto', righe };

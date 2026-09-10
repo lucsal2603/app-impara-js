@@ -1,0 +1,109 @@
+{
+  "id": "c4-l1",
+  "capitolo": "Nuove stanze",
+  "titolo": "Vista dall'alto",
+  "durata": "6 min",
+  "prossima": "c4-l2",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Una stanza nuova",
+      "testo": [
+        "Da qui in poi non c'è solo il salto alla Super Mario. Questa stanza si guarda dall'alto: Bit si muove in quattro direzioni, senza gravità e senza salti.",
+        "Ai comandi di sempre si aggiungono moveUp() e moveDown(). Bit guarda nella direzione dell'ultimo passo."
+      ],
+      "codice": "moveUp()\nmoveDown()\nmoveLeft()\nmoveRight()",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Il pacco",
+      "testo": [
+        "C'è un pacco da portare sul tappeto verde con la X. pickUp() lo prende se è nella cella davanti a Bit, putDown() lo posa nella cella davanti.",
+        "Con il pacco in mano Bit cammina normalmente. Il livello è finito quando il pacco sta sul tappeto."
+      ],
+      "codice": "moveRight()\npickUp()\nmoveRight()\nputDown()"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Bit guarda a destra e il pacco è nella cella alla sua destra. Quale comando lo prende?",
+      "opzioni": [
+        "pickUp()",
+        "moveRight()",
+        "putDown()"
+      ],
+      "risposta": 0,
+      "spiegazione": "pickUp() prende quello che c'è davanti; moveRight() sbatterebbe contro il pacco."
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "La freccia",
+      "testo": [
+        "Mentre scrivi, sulla scena appare una freccia: è il percorso che Bit farà con il codice che hai scritto finora. Se finisce in un buco, la freccia diventa rossa.",
+        "Usala per controllare il piano prima di premere ESEGUI."
+      ]
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 22",
+      "sottotitolo": "Il primo pacco",
+      "scena": "alto",
+      "config": {
+        "mappa": [
+          "########",
+          "#S..P..#",
+          "#......#",
+          "#..M...#",
+          "#.....D#",
+          "#......#",
+          "########"
+        ],
+        "obiettivo": "consegna",
+        "legenda": {}
+      },
+      "obiettivo": {
+        "tipo": "consegna",
+        "testo": "Porta il pacco sul tappeto con la X"
+      },
+      "starter": "moveRight()\nmoveRight()\n",
+      "api": [
+        "moveUp",
+        "moveDown",
+        "moveLeft",
+        "moveRight",
+        "pickUp",
+        "putDown",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if",
+        "for",
+        "while"
+      ],
+      "sensori": [],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "maxRighe",
+          "testo": "Massimo 12 righe",
+          "valore": 12
+        },
+        {
+          "tipo": "monete",
+          "testo": "Moneta raccolta"
+        }
+      ],
+      "aiuti": [
+        "Due passi a destra ti portano davanti al pacco: pickUp().",
+        "Con il pacco in mano scendi e vai a destra fino alla cella PRIMA del tappeto: putDown() posa il pacco nella cella davanti. Guarda la freccia.",
+        "Passa dalla moneta: un giro un po' più lungo, ma la stella la vale.",
+        "moveRight()\nmoveRight()\npickUp()\nmoveDown()\nmoveDown()\nmoveLeft()\nmoveDown()\nmoveRight()\nmoveRight()\nmoveRight()\nputDown()"
+      ]
+    }
+  ]
+}

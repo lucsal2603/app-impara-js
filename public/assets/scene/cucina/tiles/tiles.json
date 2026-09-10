@@ -1,0 +1,250 @@
+{
+ "tassello_px": 256,
+ "pezzi": {
+  "cucina_sfondo": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "cucina_bancone": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "cucina_cassetta": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "cucina_fornello_vuoto": {
+   "w": 1,
+   "h": 1.25,
+   "px": [
+    256,
+    320
+   ]
+  },
+  "cucina_fornello_cuoce_01": {
+   "w": 1,
+   "h": 1.25,
+   "px": [
+    256,
+    320
+   ]
+  },
+  "cucina_fornello_cuoce_02": {
+   "w": 1,
+   "h": 1.25,
+   "px": [
+    256,
+    320
+   ]
+  },
+  "cucina_fornello_cuoce_03": {
+   "w": 1,
+   "h": 1.25,
+   "px": [
+    256,
+    320
+   ]
+  },
+  "cucina_fornello_pronto": {
+   "w": 1,
+   "h": 1.25,
+   "px": [
+    256,
+    320
+   ]
+  },
+  "cucina_tagliere": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "cucina_tagliere_taglia_01": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "cucina_tagliere_taglia_02": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "cucina_tagliere_taglia_03": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "cucina_tagliere_taglia_04": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "cucina_piatto": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "cucina_mensola": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "cucina_finestra": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "cucina_ordine": {
+   "w": 2,
+   "h": 1,
+   "px": [
+    512,
+    256
+   ]
+  },
+  "ing_pomodoro_crudo": {
+   "w": 0.5,
+   "h": 0.5,
+   "px": [
+    128,
+    128
+   ]
+  },
+  "ing_pomodoro_tagliato": {
+   "w": 0.5,
+   "h": 0.5,
+   "px": [
+    128,
+    128
+   ]
+  },
+  "ing_pomodoro_cotto": {
+   "w": 0.5,
+   "h": 0.5,
+   "px": [
+    128,
+    128
+   ]
+  },
+  "ing_pomodoro_cotto_tagliato": {
+   "w": 0.5,
+   "h": 0.5,
+   "px": [
+    128,
+    128
+   ]
+  },
+  "ing_cipolla_crudo": {
+   "w": 0.5,
+   "h": 0.5,
+   "px": [
+    128,
+    128
+   ]
+  },
+  "ing_cipolla_tagliato": {
+   "w": 0.5,
+   "h": 0.5,
+   "px": [
+    128,
+    128
+   ]
+  },
+  "ing_cipolla_cotto": {
+   "w": 0.5,
+   "h": 0.5,
+   "px": [
+    128,
+    128
+   ]
+  },
+  "ing_cipolla_cotto_tagliato": {
+   "w": 0.5,
+   "h": 0.5,
+   "px": [
+    128,
+    128
+   ]
+  },
+  "ing_carota_crudo": {
+   "w": 0.5,
+   "h": 0.5,
+   "px": [
+    128,
+    128
+   ]
+  },
+  "ing_carota_tagliato": {
+   "w": 0.5,
+   "h": 0.5,
+   "px": [
+    128,
+    128
+   ]
+  },
+  "ing_carota_cotto": {
+   "w": 0.5,
+   "h": 0.5,
+   "px": [
+    128,
+    128
+   ]
+  },
+  "ing_carota_cotto_tagliato": {
+   "w": 0.5,
+   "h": 0.5,
+   "px": [
+    128,
+    128
+   ]
+  }
+ },
+ "animazioni": {
+  "cucina_fornello_cuoce": [
+   "cucina_fornello_cuoce_01",
+   "cucina_fornello_cuoce_02",
+   "cucina_fornello_cuoce_03"
+  ],
+  "cucina_tagliere_taglia": [
+   "cucina_tagliere_taglia_01",
+   "cucina_tagliere_taglia_02",
+   "cucina_tagliere_taglia_03",
+   "cucina_tagliere_taglia_04"
+  ]
+ }
+}

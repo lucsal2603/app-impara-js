@@ -1,0 +1,110 @@
+{
+  "id": "c4-l5",
+  "capitolo": "Nuove stanze",
+  "titolo": "La zuppa",
+  "durata": "8 min",
+  "prossima": "c4-l6",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Il fornello",
+      "testo": [
+        "Sul fornello c'è la pentola: put() ci mette dentro l'ingrediente e la cottura parte. Dopo tre secondi è pronto: sopra la pentola compare la scritta.",
+        "wait(3) aspetta tre secondi. Poi take() lo riprende, cotto."
+      ],
+      "codice": "put()\nwait(3)\ntake()",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "L'ordine",
+      "testo": [
+        "L'ordine di oggi: pomodoro cotto e cipolla tagliata. Due giri: uno al fornello e uno al tagliere, poi tutto nel piatto.",
+        "Metti il tempo di cottura in una variabile: se cambia, lo cambi in un posto solo."
+      ],
+      "codice": "let cottura = 3\nwait(cottura)"
+    },
+    {
+      "tipo": "scelta",
+      "domanda": "Cosa succede se fai take() dalla pentola dopo un solo secondo?",
+      "opzioni": [
+        "Prendi il pomodoro ancora crudo",
+        "Il programma si ferma",
+        "Prendi il pomodoro cotto"
+      ],
+      "risposta": 0,
+      "spiegazione": "La cottura vuole tre secondi: prima è ancora crudo, e l'ordine non sarebbe giusto."
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 26",
+      "sottotitolo": "La zuppa",
+      "scena": "cucina",
+      "config": {
+        "stazioni": [
+          {
+            "tipo": "cassetta",
+            "ingredienti": [
+              "pomodoro",
+              "cipolla",
+              "carota"
+            ]
+          },
+          "fornello",
+          "tagliere",
+          "piatto"
+        ],
+        "ordine": [
+          "pomodoro cotto",
+          "cipolla tagliato"
+        ],
+        "tempoCottura": 180,
+        "spawn": 0
+      },
+      "obiettivo": {
+        "tipo": "ordine",
+        "testo": "Servi pomodoro cotto e cipolla tagliata"
+      },
+      "starter": "let cottura = 3\ntake(\"pomodoro\")\n",
+      "api": [
+        "moveLeft",
+        "moveRight",
+        "take",
+        "put",
+        "cut",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if",
+        "for",
+        "while"
+      ],
+      "sensori": [
+        "holding",
+        "pot"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "usaVariabile",
+          "testo": "Usa una variabile"
+        },
+        {
+          "tipo": "maxRighe",
+          "testo": "Massimo 22 righe",
+          "valore": 22
+        }
+      ],
+      "aiuti": [
+        "Pomodoro: take, moveRight (fornello), put, wait(cottura), take, poi due passi a destra fino al piatto e put.",
+        "Cipolla: torna alla cassetta (tre passi a sinistra), take, due passi a destra (tagliere), put, cut, take, moveRight, put.",
+        "let cottura = 3\ntake(\"pomodoro\")\nmoveRight()\nput()\nwait(cottura)\ntake()\nmoveRight()\nmoveRight()\nput()\nfor (let i = 0; i < 3; i++) {\n  moveLeft()\n}\ntake(\"cipolla\")\nmoveRight()\nmoveRight()\nput()\ncut()\ntake()\nmoveRight()\nput()"
+      ]
+    }
+  ]
+}

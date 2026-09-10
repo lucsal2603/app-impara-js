@@ -3,23 +3,28 @@ import { COLONNE, RIGHE } from '../../config.js';
 import { Loop } from '../../motore/loop.js';
 import { Renderer } from '../../motore/renderer.js';
 import { ScenaPlatform } from '../../scene/platform/index.js';
+import { ScenaAlto } from '../../scene/alto/index.js';
+import { ScenaCucina } from '../../scene/cucina/index.js';
+import { tracciaPercorso, disegnaPercorso } from '../../sfida/anteprima.js';
 import { Sessione } from '../../sfida/sessione.js';
 import { Editor } from '../editor.js';
 import { valutaStelle } from '../../sfida/stelle.js';
 
-const BASE = `${import.meta.env.BASE_URL}assets/scene/platform`;
-let risorseCache = null;
+// Famiglie di scene: classe e cartella delle risorse (tiles/ + sprites/ con i loro json)
+export const SCENE = { platform: ScenaPlatform, alto: ScenaAlto, cucina: ScenaCucina };
+const risorseCache = {};
 
 function caricaImmagine(src) { return new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error('immagine mancante: ' + src)); i.src = src; }); }
-export async function caricaRisorse() {
-  if (risorseCache) return risorseCache;
+export async function caricaRisorse(famiglia = 'platform') {
+  if (risorseCache[famiglia]) return risorseCache[famiglia];
+  const BASE = `${import.meta.env.BASE_URL}assets/scene/${famiglia}`;
   const [tilesMeta, spritesMeta] = await Promise.all([fetch(`${BASE}/tiles/tiles.json`).then(r => r.json()), fetch(`${BASE}/sprites/sprites.json`).then(r => r.json())]);
   const tiles = {}, sprites = {};
   await Promise.all([
     ...Object.keys(tilesMeta.pezzi).map(async n => { tiles[n] = await caricaImmagine(`${BASE}/tiles/${n}.png`); }),
     ...Object.keys(spritesMeta).map(async n => { sprites[n] = await caricaImmagine(`${BASE}/sprites/${spritesMeta[n].file}`); }),
   ]);
-  return (risorseCache = { tiles, tilesMeta, sprites, spritesMeta });
+  return (risorseCache[famiglia] = { tiles, tilesMeta, sprites, spritesMeta });
 }
 function mostraValore(v) { if (typeof v === 'string') return `"${v}"`; if (Array.isArray(v)) return '[' + v.map(mostraValore).join(', ') + ']'; if (v && typeof v === 'object') return JSON.stringify(v); return String(v); }
 
@@ -47,16 +52,27 @@ const TEMPLATE = `
   </section>`;
 
 export async function montaCodice(root, livello, opzioni = {}) {
-  const risorse = await caricaRisorse();
+  const famiglia = livello.scena || 'platform', Classe = SCENE[famiglia] || ScenaPlatform;
+  const risorse = await caricaRisorse(famiglia);
   root.classList.add('scheda-codice'); root.innerHTML = TEMPLATE;
   const $ = (r) => root.querySelector(`[data-r="${r}"]`);
   $('titolo').textContent = livello.titolo || ''; $('sottotitolo').textContent = livello.sottotitolo || '';
   $('obiettivo').textContent = livello.obiettivo?.testo || '';
 
-  const scena = new ScenaPlatform(livello.config, risorse);
+  const scena = new Classe(livello.config, risorse);
   const renderer = new Renderer($('canvas'), COLONNE, RIGHE);
   const sintassi = livello.sintassi || ['call'], sensori = livello.sensori || [];
-  const editor = new Editor({ contenitore: $('editor'), palette: $('palette'), simboli: $('simboli'), api: livello.api, sensori, sintassi, contatore: $('contatore'), starter: livello.starter || '' });
+  // freccia di anteprima: a ogni modifica del codice (finché non si preme ESEGUI) il percorso di Bit viene ridisegnato sulla scena
+  let percorso = null, timerAnteprima = null;
+  const aggiornaAnteprima = () => {
+    clearTimeout(timerAnteprima);
+    timerAnteprima = setTimeout(() => {
+      if (sessione.stato !== 'pronto') { percorso = null; return; }
+      const nuovo = tracciaPercorso({ codice: editor.codice(), api: livello.api, sintassi, Classe, config: livello.config, risorse });
+      if (nuovo) percorso = nuovo;                              // con un errore di scrittura resta l'ultima freccia valida
+    }, 120);
+  };
+  const editor = new Editor({ contenitore: $('editor'), palette: $('palette'), simboli: $('simboli'), api: livello.api, sensori, sintassi, contatore: $('contatore'), starter: livello.starter || '', onModifica: () => aggiornaAnteprima() });
   const monitor = $('monitor'), mostraMonitor = sintassi.includes('let'); monitor.hidden = !mostraMonitor;
   const ui = {
     stato: (s) => { $('stato').textContent = { pronto: 'pronto', esecuzione: 'in esecuzione', passo: 'passo', pausa: 'in pausa', cambio: 'stanza dopo', finito: 'finito' }[s] || s; $('btn-pausa').textContent = s === 'pausa' ? 'RIPRENDI' : 'PAUSA'; },
@@ -74,6 +90,9 @@ export async function montaCodice(root, livello, opzioni = {}) {
   };
   const varianti = [livello.config, ...(livello.varianti || [])];
   const sessione = new Sessione({ scena, editor, api: livello.api, ui, sintassi, varianti, onVittoria: () => opzioni.onVittoria?.(valutaStelle(livello, scena, editor.righeCodice(), sessione.ast)) });
+  const impostaOrig = sessione.imposta.bind(sessione);
+  sessione.imposta = (st) => { impostaOrig(st); if (st === 'pronto') aggiornaAnteprima(); else percorso = null; };
+  aggiornaAnteprima();
   $('btn-esegui').addEventListener('click', () => sessione.esegui());
   $('btn-pausa').addEventListener('click', () => sessione.pausa());
   $('btn-passo').addEventListener('click', () => sessione.passo());
@@ -99,7 +118,7 @@ export async function montaCodice(root, livello, opzioni = {}) {
   area.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') return; inizio(e.clientX); area.setPointerCapture?.(e.pointerId); });
   area.addEventListener('pointermove', e => { if (e.pointerType === 'touch') return; muovi(e.clientX); });
   area.addEventListener('pointerup', e => { if (e.pointerType !== 'touch') fine(); }); area.addEventListener('pointercancel', e => { if (e.pointerType !== 'touch') fine(); });
-  const loop = new Loop({ tick: () => sessione.tick(), disegna: () => renderer.disegna(scena) });
+  const loop = new Loop({ tick: () => sessione.tick(), disegna: () => { renderer.disegna(scena); if (percorso && sessione.stato === 'pronto') disegnaPercorso(renderer.ctx, renderer.T, scena, percorso); } });
   loop.avvia();
   return { scena, sessione, editor, loop, renderer, distruggi() { loop.ferma(); root.innerHTML = ''; root.classList.remove('scheda-codice'); } };
 }

@@ -1,0 +1,251 @@
+{
+ "tassello_px": 256,
+ "pezzi": {
+  "alto_pavimento": {
+   "w": 1,
+   "h": 1.0,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "alto_muro": {
+   "w": 1,
+   "h": 1.25,
+   "px": [
+    256,
+    320
+   ]
+  },
+  "alto_pacco": {
+   "w": 1,
+   "h": 1.25,
+   "px": [
+    256,
+    320
+   ]
+  },
+  "alto_destinazione": {
+   "w": 1,
+   "h": 1.0,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "alto_uscita": {
+   "w": 1,
+   "h": 1.0,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "alto_buco": {
+   "w": 1,
+   "h": 1.0,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "alto_chiave": {
+   "w": 1,
+   "h": 1.0,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "alto_porta_chiusa": {
+   "w": 1,
+   "h": 1.25,
+   "px": [
+    256,
+    320
+   ]
+  },
+  "alto_porta_aperta": {
+   "w": 1,
+   "h": 1.25,
+   "px": [
+    256,
+    320
+   ]
+  },
+  "alto_piastra_su": {
+   "w": 1,
+   "h": 1.0,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "alto_piastra_giu": {
+   "w": 1,
+   "h": 1.0,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "alto_moneta": {
+   "w": 1,
+   "h": 1.0,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_01": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_02": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_03": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_04": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_05": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_06": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_07": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "chiave_presa_08": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_01": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_02": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_03": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_04": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_05": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_06": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_07": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  },
+  "moneta_presa_08": {
+   "w": 1,
+   "h": 1,
+   "px": [
+    256,
+    256
+   ]
+  }
+ },
+ "animazioni": {
+  "chiave_presa": [
+   "chiave_presa_01",
+   "chiave_presa_02",
+   "chiave_presa_03",
+   "chiave_presa_04",
+   "chiave_presa_05",
+   "chiave_presa_06",
+   "chiave_presa_07",
+   "chiave_presa_08"
+  ],
+  "moneta_presa": [
+   "moneta_presa_01",
+   "moneta_presa_02",
+   "moneta_presa_03",
+   "moneta_presa_04",
+   "moneta_presa_05",
+   "moneta_presa_06",
+   "moneta_presa_07",
+   "moneta_presa_08"
+  ]
+ }
+}

@@ -1,0 +1,110 @@
+{
+  "id": "c4-l2",
+  "capitolo": "Nuove stanze",
+  "titolo": "Chiave e buchi",
+  "durata": "7 min",
+  "prossima": "c4-l3",
+  "schede": [
+    {
+      "tipo": "spiegazione",
+      "titolo": "Buchi nel pavimento",
+      "testo": [
+        "I buchi si vedono dall'alto: se Bit ci cammina sopra, cade e il livello riparte. frontIsHole() dice se la cella davanti è un buco.",
+        "Un pacco posato su un buco lo riempie: da quel momento ci si passa sopra."
+      ],
+      "codice": "if (frontIsHole()) {\n  putDown()\n}",
+      "immagine": "/assets/mascotte/riposo.png"
+    },
+    {
+      "tipo": "spiegazione",
+      "titolo": "Chiave e porta",
+      "testo": [
+        "La porta si apre da sola quando Bit ha la chiave in tasca: basta camminare sulla chiave. Poi si va all'uscita.",
+        "Con i corridoi lunghi usa il for: quattro passi a destra sono for (let i = 0; i < 4; i++) { moveRight() }."
+      ],
+      "codice": "for (let i = 0; i < 4; i++) {\n  moveRight()\n}"
+    },
+    {
+      "tipo": "trova_errore",
+      "domanda": "Bit deve prendere la chiave a sinistra, ma questo programma va a destra. Quale riga è sbagliata?",
+      "codice": "moveDown()\nmoveDown()\nmoveRight()\nmoveRight()\nmoveUp()",
+      "riga": 3,
+      "spiegazione": "La chiave è a sinistra: le righe 3 e 4 devono essere moveLeft(). La prima delle due è la riga 3.",
+      "indizio": "Da che parte è la chiave?"
+    },
+    {
+      "tipo": "codice",
+      "titolo": "Livello 23",
+      "sottotitolo": "Chiave e buchi",
+      "scena": "alto",
+      "config": {
+        "mappa": [
+          "########",
+          "#S..O..#",
+          "#.#.#..#",
+          "#K#....#",
+          "#.#.OO.#",
+          "#...A.X#",
+          "########"
+        ],
+        "obiettivo": "uscita",
+        "legenda": {
+          "A": {
+            "tipo": "porta",
+            "id": "d1",
+            "chiave": "k1"
+          },
+          "K": {
+            "tipo": "chiave",
+            "id": "k1"
+          }
+        }
+      },
+      "obiettivo": {
+        "tipo": "uscita",
+        "testo": "Prendi la chiave, apri la porta, esci"
+      },
+      "starter": "moveDown()\n",
+      "api": [
+        "moveUp",
+        "moveDown",
+        "moveLeft",
+        "moveRight",
+        "pickUp",
+        "putDown",
+        "wait"
+      ],
+      "sintassi": [
+        "call",
+        "let",
+        "if",
+        "for",
+        "while"
+      ],
+      "sensori": [
+        "frontIsHole",
+        "hasKey"
+      ],
+      "stelle": [
+        {
+          "tipo": "completa",
+          "testo": "Livello completato"
+        },
+        {
+          "tipo": "usaFor",
+          "testo": "Usa un ciclo for"
+        },
+        {
+          "tipo": "maxRighe",
+          "testo": "Massimo 10 righe",
+          "valore": 10
+        }
+      ],
+      "aiuti": [
+        "Giù due volte, poi a sinistra: sulla chiave. Poi ancora giù fino in fondo.",
+        "In basso vai a destra: la porta si apre da sola, l'uscita è dopo la porta. Usa un for per i passi a destra.",
+        "moveDown()\nmoveDown()\nmoveLeft()\nmoveLeft()\nmoveDown()\nmoveDown()\nfor (let i = 0; i < 5; i++) {\n  moveRight()\n}"
+      ]
+    }
+  ]
+}

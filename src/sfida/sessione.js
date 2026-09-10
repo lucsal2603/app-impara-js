@@ -1,6 +1,5 @@
 // Collega editor, interprete, scena e verifica. Stati: pronto, esecuzione, passo, pausa, cambio, finito, morto.
 import { compila, ErroreCodice } from '../interprete/index.js';
-import { azioni } from '../motore/azioni.js';
 
 export class Sessione {
   constructor({ scena, editor, api, ui, sintassi = ['call'], varianti = null, onVittoria = null }) {
@@ -16,7 +15,7 @@ export class Sessione {
     this.ui.errore(null); this.ast = ris.ast; this.programma = ris.programma; this.avviaProgramma(); return true;
   }
   avviaProgramma() {
-    const fn = {}; for (const n of this.api) if (azioni[n]) fn[n] = azioni[n];
+    const tutte = this.scena.api(), fn = {}; for (const n of this.api) if (tutte[n]) fn[n] = tutte[n];
     this.gen = this.programma.esegui({ api: fn, sensori: this.scena.sensori() }); this.azioneInCorso = false;
     this.ui.console?.(null); this.ui.variabili?.(null);
   }
